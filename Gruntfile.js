@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     // configure watch to auto update ----------------
     watch: {
       options: {
-        livereload: true,
+        //livereload: true,
       },
       // for stylesheets, watch css and less files 
       // only run less and cssmin stylesheets:
