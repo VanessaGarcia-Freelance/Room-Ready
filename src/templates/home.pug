@@ -1,59 +1,13 @@
 doctype html
 html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible' content='IE=edge')
-    meta(name='viewport' content='width=device-width, initial-scale=1')
-    //The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    meta(name='description' content='')
-    meta(name='author' content='')
-    //<link rel="icon" href="../../favicon.ico">
-
-    title Page Template
-
-    //Bootstrap core CSS
-    link(href='css/bootstrap.min.css' rel='stylesheet')
-    link(href='css/roomready.min.css' rel='stylesheet')
-
-
-    //Custom styles for this template
-    //- link(href='offcanvas.css' rel='stylesheet')
-
+  //- Include Head Tag for site
+  include _components/head.pug
+  +head('Room Ready - Home')
 
   body.page-template
-    header.main-header.navbar-fixed-top.navbar-inverse
-      div.header-container.container
-        div.row
-          div.navbar-header
-            a.navbar-brand(href='#') RR Logo
-          div.collapse.navbar-collapse
-            ul.nav.navbar-right
-              li 
-                h5 System Hostname
-              li 
-                h5 System Type
-    nav.main-nav.navbar.navbar-top.navbar-inverse
-      div.container
-        div.navbar-header
-          button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-        div#navbar.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-center
-            li.active
-              a(href='#') Home
-            li
-              a(href='#setup') Setup
-            li
-              a(href='#security') Security
-            li
-              a(href='#maintenance') Maintenance
-            li
-              a(href='#rradmin') RR-Admin
-            li
-              a(href='#help') Help
+    include _components/page-header.pug
+    include _components/main-nav.pug
+    +navigation('home')
     div.container
       div
         //- .row.row-offcanvas.row-offcanvas-left
