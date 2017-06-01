@@ -2,6 +2,7 @@
  * Globals
  */
 
+@green      : #c8e7ae;
 @blue       : #40a7db;
 @borderGrey : #333;
 
@@ -24,13 +25,67 @@ a:hover {
 }
 
 
-.sample {
-  color: @blue;
-}
-
 /*
  * Base structure
  */
+
+.main-header {
+  background-color: transparent;
+  .header-container {
+    background-color: @green;
+    .navbar-right {
+      margin-right: 15px;
+    }
+  }
+}
+.main-nav {
+  background-color: transparent;
+  border-color: transparent;
+  #navbar {
+    overflow: hidden;
+    ul {
+      border-radius: 5px;
+      position: relative;
+      float: left;
+      left: 50%;
+      padding: 0;
+      list-style: none;
+      li {
+        position: relative;
+        float: left;
+        right: 50%;
+        a {
+          border: 1px solid black;
+          margin-left: -1px;
+          color: black;
+          padding: 10px 30px;
+          background-color: grey;
+        }
+
+        &.active {
+          a {
+            background-color: white;
+            border-radius: 5px;
+          }
+        }
+        
+        &:first-child {
+          a{
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+          }
+          
+        }
+        &:last-child {
+          a {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+}
 
 html,
 body {
@@ -39,6 +94,76 @@ body {
 body div{
   border-radius: 10px;
 }
+
+
+body.page-template {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+.content-block {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  h3 {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: -1px;
+    padding: 10px;
+  }
+  div {
+    padding: 20px;
+  }
+}
+//////////////////////////////////////
+
 
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -131,11 +256,9 @@ body div{
   color: rgba(255,255,255,.5);
 }
 
-
-
 /* Login Page */
 body.login_page {
-  background-color: #c8e7ae;
+  background-color: @green;
 }
 
 .form-signin {
@@ -218,5 +341,10 @@ body.login_page {
   .mastfoot,
   .cover-container {
     width: 600px;
+  }
+  .main-nav #navbar ul li {
+    a {
+      padding: 10px 50px;
+    }
   }
 }

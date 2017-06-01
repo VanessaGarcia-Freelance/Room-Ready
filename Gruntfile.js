@@ -37,7 +37,7 @@ module.exports = function(grunt) {
     less: {
       build: {
         files: {
-          'dist/css/roomready.css': 'src/css/roomready.less'
+          'src/css/roomready.css': 'src/css/roomready.less'
         }
       }
     },
