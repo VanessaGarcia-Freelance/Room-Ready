@@ -40,8 +40,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar">
               <ul class="nav navbar-nav navbar-center" id="setup">
-                <li><a class="home" href="#">Home</a></li>
-                <li><a class="setup" href="#setup">Setup</a></li>
+                <li><a class="home" href="home.html">Home</a></li>
+                <li><a class="setup" href="collector-config.html">Setup</a></li>
                 <li><a class="security" href="#security">Security</a></li>
                 <li><a class="maintenance" href="#maintenance">Maintenance</a></li>
                 <li><a class="rr-admin" href="#rradmin">RR-Admin</a></li>
@@ -67,11 +67,25 @@
                 <h5>System Information</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Room Name:</span><span class="SystemInformation" id="RoomName">Text</span></li>
-                    <li><span class="listlabel">Room Number:</span><span class="SystemInformation" id="RoomNumber">Text</span></li>
-                    <li><span class="listlabel">Building Name/Number:</span><span class="SystemInformation" id="Building">Text</span></li>
-                    <li><span class="listlabel">Address:</span><span class="SystemInformation" id="Address">Text</span></li>
-                    <li><span class="listlabel">City, State, zip:</span><span class="SystemInformation" id="City">Text</span></li>
+                    <li><span class="listlabel">Room Name:</span>
+                      <input class="SystemInformation" id="RoomName" type="text" placeholder="Room Name" value="{{ .SystemInformation.RoomName }}">
+                    </li>
+                    <li><span class="listlabel">Room Number:</span>
+                      <input class="SystemInformation" id="RoomNumber" type="text" placeholder="Room Number" value="{{ .SystemInformation.RoomNumber }}">
+                    </li>
+                    <li><span class="listlabel">Building Name/Number:</span>
+                      <input class="SystemInformation" id="Building" type="text" placeholder="Building Name/Number" value="{{ .SystemInformation.Building }}">
+                    </li>
+                    <li><span class="listlabel">Address:</span>
+                      <input class="SystemInformation" id="Address" type="text" placeholder="Address" value="{{ .SystemInformation.Address }}">
+                    </li>
+                    <li><span class="listlabel">City, State, zip:</span>
+                      <input class="SystemInformation" id="City" type="text" placeholder="City" value="{{ .SystemInformation.City }}">
+                    </li>
+                    <li><span class="listlabel"></span>
+                      <input class="SystemInformation" id="State" type="text" placeholder="State" value="{{ .SystemInformation.State }}">
+                      <input class="SystemInformation" id="Zip" type="text" placeholder="Zipcode" value="{{ .SystemInformation.Zip }}">
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -79,11 +93,21 @@
                 <h5>Network Settings</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">DHCP or Static:</span><span class="NetworkSettings" id="Name">[INSERT CHECKBOXES]</span></li>
-                    <li><span class="listlabel">Ipv4 Address:</span><span class="NetworkSettings" id="IPAddress">Text</span></li>
-                    <li><span class="listlabel">Subnet Mask:</span><span class="NetworkSettings" id="NetMask">Text</span></li>
-                    <li><span class="listlabel">Gateway:</span><span class="NetworkSettings" id="Gateway">Text</span></li>
-                    <li><span class="listlabel">Hostname:</span><span class="NetworkSettings" id="HostName">Text</span></li>
+                    <li><span class="listlabel">DHCP:</span>
+                      <input class="NetworkSettings" id="DHCP" type="checkbox" value="{{ .NetworkSettings.DHCPstring }}">
+                    </li>
+                    <li><span class="listlabel">Ipv4 Address:</span>
+                      <input class="NetworkSettings" id="IPAddress" type="text" placeholder="Ipv4 Address" value="{{ .NetworkSettings.IPAddress }}">
+                    </li>
+                    <li><span class="listlabel">Subnet Mask:</span>
+                      <input class="NetworkSettings" id="NetMask" type="text" placeholder="Subnet Mask" value="{{ .NetworkSettings.NetMask }}">
+                    </li>
+                    <li><span class="listlabel">Gateway:</span>
+                      <input class="NetworkSettings" id="Gateway" type="text" placeholder="Gateway" value="{{ .NetworkSettings.Gateway }}">
+                    </li>
+                    <li><span class="listlabel">Hostname:</span>
+                      <input class="NetworkSettings" id="HostName" type="text" placeholder="Hostname" value="{{ .NetworkSettings.HostName }}">
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -91,12 +115,24 @@
                 <h5>Internet Settings</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Domain Name:</span><span class="InternetSettings" id="DomainName">Text</span></li>
-                    <li><span class="listlabel">DNS Server 1:</span><span class="InternetSettings" id="DNSServer1">Text</span></li>
-                    <li><span class="listlabel">NS Server 2:</span><span class="InternetSettings" id="DNSServer2">Text</span></li>
-                    <li><span class="listlabel">Proxy Server:</span><span class="InternetSettings" id="ProxyServer">Text</span></li>
-                    <li><span class="listlabel">Proxy Username:</span><span class="InternetSettings" id="ProxyUsername">Text</span></li>
-                    <li><span class="listlabel">Proxy Password:</span><span class="InternetSettings" id="ProxyPassword">Text</span></li>
+                    <li><span class="listlabel">Domain Name:</span>
+                      <input class="InternetSettings" id="DomainName" type="text" placeholder="Domain Name" value="{{ .InternetSettings.DomainName }}">
+                    </li>
+                    <li><span class="listlabel">DNS Server 1:</span>
+                      <input class="InternetSettings" id="DNSServer1" type="text" placeholder="DNS Server 1" value="{{ .InternetSettings.DNSServer1 }}">
+                    </li>
+                    <li><span class="listlabel">NS Server 2:</span>
+                      <input class="InternetSettings" id="DNSServer2" type="text" placeholder="NS Server 2" value="{{ .InternetSettings.DNSServer2 }}">
+                    </li>
+                    <li><span class="listlabel">Proxy Server:</span>
+                      <input class="InternetSettings" id="ProxyServer" type="text" placeholder="Proxy Server" value="{{ .InternetSettings.ProxyServer }}">
+                    </li>
+                    <li><span class="listlabel">Proxy Username:</span>
+                      <input class="InternetSettings" id="ProxyUsername" type="text" placeholder="Proxy Username" value="{{ .InternetSettings.ProxyUserName }}">
+                    </li>
+                    <li><span class="listlabel">Proxy Password:</span>
+                      <input class="InternetSettings" id="ProxyPassword" type="password" placeholder="Proxy Password" value="{{ .InternetSettings.ProxyPassword }}">
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -104,8 +140,12 @@
                 <h5>Network Services</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">NTP Server 1:</span><span class="NetworkServices" id="NTPServer1">Text</span></li>
-                    <li><span class="listlabel">NTP Server 2:</span><span class="NetworkServices" id="NTPServer2">Text</span></li>
+                    <li><span class="listlabel">NTP Server 1:</span>
+                      <input class="NetworkServices" id="NTPServer1" type="text" placeholder="NTP Server 1" value="{{ .NetworkServices.NTPServer1 }}">
+                    </li>
+                    <li><span class="listlabel">NTP Server 2:</span>
+                      <input class="NetworkServices" id="NTPServer2" type="text" placeholder="NTP Server 2" value="{{ .NetworkServices.NTPServer2 }}">
+                    </li>
                   </ul>
                 </div>
               </div>
