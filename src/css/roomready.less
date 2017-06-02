@@ -5,6 +5,7 @@
 @green        : #a4d77c;   //: #c8e7ae;
 @blue         : #40a7db;
 @borderGrey   : #333;
+@bgGrey       : #bfbfbf;
 @systemRed    : #c72f3d;
 @systemYellow : #fbc348;
 @systemGreen  : #7cb44f;
@@ -38,11 +39,6 @@ body {
 }
 body div{
   border-radius: 10px;
-}
-
-
-body.page-template {
-  padding-top: 70px;
 }
 footer {
   padding: 30px 0;
@@ -87,6 +83,7 @@ ul{
  */
 .main-header {
   background-color: transparent;
+  border: none;
   .header-container {
     background-color: @green;
     .navbar-right {
@@ -100,62 +97,19 @@ ul{
  * Main Navigation
  */
 .main-nav {
-  background-color: transparent;
-  border-color: transparent;
-  #navbar {
-    overflow: hidden;
-    ul {
-      border-radius: 5px;
-      position: relative;
-      float: left;
-      left: 50%;
-      padding: 0;
-      list-style: none;
-      &#home {
-        a.home {
-          background-color: white;
-          border-radius: 5px;
-        }
-      }
-      &#security {
-        a.security {
-          background-color: white;
-          border-radius: 5px;
-        }
-      }
-      li {
-        position: relative;
-        float: left;
-        right: 50%;
-        a {
-          border: 1px solid black;
-          margin-left: -1px;
-          color: black;
-          padding: 10px 30px;
-          background-color: grey;
-        }
+  background-color: @bgGrey;
+  // border-color: transparent;
+  &.navbar-inverse{
+    .navbar-toggle {
+      background-color: #333;
+    }
+  }
 
-        &.active {
-          a {
-            background-color: white;
-            border-radius: 5px;
-          }
-        }
-        
-        &:first-child {
-          a{
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-          }
-          
-        }
-        &:last-child {
-          a {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-          }
-        }
-      }
+  #navbar  {
+    border: none;
+    a {
+      color: black;
+      // border-bottom: 1px solid @borderGrey;
     }
   }
 }
@@ -349,6 +303,67 @@ ul{
   .masthead-nav {
     float: right;
   }
+
+  .main-nav {
+    background-color: transparent;
+    border-color: transparent;
+    #navbar  {
+      overflow: hidden;
+      ul {
+        border-radius: 5px;
+        position: relative;
+        float: left;
+        left: 50%;
+        padding: 0;
+        list-style: none;
+        &#home {
+          a.home {
+            background-color: white;
+            border-radius: 5px;
+          }
+        }
+        &#security {
+          a.security {
+            background-color: white;
+            border-radius: 5px;
+          }
+        }
+        li {
+          position: relative;
+          float: left;
+          right: 50%;
+          a {
+            border: 1px solid black;
+            margin-left: -1px;
+            color: black;
+            padding: 10px 30px;
+            background-color: @bgGrey;
+          }
+
+          &.active {
+            a {
+              background-color: white;
+              border-radius: 5px;
+            }
+          }
+          
+          &:first-child {
+            a{
+              border-top-left-radius: 5px;
+              border-bottom-left-radius: 5px;
+            }
+            
+          }
+          &:last-child {
+            a {
+              border-top-right-radius: 5px;
+              border-bottom-right-radius: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 
@@ -419,6 +434,48 @@ body.login_page {
 /*
  * Affix and center
  */
+
+ 
+ .main-header {
+    .header-container {
+      .navbar-header {
+
+        .navbar-brand {
+          display: block;
+          float: none;
+          > img {
+            text-align: center;
+            margin: 0 auto;
+          }
+        }
+        .nav {
+          text-align: center;
+        }
+      }
+      .navbar-right {
+          text-align: center;
+        }
+      } 
+  } 
+
+@media (min-width: 480px) {
+  
+  .main-header {
+    .header-container {
+      .navbar-header {
+        float: left;
+        .navbar-brand {
+          margin: 0;
+          float: left;
+        }
+      }
+      .navbar-right {
+        text-align: right;
+      }
+    }
+  }  
+
+}
 
 @media (min-width: 768px) {
   /* Pull out the header and footer */

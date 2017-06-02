@@ -27,9 +27,6 @@ body {
 body div {
   border-radius: 10px;
 }
-body.page-template {
-  padding-top: 70px;
-}
 footer {
   padding: 30px 0;
 }
@@ -61,6 +58,7 @@ ul.list-unstyled .listlabel {
  */
 .main-header {
   background-color: transparent;
+  border: none;
 }
 .main-header .header-container {
   background-color: #a4d77c;
@@ -73,51 +71,16 @@ ul.list-unstyled .listlabel {
  * Main Navigation
  */
 .main-nav {
-  background-color: transparent;
-  border-color: transparent;
+  background-color: #bfbfbf;
+}
+.main-nav.navbar-inverse .navbar-toggle {
+  background-color: #333;
 }
 .main-nav #navbar {
-  overflow: hidden;
+  border: none;
 }
-.main-nav #navbar ul {
-  border-radius: 5px;
-  position: relative;
-  float: left;
-  left: 50%;
-  padding: 0;
-  list-style: none;
-}
-.main-nav #navbar ul#home a.home {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav #navbar ul#security a.security {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav #navbar ul li {
-  position: relative;
-  float: left;
-  right: 50%;
-}
-.main-nav #navbar ul li a {
-  border: 1px solid black;
-  margin-left: -1px;
+.main-nav #navbar a {
   color: black;
-  padding: 10px 30px;
-  background-color: grey;
-}
-.main-nav #navbar ul li.active a {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav #navbar ul li:first-child a {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-.main-nav #navbar ul li:last-child a {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
 }
 /*
  * Homepage
@@ -271,6 +234,53 @@ ul.list-unstyled .listlabel {
   .masthead-nav {
     float: right;
   }
+  .main-nav {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .main-nav #navbar {
+    overflow: hidden;
+  }
+  .main-nav #navbar ul {
+    border-radius: 5px;
+    position: relative;
+    float: left;
+    left: 50%;
+    padding: 0;
+    list-style: none;
+  }
+  .main-nav #navbar ul#home a.home {
+    background-color: white;
+    border-radius: 5px;
+  }
+  .main-nav #navbar ul#security a.security {
+    background-color: white;
+    border-radius: 5px;
+  }
+  .main-nav #navbar ul li {
+    position: relative;
+    float: left;
+    right: 50%;
+  }
+  .main-nav #navbar ul li a {
+    border: 1px solid black;
+    margin-left: -1px;
+    color: black;
+    padding: 10px 30px;
+    background-color: #bfbfbf;
+  }
+  .main-nav #navbar ul li.active a {
+    background-color: white;
+    border-radius: 5px;
+  }
+  .main-nav #navbar ul li:first-child a {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .main-nav #navbar ul li:last-child a {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
 }
 /*
  * Cover
@@ -328,6 +338,32 @@ body.login_page {
 /*
  * Affix and center
  */
+.main-header .header-container .navbar-header .navbar-brand {
+  display: block;
+  float: none;
+}
+.main-header .header-container .navbar-header .navbar-brand > img {
+  text-align: center;
+  margin: 0 auto;
+}
+.main-header .header-container .navbar-header .nav {
+  text-align: center;
+}
+.main-header .header-container .navbar-right {
+  text-align: center;
+}
+@media (min-width: 480px) {
+  .main-header .header-container .navbar-header {
+    float: left;
+  }
+  .main-header .header-container .navbar-header .navbar-brand {
+    margin: 0;
+    float: left;
+  }
+  .main-header .header-container .navbar-right {
+    text-align: right;
+  }
+}
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
