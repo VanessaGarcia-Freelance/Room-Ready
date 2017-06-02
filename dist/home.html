@@ -19,14 +19,14 @@
     <header class="main-header navbar-fixed-top navbar-inverse">
       <div class="header-container container">
         <div class="row">
-          <div class="navbar-header"><a class="navbar-brand" href="#">RR Logo</a></div>
+          <div class="navbar-header"><a class="navbar-brand" href="#"><img alt="Brand" src="..."></a></div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-right">
               <li> 
-                <h5>System Hostname</h5>
+                <h5 class="SystemHostname">System Hostname</h5>
               </li>
               <li> 
-                <h5>System Type</h5>
+                <h5 class="SystemType">System Type</h5>
               </li>
             </ul>
           </div>
@@ -51,65 +51,117 @@
           </div>
         </nav>
     <div class="container">
-      <div>
-        <div class="col-xs-12 col-md-10 col-md-offset-1">
-          <div class="row">
-            <p class="pull-left visible-xs">
-              <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas">Toggle nav</button>
-            </p>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="content-block">
-                <h3>System Info</h3>
-                <div>
-                  <p>System Name:</p>
-                  <p>Mac Address:</p>
-                  <p>IP Address:</p>
-                  <p>Gateway:</p>
-                  <p>Serial Number:</p>
-                </div>
-              </div>
-              <div class="content-block">
-                <h3>System License</h3>
-                <div>
-                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-                </div>
+      <div class="col-xs-12 col-md-10 col-md-offset-1">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="content-block">
+              <h5>System Info</h5>
+              <div>
+                <ul class="list-unstyled">
+                  <li><span class="listlabel">System Name:</span><span class="SystemInfo" id="Name">Example Name</span></li>
+                </ul>
+                <ul class="list-unstyled">
+                  <li><span class="listlabel">Mac Address:</span><span class="SystemInfo" id="MACAddress">Example MAC</span></li>
+                  <li><span class="listlabel">IP Address:</span><span class="SystemInfo" id="IPAddress">Example IP</span></li>
+                  <li><span class="listlabel">Gateway:</span><span class="SystemInfo" id="Gateway">Example Gateway</span></li>
+                </ul>
+                <ul class="list-unstyled">
+                  <li><span class="listlabel">Serial Number:</span><span class="SystemInfo" id="SerialNumber">Example Serial</span></li>
+                </ul>
               </div>
             </div>
-            <div class="col-xs-12 col-md-6">
-              <div class="content-block">
-                <h3>Connected Devices</h3>
-                <div>
-                  <p>Number of Displays:</p>
-                  <p>Codec IP:</p>
-                  <p>Codec Model:</p>
-                  <p>Codec Firmware:</p>
-                  <p>Number of Codecs:</p>
-                  <p>Number of Drones:</p>
-                </div>
+            <div class="content-block">
+              <h5 class="listlabel">System License</h5>
+              <div class="SystemLicenses">
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
               </div>
-              <div class="content-block">
-                <h3>System Status</h3>
-                <div>
-                  <div class="row">
-                    <div class="col-xs-12 col-md-4">
-                      <h5>Portal Online</h5>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                      <h5>Codec Online</h5>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                      <h5>Monitors</h5>
-                    </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="content-block">
+              <h5>Connected Devices</h5>
+              <div>
+                <ul class="list-unstyled">
+                  <li><span class="listlabel">Number of Displays:</span><span class="ConnectedDevices" id="NumberOfDisplays">#</span></li>
+                  <li><span class="listlabel">Codec IP:</span><span class="ConnectedDevices" id="CodecIp">IP</span></li>
+                  <li><span class="listlabel">Codec Model:</span><span class="ConnectedDevices" id="CodecModel">Model</span></li>
+                  <li><span class="listlabel">Codec Firmware:</span><span class="ConnectedDevices" id="CodecFirmware">Firmware</span></li>
+                </ul>
+                <ul class="list-unstyled">
+                  <li><span class="listlabel">Number of Codecs:</span><span class="ConnectedDevices" id="NumberOfCodecs">#</span></li>
+                  <li><span class="listlabel">Number of Drones:</span><span class="ConnectedDevices" id="NumberOfDrones">#</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-block">
+              <h5>System Status</h5>
+              <div>
+                <div class="row">
+                  <div class="SystemStatus col-xs-12 col-md-4" id="Portal">
+                    <h6>Portal Online</h6>
+                    <div class="circle"></div>
+                  </div>
+                  <div class="SystemStatus col-xs-12 col-md-4" id="Codec">
+                    <h6>Codec Online</h6>
+                    <div class="circle"></div>
+                  </div>
+                  <div class="SystemStatus col-xs-12 col-md-4" id="Monitors">
+                    <h6>Monitors</h6>
+                    <div class="circle"></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="row remoteDevice">
+          <div class="col-xs-12 col-md-12">
+            <div class="content-block">
+              <h5>Remote Device Status</h5>
+              <div class="table-responsive">
+                <table class="table" id="RemoteDevice">
+                  <tr>
+                    <th>Room Name</th>
+                    <th>IP Address</th>
+                    <th>Status</th>
+                    <th>Options</th>
+                  </tr>
+                  <tr>
+                    <td class="roomName">Redbird Room</td>
+                    <td class="ipAddress">192.168.101.40</td>
+                    <td class="status issues">Issues</td>
+                    <td class="options"> 
+                      <button>Update</button>
+                      <button>Configure</button>
+                      <button>Capture</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="roomName">Engineering Room</td>
+                    <td class="ipAddress">192.168.101.40</td>
+                    <td class="status online">Online</td>
+                    <td class="options"> 
+                      <button>Update</button>
+                      <button>Configure</button>
+                      <button>Capture</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="roomName">Redbird Room</td>
+                    <td class="ipAddress">192.168.101.40</td>
+                    <td class="status offline">Offline</td>
+                    <td class="options"> 
+                      <button>Update</button>
+                      <button>Configure</button>
+                      <button>Capture</button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <hr>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

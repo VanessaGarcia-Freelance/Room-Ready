@@ -20,15 +20,58 @@ a:hover {
 /*
  * Base structure
  */
+html,
+body {
+  height: 100%;
+}
+body div {
+  border-radius: 10px;
+}
+body.page-template {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+.content-block {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.content-block h5 {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: -1px;
+  padding: 10px;
+  text-align: center;
+}
+.content-block > div {
+  padding: 20px;
+}
+ul.list-unstyled .listlabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  margin-right: 10px;
+  width: 110px;
+  display: inline-block;
+}
+/*
+ * Main Header
+ */
 .main-header {
   background-color: transparent;
 }
 .main-header .header-container {
-  background-color: #c8e7ae;
+  background-color: #a4d77c;
 }
 .main-header .header-container .navbar-right {
   margin-right: 15px;
+  text-align: right;
 }
+/*
+ * Main Navigation
+ */
 .main-nav {
   background-color: transparent;
   border-color: transparent;
@@ -76,18 +119,55 @@ a:hover {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-html,
-body {
-  height: 100%;
+/*
+ * Homepage
+ */
+.SystemStatus h6 {
+  text-align: center;
 }
-body div {
-  border-radius: 10px;
+.SystemStatus .circle {
+  background-color: grey;
+  border-radius: 100px;
+  height: 55px;
+  width: 55px;
+  margin: 0 auto;
+  border: 1px solid black;
+  margin-bottom: 20px;
 }
-body.page-template {
-  padding-top: 70px;
+.SystemStatus#Portal .circle {
+  background-color: #c72f3d;
 }
-footer {
-  padding: 30px 0;
+.SystemStatus#Codec .circle {
+  background-color: #fbc348;
+}
+.SystemStatus#Monitors .circle {
+  background-color: #7cb44f;
+}
+.remoteDevice .content-block > div {
+  padding: 2px;
+}
+.remoteDevice table#RemoteDevice tr th {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.remoteDevice table#RemoteDevice tr td {
+  text-align: center;
+}
+.remoteDevice table#RemoteDevice tr td.issues {
+  color: #fbc348;
+}
+.remoteDevice table#RemoteDevice tr td.online {
+  color: #7cb44f;
+}
+.remoteDevice table#RemoteDevice tr td.offline {
+  color: #c72f3d;
+}
+.remoteDevice table#RemoteDevice tr td button {
+  border-radius: 5px;
 }
 /*
  * Off Canvas
@@ -128,20 +208,6 @@ footer {
     width: 50%;
     /* 6 columns */
   }
-}
-.content-block {
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-.content-block h3 {
-  border: 1px solid black;
-  border-radius: 5px;
-  margin: -1px;
-  padding: 10px;
-}
-.content-block div {
-  padding: 20px;
 }
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
@@ -226,7 +292,7 @@ footer {
 }
 /* Login Page */
 body.login_page {
-  background-color: #c8e7ae;
+  background-color: #a4d77c;
 }
 .form-signin {
   border: 1px solid black;

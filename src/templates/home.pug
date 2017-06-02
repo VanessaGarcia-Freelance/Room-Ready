@@ -8,57 +8,113 @@ html(lang='en')
     include _components/page-header.pug
     include _components/main-nav.pug
     +navigation('home')
+    
     div.container
-      div
-        //- .row.row-offcanvas.row-offcanvas-left
-
-        //- div#sidebar.col-xs-6.col-sm-3.sidebar-offcanvas
-          div.list-group
-            a.list-group-item.active(href='#') Link
-            a.list-group-item(href='#') Link
-            a.list-group-item(href='#') Link
-            a.list-group-item(href='#') Link
-
-        div.col-xs-12.col-md-10.col-md-offset-1
-          div.row
-            p.pull-left.visible-xs
-              button.btn.btn-primary.btn-xs(type="button" data-toggle="offcanvas") Toggle nav
+      div.col-xs-12.col-md-10.col-md-offset-1
           div.row
             div.col-xs-12.col-md-6
               div.content-block
-                h3 System Info
+                h5 System Info
                 div
-                  p System Name:
-                  p Mac Address:
-                  p IP Address:
-                  p Gateway:
-                  p Serial Number:
+                  ul.list-unstyled
+                    li
+                      span.listlabel System Name:
+                      span#Name.SystemInfo Example Name
+                  ul.list-unstyled
+                    li
+                      span.listlabel Mac Address:
+                      span#MACAddress.SystemInfo Example MAC
+                    li
+                      span.listlabel IP Address:
+                      span#IPAddress.SystemInfo Example IP
+                    li
+                      span.listlabel Gateway:
+                      span#Gateway.SystemInfo Example Gateway
+                  ul.list-unstyled
+                    li
+                      span.listlabel Serial Number:
+                      span#SerialNumber.SystemInfo Example Serial
               div.content-block
-                h3 System License
-                div
+                h5.listlabel System License
+                div.SystemLicenses
                   p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
             div.col-xs-12.col-md-6
               div.content-block
-                h3 Connected Devices
+                h5 Connected Devices
                 div
-                  p Number of Displays:
-                  p Codec IP:
-                  p Codec Model:
-                  p Codec Firmware:
-                  p Number of Codecs:
-                  p Number of Drones:
+                  ul.list-unstyled
+                    li
+                      span.listlabel Number of Displays:
+                      span#NumberOfDisplays.ConnectedDevices #
+                    li
+                      span.listlabel Codec IP:
+                      span#CodecIp.ConnectedDevices IP
+                    li
+                      span.listlabel Codec Model:
+                      span#CodecModel.ConnectedDevices Model
+                    li
+                      span.listlabel Codec Firmware:
+                      span#CodecFirmware.ConnectedDevices Firmware
+                  ul.list-unstyled
+                    li
+                      span.listlabel Number of Codecs:
+                      span#NumberOfCodecs.ConnectedDevices #
+                    li
+                      span.listlabel Number of Drones:
+                      span#NumberOfDrones.ConnectedDevices #
+
               div.content-block
-                h3 System Status
+                h5 System Status
                 div
                   div.row
-                    div.col-xs-12.col-md-4
-                      h5 Portal Online
-                    div.col-xs-12.col-md-4
-                      h5 Codec Online
-                    div.col-xs-12.col-md-4
-                      h5 Monitors
+                    div#Portal.SystemStatus.col-xs-12.col-md-4
+                      h6 Portal Online
+                      div.circle
+                    div#Codec.SystemStatus.col-xs-12.col-md-4
+                      h6 Codec Online
+                      div.circle
+                    div#Monitors.SystemStatus.col-xs-12.col-md-4
+                      h6 Monitors
+                      div.circle
+          div.row.remoteDevice
+            div.col-xs-12.col-md-12
+              div.content-block
+                h5 Remote Device Status
+                div.table-responsive
+                  table#RemoteDevice.table
+                    tr
+                      th Room Name
+                      th IP Address
+                      th Status
+                      th Options
+                    tr
+                      td.roomName Redbird Room
+                      td.ipAddress 192.168.101.40
+                      td.status.issues Issues
+                      td.options 
+                        button Update
+                        button Configure
+                        button Capture
+                    tr
+                      td.roomName Engineering Room
+                      td.ipAddress 192.168.101.40
+                      td.status.online Online
+                      td.options 
+                        button Update
+                        button Configure
+                        button Capture
+                    tr
+                      td.roomName Redbird Room
+                      td.ipAddress 192.168.101.40
+                      td.status.offline Offline
+                      td.options 
+                        button Update
+                        button Configure
+                        button Capture
 
-      hr
+
+
+      //- hr
 
       //- footer
       //-   p &copy; 2016 Company, Inc.

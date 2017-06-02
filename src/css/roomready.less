@@ -2,9 +2,13 @@
  * Globals
  */
 
-@green      : #c8e7ae;
-@blue       : #40a7db;
-@borderGrey : #333;
+@green        : #a4d77c;   //: #c8e7ae;
+@blue         : #40a7db;
+@borderGrey   : #333;
+@systemRed    : #c72f3d;
+@systemYellow : #fbc348;
+@systemGreen  : #7cb44f;
+
 
 
 /* Links */
@@ -28,16 +32,73 @@ a:hover {
 /*
  * Base structure
  */
+html,
+body {
+  height: 100%;
+}
+body div{
+  border-radius: 10px;
+}
 
+
+body.page-template {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+// Components
+.content-block {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  h5 {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: -1px;
+    padding: 10px;
+    text-align: center;
+  }
+  > div {
+    padding: 20px;
+  }
+}
+
+// Lists
+ul{
+  &.list-unstyled {
+    .listlabel {
+      font-size:12px;
+      font-weight: 500;
+      color: black;
+      margin-right: 10px;
+      width: 110px;
+      display: inline-block;
+    }
+  }
+}
+
+
+
+
+/*
+ * Main Header
+ */
 .main-header {
   background-color: transparent;
   .header-container {
     background-color: @green;
     .navbar-right {
       margin-right: 15px;
+      text-align: right;
     }
   }
 }
+
+/*
+ * Main Navigation
+ */
 .main-nav {
   background-color: transparent;
   border-color: transparent;
@@ -51,14 +112,12 @@ a:hover {
       padding: 0;
       list-style: none;
       &#home {
-        // background-color: red;
         a.home {
           background-color: white;
           border-radius: 5px;
         }
       }
       &#security {
-        // background-color: red;
         a.security {
           background-color: white;
           border-radius: 5px;
@@ -101,21 +160,79 @@ a:hover {
   }
 }
 
-html,
-body {
-  height: 100%;
-}
-body div{
-  border-radius: 10px;
+/*
+ * Homepage
+ */
+
+.SystemStatus {
+  h6 {
+    text-align: center;
+  }
+  .circle{
+    background-color: grey;
+    border-radius: 100px;
+    height: 55px;
+    width: 55px;
+    margin: 0 auto;
+    border: 1px solid black;
+    margin-bottom: 20px;
+  }
+  &#Portal{
+    .circle{
+      background-color: @systemRed;
+    }
+  }
+  &#Codec{
+    .circle{
+      background-color: @systemYellow;
+    }
+  }
+  &#Monitors{
+    .circle{
+      background-color: @systemGreen;
+    }
+  }
 }
 
+.remoteDevice{
+  .content-block {
+    > div {
+      padding: 2px;
+    }
+  }
+  table#RemoteDevice {
+    tr {
+      th {
+        text-align: center;
+        font-size:12px;
+        font-weight: 500;
+        color: black;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      td {
+        text-align: center;
 
-body.page-template {
-  padding-top: 70px;
+        &.issues {
+          color: @systemYellow;
+        }
+        &.online {
+          color: @systemGreen;
+        }
+        &.offline {
+          color: @systemRed;
+        }
+
+        button {
+          border-radius: 5px;
+          // background-color: white;
+          // border: 1px solid black;
+        }
+      }
+    }
+  }
 }
-footer {
-  padding: 30px 0;
-}
+
 
 /*
  * Off Canvas
@@ -162,20 +279,7 @@ footer {
   }
 }
 
-.content-block {
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  h3 {
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: -1px;
-    padding: 10px;
-  }
-  div {
-    padding: 20px;
-  }
-}
+
 //////////////////////////////////////
 
 
