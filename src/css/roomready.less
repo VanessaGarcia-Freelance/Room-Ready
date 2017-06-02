@@ -103,6 +103,45 @@ ul{
     .navbar-toggle {
       background-color: #333;
     }
+
+    ul {
+      &#home {
+        a.home {
+          background-color: white;
+          border-radius: 5px;
+        }
+      }
+      &#setup {
+        a.setup {
+          background-color: white;
+          border-radius: 5px;
+        }
+      }
+      &#security {
+        a.security {
+          background-color: white;
+          border-radius: 5px;
+        }
+      }
+      &#maintenance {
+        a.maintenance {
+          background-color: white;
+          border-radius: 5px;
+        }
+      }
+      &#rr-admin {
+        a.rr-admin {
+          background-color: white;
+          border-radius: 5px;
+        }
+      }
+      &#help {
+        a.help {
+          background-color: white;
+          border-radius: 5px;
+        }
+      }
+    }
   }
 
   #navbar  {
@@ -263,6 +302,27 @@ ul{
 /*
  * Header
  */
+ .main-header {
+    .header-container {
+      .navbar-header {
+
+        .navbar-brand {
+          display: block;
+          float: none;
+          > img {
+            text-align: center;
+            margin: 0 auto;
+          }
+        }
+        .nav {
+          text-align: center;
+        }
+      }
+      .navbar-right {
+          text-align: center;
+        }
+      } 
+  } 
 .masthead-brand {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -316,18 +376,6 @@ ul{
         left: 50%;
         padding: 0;
         list-style: none;
-        &#home {
-          a.home {
-            background-color: white;
-            border-radius: 5px;
-          }
-        }
-        &#security {
-          a.security {
-            background-color: white;
-            border-radius: 5px;
-          }
-        }
         li {
           position: relative;
           float: left;
@@ -338,13 +386,6 @@ ul{
             color: black;
             padding: 10px 30px;
             background-color: @bgGrey;
-          }
-
-          &.active {
-            a {
-              background-color: white;
-              border-radius: 5px;
-            }
           }
           
           &:first-child {
@@ -436,27 +477,7 @@ body.login_page {
  */
 
  
- .main-header {
-    .header-container {
-      .navbar-header {
 
-        .navbar-brand {
-          display: block;
-          float: none;
-          > img {
-            text-align: center;
-            margin: 0 auto;
-          }
-        }
-        .nav {
-          text-align: center;
-        }
-      }
-      .navbar-right {
-          text-align: center;
-        }
-      } 
-  } 
 
 @media (min-width: 480px) {
   
