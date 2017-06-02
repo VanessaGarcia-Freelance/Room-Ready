@@ -1,6 +1,19 @@
 /*
  * Globals
  */
+body.listpage {
+  background-color: #a4d77c;
+}
+body.listpage .content-block {
+  background-color: white;
+}
+body.listpage a {
+  color: black;
+  text-decoration: underline;
+}
+body.listpage h4 {
+  margin: 40px 0 20px 0;
+}
 /* Links */
 a,
 a:focus,
