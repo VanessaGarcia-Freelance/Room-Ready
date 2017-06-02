@@ -1,107 +1,103 @@
 doctype html
 html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible' content='IE=edge')
-    meta(name='viewport' content='width=device-width, initial-scale=1')
-    //The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    meta(name='description' content='')
-    meta(name='author' content='')
-    //<link rel="icon" href="../../favicon.ico">
-
-    title Page Template
-
-    //Bootstrap core CSS
-    link(href='css/bootstrap.min.css' rel='stylesheet')
-    link(href='css/roomready.min.css' rel='stylesheet')
-
-
-    //Custom styles for this template
-    //- link(href='offcanvas.css' rel='stylesheet')
-
+  //- Include Head Tag for site
+  include _components/head.pug
+  +head('Setup - Collector Config')
 
   body.page-template
-    header.main-header.navbar-fixed-top.navbar-inverse
-      div.header-container.container
-        div.row
-          div.navbar-header
-            a.navbar-brand(href='#') RR Logo
-          div.collapse.navbar-collapse
-            ul.nav.navbar-right
-              li 
-                h5 System Hostname
-              li 
-                h5 System Type
-    nav.main-nav.navbar.navbar-top.navbar-inverse
-      div.container
-        div.navbar-header
-          button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-        div#navbar.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-center
-            li.active
-              a(href='#') Home
-            li
-              a(href='#setup') Setup
-            li
-              a(href='#security') Security
-            li
-              a(href='#maintenance') Maintenance
-            li
-              a(href='#rradmin') RR-Admin
-            li
-              a(href='#help') Help
+    include _components/page-header.pug
+    include _components/main-nav.pug
+    +navigation('setup')
+
     div.container
       div.row.row-offcanvas.row-offcanvas-left
 
         div#sidebar.col-xs-6.col-sm-3.sidebar-offcanvas
           div.list-group
-            a.list-group-item.active(href='#') Link
-            a.list-group-item(href='#') Link
-            a.list-group-item(href='#') Link
-            a.list-group-item(href='#') Link
+            a.list-group-item.active(href='#') Collector Config
+            a.list-group-item(href='#') External Device
+            a.list-group-item(href='#') Codec Configuration
+            a.list-group-item(href='#') Spark Services
 
         div.col-xs-12.col-sm-9
           div.row
             p.pull-left.visible-xs
               button.btn.btn-primary.btn-xs(type="button" data-toggle="offcanvas") Toggle nav
           div.row
-            div.col-xs-12.col-md-6
+            div.col-xs-12.col-md-10.col-md-offset-1
               div.content-block
-                h3 System Info
+                h5 System Information
                 div
-                  p System Name:
-                  p Mac Address:
-                  p IP Address:
-                  p Gateway:
-                  p Serial Number:
+                  ul.list-unstyled
+                    li
+                      span.listlabel Room Name:
+                      span#RoomName.SystemInformation Text
+                    li
+                      span.listlabel Room Number:
+                      span#RoomNumber.SystemInformation Text
+                    li
+                      span.listlabel Building Name/Number:
+                      span#Building.SystemInformation Text
+                    li
+                      span.listlabel Address:
+                      span#Address.SystemInformation Text
+                    li
+                      span.listlabel City, State, zip:
+                      span#City.SystemInformation Text
+                      //- div.row
+                      //-   span#State.SystemInformation Text
+                      //-   span#Zip.SystemInformation Text
               div.content-block
-                h3 System License
+                h5 Network Settings
                 div
-                  p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-            div.col-xs-12.col-md-6
+                  ul.list-unstyled
+                    li
+                      span.listlabel DHCP or Static:
+                      span#Name.NetworkSettings [INSERT CHECKBOXES]
+                    li
+                      span.listlabel Ipv4 Address:
+                      span#IPAddress.NetworkSettings Text
+                    li
+                      span.listlabel Subnet Mask:
+                      span#NetMask.NetworkSettings Text
+                    li
+                      span.listlabel Gateway:
+                      span#Gateway.NetworkSettings Text
+                    li
+                      span.listlabel Hostname:
+                      span#HostName.NetworkSettings Text
               div.content-block
-                h3 Connected Devices
+                h5 Internet Settings
                 div
-                  p Number of Displays:
-                  p Codec IP:
-                  p Codec Model:
-                  p Codec Firmware:
-                  p Number of Codecs:
-                  p Number of Drones:
+                  ul.list-unstyled
+                    li
+                      span.listlabel Domain Name:
+                      span#DomainName.InternetSettings Text
+                    li
+                      span.listlabel DNS Server 1:
+                      span#DNSServer1.InternetSettings Text
+                    li
+                      span.listlabel NS Server 2:
+                      span#DNSServer2.InternetSettings Text
+                    li
+                      span.listlabel Proxy Server:
+                      span#ProxyServer.InternetSettings Text
+                    li
+                      span.listlabel Proxy Username:
+                      span#ProxyUsername.InternetSettings Text
+                    li
+                      span.listlabel Proxy Password:
+                      span#ProxyPassword.InternetSettings Text
               div.content-block
-                h3 System Status
+                h5 Network Services
                 div
-                  div.row
-                    div.col-xs-12.col-md-4
-                      h5 Portal Online
-                    div.col-xs-12.col-md-4
-                      h5 Codec Online
-                    div.col-xs-12.col-md-4
-                      h5 Monitors
+                  ul.list-unstyled
+                    li
+                      span.listlabel NTP Server 1:
+                      span#NTPServer1.NetworkServices Text
+                    li
+                      span.listlabel NTP Server 2:
+                      span#NTPServer2.NetworkServices Text
 
       hr
 
