@@ -58,6 +58,10 @@ footer {
 .content-block > div {
   padding: 20px;
 }
+.content-block > p {
+  text-align: center;
+  margin: 10px 0;
+}
 ul.list-unstyled .listlabel {
   font-size: 12px;
   font-weight: 500;
@@ -65,6 +69,9 @@ ul.list-unstyled .listlabel {
   margin-right: 10px;
   width: 110px;
   display: inline-block;
+}
+ul.list-unstyled label .listlabel {
+  margin-left: 10px;
 }
 /*
  * Main Header

@@ -1,12 +1,12 @@
+include _components/mixins.pug
+
 doctype html
 html(lang='en')
-  //- Include Head Tag for site
-  include _components/head.pug
+  //- include head tag
   +head('Room Ready - Home')
 
   body.page-template
-    include _components/page-header.pug
-    include _components/main-nav.pug
+    +pageheader()
     +navigation('home')
     
     div.container
