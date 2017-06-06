@@ -4,8 +4,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    //clean folders
     clean: {
-      dist: 'dist'
+      dist: 'dist',
+      minified: 'minified'
     },
 
     // configure jshint to validate js files -----------------------------------
@@ -76,6 +78,7 @@ module.exports = function(grunt) {
       }
     },
 
+    //compile pug files into static html pages
     pug: {
       compile: {
         options: {
@@ -93,6 +96,50 @@ module.exports = function(grunt) {
           ext: ".html"
         } ]
       }
+    },
+
+    //copy over folders to create a new finalized folder
+    copy: {
+      main: {
+        files: [{
+          expand: true, 
+          cwd: 'dist/',
+          src: ['**/*.html', '**/*.js', 'img/**'],       
+          dest: 'minified/'
+        }],
+      },
+    },
+
+    //remove any css not being used by the pages
+    uncss: {
+      dist: {
+        files: {
+          'minified/css/roomready-clean.css': ['dist/*.html']
+        },
+        options: {
+          report: 'min' // optional: include to report savings
+        }
+      }
+    },
+
+    //in final version, change all stylesheet references to the newly compressed css file
+    processhtml: {
+      dist: {
+        // files: {
+        //   'minified/index.html': ['dist/index.html'],
+        //   'minified/login.html': ['dist/login.html'],
+        //   'minified/home.html': ['dist/home.html']
+        //   // 'minified/*.html': ['dist/*.html']
+        // },
+        files: [
+        {
+          expand: true,
+          cwd: 'dist/',
+          src: ['**/*.html'],
+          dest: 'minified/',
+          ext: '.html'
+        }],
+      }
     }
   });
 
@@ -107,9 +154,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   // grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-pug');
+  grunt.loadNpmTasks('grunt-uncss');
+  grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   //Grunt Tasks
-  grunt.registerTask('default', ['clean', 'jshint', 'uglify', 'cssmin', 'less', 'pug']); 
+  grunt.registerTask('default', ['clean:dist', 'jshint', 'uglify', 'cssmin', 'less', 'pug']); 
+  grunt.registerTask('dist', ['clean:dist', 'jshint', 'uglify', 'cssmin', 'less', 'pug']); 
+  grunt.registerTask('compress', ['clean:minified', 'copy', 'uncss', 'processhtml']); 
 
 
 };
