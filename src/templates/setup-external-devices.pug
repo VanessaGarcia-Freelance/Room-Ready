@@ -1,0 +1,63 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'Setup - External Devices';
+  -var section    = 'setup';
+  -var subsection = 'External Devices';
+
+block secondaryMenu
+  +setupMenu( subsection )
+
+block content
+  div.content-block
+    h5 Monitors
+    p Make sure your Monitors are off
+    div
+      ul.list-unstyled
+        li
+          span.listlabel Scan for Monitors:
+          button#scan.scan SCAN
+        li
+          span.listlabel Scan Results:
+          span#monitorCount 0
+    div
+      button#on.monitorControl Turn Monitors On
+      button#off.monitorControl Turn Monitors Off
+  div.content-block
+    h5 Light Configuration
+    div
+      ul.list-unstyled
+        li
+          span.listlabel Enable:
+          input#Enabled.Enable(type="checkbox" value="")
+        li
+          span.listlabel OCC Sensor Timeout:
+          input(type="text"  placeholder="Sensor Timeout" value="")
+        li
+          span.listlabel Enter Your Devices Here:
+          input#NetMask.NetworkSettings(type="text"  placeholder="Devices" value="")
+        li
+          label
+            input(type="checkbox" value="")
+            span.listlabel Is a Switch
+        li
+          label
+            input(type="checkbox" value="")  
+            span.listlabel Is Interior
+        li
+          label
+            input(type="checkbox" value="")
+            span.listlabel Use Color Temp
+        li
+          label
+            input(type="checkbox" value="")
+            span.listlabel Use PIR
+        li
+          label
+            input(type="checkbox" value="")
+            span.listlabel Is Indicator
+        li
+          button Add
+    div
+      table
+        h5 Device List

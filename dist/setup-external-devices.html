@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!--<link rel="icon" href="../../favicon.ico">-->
+      <title>Setup - External Devices</title>
+      <!--Bootstrap core CSS-->
+      <!-- build:css css/roomready-clean.css-->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/roomready.min.css" rel="stylesheet">
+      <!-- /build-->
+    </head>
+  </html>
+  <body class="page-template">
+    <header class="main-header navbar navbar-default navbar-static-top navbar-inverse">
+      <div class="header-container container">
+        <div class="row">
+          <div class="navbar-header"><a class="navbar-brand" href="#"><img alt="Room Ready" src="img/room-ready-logo.png"></a></div>
+          <div>
+            <ul class="nav navbar-right">
+              <li> 
+                <h5 class="SystemHostname">System Hostname</h5>
+              </li>
+              <li> 
+                <h5 class="SystemType">System Type</h5>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <nav class="main-nav navbar navbar-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav navbar-center" id="setup">
+            <li><a class="home" href="home.html">Home</a></li>
+            <li><a class="setup" href="collector-config.html">Setup</a></li>
+            <li><a class="security" href="#security">Security</a></li>
+            <li><a class="maintenance" href="#maintenance">Maintenance</a></li>
+            <li><a class="rr-admin" href="#rradmin">RR-Admin</a></li>
+            <li><a class="help" href="#help">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group"><a class="list-group-item" href="setup-collector-config.html" title="Collector Config">Collector Config</a><a class="list-group-item active" href="setup-external-devices.html" title="External Devices">External Devices</a><a class="list-group-item" href="#" title="Codec Configuration">Codec Configuration</a><a class="list-group-item" href="#" title="Spark Services">Spark Services</a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+          <div class="row">
+            <p class="pull-left visible-xs">
+              <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas">Toggle nav</button>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+              <div class="content-block">
+                <h5>Monitors</h5>
+                <p>Make sure your Monitors are off</p>
+                <div>
+                  <ul class="list-unstyled">
+                    <li><span class="listlabel">Scan for Monitors:</span>
+                      <button class="scan" id="scan">SCAN</button>
+                    </li>
+                    <li><span class="listlabel">Scan Results:</span><span id="monitorCount">0</span></li>
+                  </ul>
+                </div>
+                <div>
+                  <button class="monitorControl" id="on">Turn Monitors On</button>
+                  <button class="monitorControl" id="off">Turn Monitors Off</button>
+                </div>
+              </div>
+              <div class="content-block">
+                <h5>Light Configuration</h5>
+                <div>
+                  <ul class="list-unstyled">
+                    <li><span class="listlabel">Enable:</span>
+                      <input class="Enable" id="Enabled" type="checkbox" value="">
+                    </li>
+                    <li><span class="listlabel">OCC Sensor Timeout:</span>
+                      <input type="text" placeholder="Sensor Timeout" value="">
+                    </li>
+                    <li><span class="listlabel">Enter Your Devices Here:</span>
+                      <input class="NetworkSettings" id="NetMask" type="text" placeholder="Devices" value="">
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" value=""><span class="listlabel">Is a Switch</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" value=""><span class="listlabel">Is Interior</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" value=""><span class="listlabel">Use Color Temp</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" value=""><span class="listlabel">Use PIR</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" value=""><span class="listlabel">Is Indicator</span>
+                      </label>
+                    </li>
+                    <li>
+                      <button>Add</button>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <table>
+                    <h5>Device List</h5>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/roomready.min.js"> </script>
+  </body>
+</html>

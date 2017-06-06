@@ -1,0 +1,76 @@
+
+mixin head(page_title)
+    doctype html
+    html(lang='en')
+      head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        //The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+        meta(name='description' content='')
+        meta(name='author' content='')
+        //<link rel="icon" href="../../favicon.ico">
+
+        title= page_title
+
+        //Bootstrap core CSS
+        // build:css css/roomready-clean.css
+        link(href='css/bootstrap.min.css' rel='stylesheet')
+        link(href='css/roomready.min.css' rel='stylesheet')
+        // /build
+        
+mixin pageheader
+  header.main-header.navbar.navbar-default.navbar-static-top.navbar-inverse
+    div.header-container.container
+      div.row
+        div.navbar-header
+          a.navbar-brand(href='#')
+            img(alt='Room Ready' src='img/room-ready-logo.png')
+        div
+          ul.nav.navbar-right
+            li 
+              h5.SystemHostname System Hostname
+            li 
+              h5.SystemType System Type
+
+mixin navigation(currentPage)
+  nav.main-nav.navbar.navbar-top.navbar-inverse
+    div.container
+      div.navbar-header
+        button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      div#navbar.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-center(id=currentPage)
+          li
+            a.home(href='home.html') Home
+          li
+            a.setup(href='collector-config.html') Setup
+          li
+            a.security(href='#security') Security
+          li
+            a.maintenance(href='#maintenance') Maintenance
+          li
+            a.rr-admin(href='#rradmin') RR-Admin
+          li
+            a.help(href='#help') Help
+
+mixin subnavigation(active, menu)
+  div.list-group
+    each val, key in menu
+      if key === active
+        a.list-group-item.active(href=val, title=key)= key
+      else
+        a.list-group-item(href=val, title=key)= key
+
+mixin setupMenu(active)
+  -var menu = { 'Collector Config': 'setup-collector-config.html', 'External Devices': 'setup-external-devices.html', 'Codec Configuration': '#', 'Spark Services': '#' };
+
+  +subnavigation( active , menu )
+
+mixin securityMenu(active)
+  -var menu = { 'Certificates': '#', '802.1x': '#', 'Users': '#' };
+
+  +subnavigation( active , menu )
