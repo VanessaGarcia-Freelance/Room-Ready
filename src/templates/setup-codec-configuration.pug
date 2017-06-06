@@ -1,0 +1,65 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'Setup - Codec Configuration';
+  -var section    = 'setup';
+  -var subsection = 'Codec Configuration';
+
+block secondaryMenu
+  +setupMenu( subsection )
+
+block content
+  div.content-block
+    h5 Codec Connection
+    div
+      ul.list-unstyled
+        li
+          span.listlabel Codec IP Address:
+          input#IPAddress.CodecConnection(type="text"  placeholder="#IP ADDRESS" value="{{ .CodecConnection.IPAddress }}")
+        li
+          span.listlabel Codec Username:
+          input#UserName.CodecConnection(type="text"  placeholder="#Username" value="{{ .CodecConnection.UserName }}")
+        li
+          span.listlabel Codec Password:
+          input#Password.CodecConnection(type="text"  placeholder="#Password" value="{{ .CodecConnection.Password }}")
+    div
+      button#testConnection.CodecConnection Test Codec Connection
+      button#standbyActivate.CodecConnection Activate Standby
+      button#standbyDeactivate.CodecConnection Deactivate Standby
+  div.content-block
+    h5 User Experience Settings
+    div
+      ul.list-unstyled
+        li
+          span.listlabel User Experience Reset:
+          label
+            input#enabled.UserExperienceReset(type="checkbox" value="")
+            span.listlabel Activate
+          label
+            input#disabled.UserExperienceReset(type="checkbox" value="")
+            span.listlabel Deactivate
+        li
+          span.listlabel Do Not Disturb During Call:
+          label
+            input#enabled.DoNotDisturb(type="checkbox" value="")
+            span.listlabel Activate
+          label
+            input#disabled.DoNotDisturb(type="checkbox" value="")
+            span.listlabel Deactivate
+        li
+          span.listlabel Send Configuration:
+          select.dropdown
+            option(value="#roomType1") #roomType1
+            option(value="#roomType2") #roomType2
+            option(value="#roomType3") #roomType3
+            option(value="#roomType4") #roomType4
+    p Do Not Complete This Step Until You Have Finished Your Install
+    div
+      ul.list-unstyled
+        li
+          span.listlabel Capture Codec Configuration
+          button#capture.ux Capture
+        li
+          span.listlabel Register Feedbacks
+          button#register.ux Register
+          button#deregister.ux DeRegister

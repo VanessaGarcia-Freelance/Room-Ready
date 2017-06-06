@@ -9,7 +9,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <!--<link rel="icon" href="../../favicon.ico">-->
-      <title>Setup - External Devices</title>
+      <title>Setup - Codec Configuration</title>
       <!--Bootstrap core CSS-->
       <!-- build:css css/roomready-clean.css-->
       <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-left">
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group"><a class="list-group-item" href="setup-collector-config.html" title="Collector Config">Collector Config</a><a class="list-group-item active" href="setup-external-devices.html" title="External Devices">External Devices</a><a class="list-group-item" href="setup-codec-configuration.html" title="Codec Configuration">Codec Configuration</a><a class="list-group-item" href="#" title="Spark Services">Spark Services</a>
+          <div class="list-group"><a class="list-group-item" href="setup-collector-config.html" title="Collector Config">Collector Config</a><a class="list-group-item" href="setup-external-devices.html" title="External Devices">External Devices</a><a class="list-group-item active" href="setup-codec-configuration.html" title="Codec Configuration">Codec Configuration</a><a class="list-group-item" href="#" title="Spark Services">Spark Services</a>
           </div>
         </div>
         <div class="col-xs-12 col-sm-9">
@@ -67,68 +67,67 @@
           <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
               <div class="content-block">
-                <h5>Monitors</h5>
-                <p>Make sure your Monitors are off</p>
+                <h5>Codec Connection</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Scan for Monitors:</span>
-                      <button class="scan" id="scan">SCAN</button>
+                    <li><span class="listlabel">Codec IP Address:</span>
+                      <input class="CodecConnection" id="IPAddress" type="text" placeholder="#IP ADDRESS" value="{{ .CodecConnection.IPAddress }}">
                     </li>
-                    <li><span class="listlabel">Scan Results:</span><span id="monitorCount">0</span></li>
+                    <li><span class="listlabel">Codec Username:</span>
+                      <input class="CodecConnection" id="UserName" type="text" placeholder="#Username" value="{{ .CodecConnection.UserName }}">
+                    </li>
+                    <li><span class="listlabel">Codec Password:</span>
+                      <input class="CodecConnection" id="Password" type="text" placeholder="#Password" value="{{ .CodecConnection.Password }}">
+                    </li>
                   </ul>
                 </div>
                 <div>
-                  <button class="monitorControl" id="on">Turn Monitors On</button>
-                  <button class="monitorControl" id="off">Turn Monitors Off</button>
+                  <button class="CodecConnection" id="testConnection">Test Codec Connection</button>
+                  <button class="CodecConnection" id="standbyActivate">Activate Standby</button>
+                  <button class="CodecConnection" id="standbyDeactivate">Deactivate Standby</button>
                 </div>
               </div>
               <div class="content-block">
-                <h5>Light Configuration</h5>
+                <h5>User Experience Settings</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Enable:</span>
-                      <input class="Enable" id="Enabled" type="checkbox" value="">
-                    </li>
-                    <li><span class="listlabel">OCC Sensor Timeout:</span>
-                      <input type="text" placeholder="Sensor Timeout" value="">
-                    </li>
-                    <li><span class="listlabel">Enter Your Devices Here:</span>
-                      <input class="NetworkSettings" id="NetMask" type="text" placeholder="Devices" value="">
-                    </li>
-                    <li>
+                    <li><span class="listlabel">User Experience Reset:</span>
                       <label>
-                        <input type="checkbox" value=""><span class="listlabel">Is a Switch</span>
+                        <input class="UserExperienceReset" id="enabled" type="checkbox" value=""><span class="listlabel">Activate</span>
+                      </label>
+                      <label>
+                        <input class="UserExperienceReset" id="disabled" type="checkbox" value=""><span class="listlabel">Deactivate</span>
                       </label>
                     </li>
-                    <li>
+                    <li><span class="listlabel">Do Not Disturb During Call:</span>
                       <label>
-                        <input type="checkbox" value=""><span class="listlabel">Is Interior</span>
+                        <input class="DoNotDisturb" id="enabled" type="checkbox" value=""><span class="listlabel">Activate</span>
+                      </label>
+                      <label>
+                        <input class="DoNotDisturb" id="disabled" type="checkbox" value=""><span class="listlabel">Deactivate</span>
                       </label>
                     </li>
-                    <li>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Use Color Temp</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Use PIR</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Is Indicator</span>
-                      </label>
-                    </li>
-                    <li>
-                      <button>Add</button>
+                    <li><span class="listlabel">Send Configuration:</span>
+                      <select class="dropdown">
+                        <option value="#roomType1">#roomType1</option>
+                        <option value="#roomType2">#roomType2</option>
+                        <option value="#roomType3">#roomType3</option>
+                        <option value="#roomType4">#roomType4</option>
+                      </select>
                     </li>
                   </ul>
                 </div>
+                <p>Do Not Complete This Step Until You Have Finished Your Install</p>
                 <div>
-                  <table>
-                    <h5>Device List</h5>
-                  </table>
+                  <ul class="list-unstyled">
+                    <li><span class="listlabel">Capture Codec Configuration</span>
+                      <button class="ux" id="capture">Capture</button>
+                    </li>
+                    <li><span class="listlabel">Register Feedbacks</span>
+                      <button class="ux" id="register">Register</button>
+                      <button class="ux" id="deregister">DeRegister</button>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>

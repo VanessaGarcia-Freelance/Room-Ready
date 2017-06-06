@@ -73,6 +73,9 @@ ul.list-unstyled .listlabel {
 ul.list-unstyled label .listlabel {
   margin-left: 10px;
 }
+select.dropdown {
+  display: inline-block;
+}
 /*
  * Main Header
  */
