@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!--<link rel="icon" href="../../favicon.ico">-->
+      <title>Setup - Collector Config</title>
+      <!--Bootstrap core CSS-->
+      <!-- build:css css/roomready-clean.css-->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/roomready.min.css" rel="stylesheet">
+      <!-- /build-->
+    </head>
+  </html>
+  <body class="page-template">
+    <header class="main-header navbar navbar-default navbar-static-top navbar-inverse">
+      <div class="header-container container">
+        <div class="row">
+          <div class="navbar-header"><a class="navbar-brand" href="#"><img alt="Room Ready" src="img/room-ready-logo.png"></a></div>
+          <div>
+            <ul class="nav navbar-right">
+              <li> 
+                <h5 class="SystemHostname">System Hostname</h5>
+              </li>
+              <li> 
+                <h5 class="SystemType">System Type</h5>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <nav class="main-nav navbar navbar-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav navbar-center" id="setup">
+            <li><a class="home" href="home.html">Home</a></li>
+            <li><a class="setup" href="collector-config.html">Setup</a></li>
+            <li><a class="security" href="#security">Security</a></li>
+            <li><a class="maintenance" href="#maintenance">Maintenance</a></li>
+            <li><a class="rr-admin" href="#rradmin">RR-Admin</a></li>
+            <li><a class="help" href="#help">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group"><a class="list-group-item active" href="setup-collector-config.html" title="Collector Config">Collector Config</a><a class="list-group-item" href="setup-external-devices.html" title="External Devices">External Devices</a><a class="list-group-item" href="#" title="Codec Configuration">Codec Configuration</a><a class="list-group-item" href="#" title="Spark Services">Spark Services</a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+          <div class="row">
+            <p class="pull-left visible-xs">
+              <button class="btn btn-primary btn-xs" type="button" data-toggle="offcanvas">Toggle nav</button>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+              <div class="content-block">
+                <h5>System Information</h5>
+                <div>
+                  <ul class="list-unstyled">
+                    <li><span class="listlabel">Room Name:</span>
+                      <input class="SystemInformation" id="RoomName" type="text" placeholder="Room Name" value="{{ .SystemInformation.RoomName }}">
+                    </li>
+                    <li><span class="listlabel">Room Number:</span>
+                      <input class="SystemInformation" id="RoomNumber" type="text" placeholder="Room Number" value="{{ .SystemInformation.RoomNumber }}">
+                    </li>
+                    <li><span class="listlabel">Building Name/Number:</span>
+                      <input class="SystemInformation" id="Building" type="text" placeholder="Building Name/Number" value="{{ .SystemInformation.Building }}">
+                    </li>
+                    <li><span class="listlabel">Address:</span>
+                      <input class="SystemInformation" id="Address" type="text" placeholder="Address" value="{{ .SystemInformation.Address }}">
+                    </li>
+                    <li><span class="listlabel">City, State, zip:</span>
+                      <input class="SystemInformation" id="City" type="text" placeholder="City" value="{{ .SystemInformation.City }}">
+                    </li>
+                    <li><span class="listlabel"></span>
+                      <input class="SystemInformation" id="State" type="text" placeholder="State" value="{{ .SystemInformation.State }}">
+                      <input class="SystemInformation" id="Zip" type="text" placeholder="Zipcode" value="{{ .SystemInformation.Zip }}">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="content-block">
+                <h5>Network Settings</h5>
+                <div>
+                  <ul class="list-unstyled">
+                    <li><span class="listlabel">DHCP:</span>
+                      <input class="NetworkSettings" id="DHCP" type="checkbox" value="{{ .NetworkSettings.DHCPstring }}">
+                    </li>
+                    <li><span class="listlabel">Ipv4 Address:</span>
+                      <input class="NetworkSettings" id="IPAddress" type="text" placeholder="Ipv4 Address" value="{{ .NetworkSettings.IPAddress }}">
+                    </li>
+                    <li><span class="listlabel">Subnet Mask:</span>
+                      <input class="NetworkSettings" id="NetMask" type="text" placeholder="Subnet Mask" value="{{ .NetworkSettings.NetMask }}">
+                    </li>
+                    <li><span class="listlabel">Gateway:</span>
+                      <input class="NetworkSettings" id="Gateway" type="text" placeholder="Gateway" value="{{ .NetworkSettings.Gateway }}">
+                    </li>
+                    <li><span class="listlabel">Hostname:</span>
+                      <input class="NetworkSettings" id="HostName" type="text" placeholder="Hostname" value="{{ .NetworkSettings.HostName }}">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="content-block">
+                <h5>Internet Settings</h5>
+                <div>
+                  <ul class="list-unstyled">
+                    <li><span class="listlabel">Domain Name:</span>
+                      <input class="InternetSettings" id="DomainName" type="text" placeholder="Domain Name" value="{{ .InternetSettings.DomainName }}">
+                    </li>
+                    <li><span class="listlabel">DNS Server 1:</span>
+                      <input class="InternetSettings" id="DNSServer1" type="text" placeholder="DNS Server 1" value="{{ .InternetSettings.DNSServer1 }}">
+                    </li>
+                    <li><span class="listlabel">NS Server 2:</span>
+                      <input class="InternetSettings" id="DNSServer2" type="text" placeholder="NS Server 2" value="{{ .InternetSettings.DNSServer2 }}">
+                    </li>
+                    <li><span class="listlabel">Proxy Server:</span>
+                      <input class="InternetSettings" id="ProxyServer" type="text" placeholder="Proxy Server" value="{{ .InternetSettings.ProxyServer }}">
+                    </li>
+                    <li><span class="listlabel">Proxy Username:</span>
+                      <input class="InternetSettings" id="ProxyUsername" type="text" placeholder="Proxy Username" value="{{ .InternetSettings.ProxyUserName }}">
+                    </li>
+                    <li><span class="listlabel">Proxy Password:</span>
+                      <input class="InternetSettings" id="ProxyPassword" type="password" placeholder="Proxy Password" value="{{ .InternetSettings.ProxyPassword }}">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="content-block">
+                <h5>Network Services</h5>
+                <div>
+                  <ul class="list-unstyled">
+                    <li><span class="listlabel">NTP Server 1:</span>
+                      <input class="NetworkServices" id="NTPServer1" type="text" placeholder="NTP Server 1" value="{{ .NetworkServices.NTPServer1 }}">
+                    </li>
+                    <li><span class="listlabel">NTP Server 2:</span>
+                      <input class="NetworkServices" id="NTPServer2" type="text" placeholder="NTP Server 2" value="{{ .NetworkServices.NTPServer2 }}">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/roomready.min.js"> </script>
+  </body>
+</html>

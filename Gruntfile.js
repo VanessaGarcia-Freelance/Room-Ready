@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       },
 
       // when this task is run, lint the Gruntfile and all js files in src
-      build: ['Gruntfile.js', 'src/**/*.js', '!src/js/bootstrap.js']
+      build: ['Gruntfile.js', 'src/js/**/*.js', '!src/js/bootstrap.js']
     },
 
     // configure uglify to minify js files -------------------------------------
