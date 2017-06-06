@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-center" id="setup">
             <li><a class="home" href="home.html">Home</a></li>
-            <li><a class="setup" href="collector-config.html">Setup</a></li>
+            <li><a class="setup" href="setup-collector-config.html">Setup</a></li>
             <li><a class="security" href="#security">Security</a></li>
             <li><a class="maintenance" href="#maintenance">Maintenance</a></li>
             <li><a class="rr-admin" href="#rradmin">RR-Admin</a></li>
@@ -71,58 +71,76 @@
                 <p>Make sure your Monitors are off</p>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Scan for Monitors:</span>
-                      <button class="scan" id="scan">SCAN</button>
+                    <li class="col2"><span class="listlabel">Scan for Monitors:</span>
+                      <div>
+                        <button class="scan" id="scan">SCAN</button>
+                      </div>
                     </li>
-                    <li><span class="listlabel">Scan Results:</span><span id="monitorCount">0</span></li>
+                    <li class="col2"><span class="listlabel">Scan Results:</span><span id="monitorCount">0</span></li>
+                    <li class="col2even">
+                      <div>
+                        <button class="monitorControl" id="on">Turn Monitors On</button>
+                      </div>
+                      <div>
+                        <button class="monitorControl" id="off">Turn Monitors Off</button>
+                      </div>
+                    </li>
                   </ul>
-                </div>
-                <div>
-                  <button class="monitorControl" id="on">Turn Monitors On</button>
-                  <button class="monitorControl" id="off">Turn Monitors Off</button>
                 </div>
               </div>
               <div class="content-block">
                 <h5>Light Configuration</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Enable:</span>
-                      <input class="Enable" id="Enabled" type="checkbox" value="">
+                    <li class="col2"><span class="listlabel">Enable:</span>
+                      <div>
+                        <input class="Enable" id="Enabled" type="checkbox" value="">
+                      </div>
                     </li>
-                    <li><span class="listlabel">OCC Sensor Timeout:</span>
-                      <input type="text" placeholder="Sensor Timeout" value="">
+                    <li class="col2"><span class="listlabel">OCC Sensor Timeout:</span>
+                      <div>
+                        <input type="text" placeholder="Sensor Timeout" value="">
+                      </div>
                     </li>
-                    <li><span class="listlabel">Enter Your Devices Here:</span>
-                      <input class="NetworkSettings" id="NetMask" type="text" placeholder="Devices" value="">
+                    <li class="col2"><span class="listlabel">Enter Your Devices Here:</span>
+                      <div>
+                        <input class="NetworkSettings" id="NetMask" type="text" placeholder="Devices" value="">
+                      </div>
                     </li>
-                    <li>
+                    <li class="col2">
+                      <div></div>
                       <label>
                         <input type="checkbox" value=""><span class="listlabel">Is a Switch</span>
                       </label>
                     </li>
-                    <li>
+                    <li class="col2">
+                      <div></div>
                       <label>
                         <input type="checkbox" value=""><span class="listlabel">Is Interior</span>
                       </label>
                     </li>
-                    <li>
+                    <li class="col2">
+                      <div></div>
                       <label>
                         <input type="checkbox" value=""><span class="listlabel">Use Color Temp</span>
                       </label>
                     </li>
-                    <li>
+                    <li class="col2">
+                      <div></div>
                       <label>
                         <input type="checkbox" value=""><span class="listlabel">Use PIR</span>
                       </label>
                     </li>
-                    <li>
+                    <li class="col2">
+                      <div></div>
                       <label>
                         <input type="checkbox" value=""><span class="listlabel">Is Indicator</span>
                       </label>
                     </li>
-                    <li>
+                    <lili class="col2">
+                      <div></div>
                       <button>Add</button>
-                    </li>
+                    </lili>
                   </ul>
                 </div>
                 <div>

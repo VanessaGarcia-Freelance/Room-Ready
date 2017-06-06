@@ -14,49 +14,61 @@ block content
     p Make sure your Monitors are off
     div
       ul.list-unstyled
-        li
+        li.col2
           span.listlabel Scan for Monitors:
-          button#scan.scan SCAN
-        li
+          div
+            button#scan.scan SCAN
+        li.col2
           span.listlabel Scan Results:
           span#monitorCount 0
-    div
-      button#on.monitorControl Turn Monitors On
-      button#off.monitorControl Turn Monitors Off
+        li.col2even
+          div
+            button#on.monitorControl Turn Monitors On
+          div
+            button#off.monitorControl Turn Monitors Off
   div.content-block
     h5 Light Configuration
     div
       ul.list-unstyled
-        li
+        li.col2
           span.listlabel Enable:
-          input#Enabled.Enable(type="checkbox" value="")
-        li
+          div
+            input#Enabled.Enable(type="checkbox" value="")
+        li.col2
           span.listlabel OCC Sensor Timeout:
-          input(type="text"  placeholder="Sensor Timeout" value="")
-        li
+          div
+            input(type="text"  placeholder="Sensor Timeout" value="")
+        li.col2
           span.listlabel Enter Your Devices Here:
-          input#NetMask.NetworkSettings(type="text"  placeholder="Devices" value="")
-        li
+          div
+            input#NetMask.NetworkSettings(type="text"  placeholder="Devices" value="")
+        li.col2
+          div
           label
             input(type="checkbox" value="")
             span.listlabel Is a Switch
-        li
+        li.col2
+          div
           label
             input(type="checkbox" value="")  
             span.listlabel Is Interior
-        li
+        li.col2
+          div
           label
             input(type="checkbox" value="")
             span.listlabel Use Color Temp
-        li
+        li.col2
+          div
           label
             input(type="checkbox" value="")
             span.listlabel Use PIR
-        li
+        li.col2
+          div
           label
             input(type="checkbox" value="")
             span.listlabel Is Indicator
-        li
+        lili.col2
+          div
           button Add
     div
       table

@@ -1,3 +1,6 @@
+// Imports
+@import url("less/bootstrap.less");
+
 /*
  * Globals
  */
@@ -37,10 +40,17 @@ a:hover {
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
-  color: @borderGrey;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
+  // color: @borderGrey;
+  // text-shadow: none;  Prevent inheritance from `body` 
+  // background-color: #fff;
+  // border: 1px solid #;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #f5f5f5;
+}
+button {
+  .btn-default;
 }
 
 
@@ -82,18 +92,69 @@ footer {
 // Lists
 ul{
   &.list-unstyled {
+    li{
+      margin-bottom: 10px;
+      &.col2 {
+        .make-row();
+
+        > :first-child {
+          .make-sm-column(4);
+          .make-xs-column(12);
+        }
+        > :last-child {
+          .make-sm-column(8);
+          .make-xs-column(12);
+        }
+      }
+      &.col2even {
+        .make-row();
+
+        > :first-child {
+          .make-sm-column(6);
+          .make-xs-column(12);
+        }
+        > :last-child {
+          .make-sm-column(6);
+          .make-xs-column(12);
+        }
+      }
+      &.col3 {
+        .make-row();
+
+        > :first-child {
+          .make-sm-column(4);
+          .make-xs-column(12);
+        }
+        > :nth-child(2) {
+          .make-sm-column(4);
+          .make-xs-column(12);
+        }
+        > :last-child {
+          .make-sm-column(4);
+          .make-xs-column(12);
+        }
+      }
+    }
+    
     .listlabel {
       font-size:12px;
       font-weight: 500;
       color: black;
-      margin-right: 10px;
-      width: 110px;
       display: inline-block;
     }
     label {
       .listlabel{
         margin-left: 10px;
       }
+    }
+    input, button {
+      width: 100%;
+    }
+    input[type=checkbox], input[type=radio] {
+      width: auto;
+    }
+    button {
+      .btn-default;
     }
   }
 }

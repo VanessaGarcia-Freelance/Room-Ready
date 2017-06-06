@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-center" id="setup">
             <li><a class="home" href="home.html">Home</a></li>
-            <li><a class="setup" href="collector-config.html">Setup</a></li>
+            <li><a class="setup" href="setup-collector-config.html">Setup</a></li>
             <li><a class="security" href="#security">Security</a></li>
             <li><a class="maintenance" href="#maintenance">Maintenance</a></li>
             <li><a class="rr-admin" href="#rradmin">RR-Admin</a></li>
@@ -67,62 +67,90 @@
                 <h5>Codec Connection</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Codec IP Address:</span>
-                      <input class="CodecConnection" id="IPAddress" type="text" placeholder="#IP ADDRESS" value="{{ .CodecConnection.IPAddress }}">
+                    <li class="col2"><span class="listlabel">Codec IP Address:</span>
+                      <div>
+                        <input class="CodecConnection" id="IPAddress" type="text" placeholder="#IP ADDRESS" value="{{ .CodecConnection.IPAddress }}">
+                      </div>
                     </li>
-                    <li><span class="listlabel">Codec Username:</span>
-                      <input class="CodecConnection" id="UserName" type="text" placeholder="#Username" value="{{ .CodecConnection.UserName }}">
+                    <li class="col2"><span class="listlabel">Codec Username:</span>
+                      <div>
+                        <input class="CodecConnection" id="UserName" type="text" placeholder="#Username" value="{{ .CodecConnection.UserName }}">
+                      </div>
                     </li>
-                    <li><span class="listlabel">Codec Password:</span>
-                      <input class="CodecConnection" id="Password" type="text" placeholder="#Password" value="{{ .CodecConnection.Password }}">
+                    <li class="col2"><span class="listlabel">Codec Password:</span>
+                      <div>
+                        <input class="CodecConnection" id="Password" type="text" placeholder="#Password" value="{{ .CodecConnection.Password }}">
+                      </div>
+                    </li>
+                    <li class="col3">
+                      <div>
+                        <button class="CodecConnection" id="testConnection">Test Codec Connection</button>
+                      </div>
+                      <div>
+                        <button class="CodecConnection" id="standbyActivate">Activate Standby</button>
+                      </div>
+                      <div>
+                        <button class="CodecConnection" id="standbyDeactivate">Deactivate Standby</button>
+                      </div>
                     </li>
                   </ul>
-                </div>
-                <div>
-                  <button class="CodecConnection" id="testConnection">Test Codec Connection</button>
-                  <button class="CodecConnection" id="standbyActivate">Activate Standby</button>
-                  <button class="CodecConnection" id="standbyDeactivate">Deactivate Standby</button>
                 </div>
               </div>
               <div class="content-block">
                 <h5>User Experience Settings</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">User Experience Reset:</span>
-                      <label>
-                        <input class="UserExperienceReset" id="enabled" type="checkbox" value=""><span class="listlabel">Activate</span>
-                      </label>
-                      <label>
-                        <input class="UserExperienceReset" id="disabled" type="checkbox" value=""><span class="listlabel">Deactivate</span>
-                      </label>
+                    <li class="col3"><span class="listlabel">User Experience Reset:</span>
+                      <div>
+                        <label>
+                          <input class="UserExperienceReset" id="enabled" type="radio" name="UserExperienceReset" value="enabled"><span class="listlabel">Activate</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label>
+                          <input class="UserExperienceReset" id="disabled" type="radio" name="UserExperienceReset" value="disabled"><span class="listlabel">Deactivate</span>
+                        </label>
+                      </div>
                     </li>
-                    <li><span class="listlabel">Do Not Disturb During Call:</span>
-                      <label>
-                        <input class="DoNotDisturb" id="enabled" type="checkbox" value=""><span class="listlabel">Activate</span>
-                      </label>
-                      <label>
-                        <input class="DoNotDisturb" id="disabled" type="checkbox" value=""><span class="listlabel">Deactivate</span>
-                      </label>
+                    <li class="col3"><span class="listlabel">Do Not Disturb During Call:</span>
+                      <div>
+                        <label>
+                          <input class="DoNotDisturb" id="enabled" type="radio" name="DoNotDisturb" value="enabled"><span class="listlabel">Activate</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label>
+                          <input class="DoNotDisturb" id="disabled" type="radio" name="DoNotDisturb" value="disabled"><span class="listlabel">Deactivate</span>
+                        </label>
+                      </div>
                     </li>
-                    <li><span class="listlabel">Send Configuration:</span>
-                      <select class="dropdown">
-                        <option value="#roomType1">#roomType1</option>
-                        <option value="#roomType2">#roomType2</option>
-                        <option value="#roomType3">#roomType3</option>
-                        <option value="#roomType4">#roomType4</option>
-                      </select>
+                    <li class="col2"><span class="listlabel">Send Configuration:</span>
+                      <div>
+                        <select class="dropdown">
+                          <option value="#roomType1">#roomType1</option>
+                          <option value="#roomType2">#roomType2</option>
+                          <option value="#roomType3">#roomType3</option>
+                          <option value="#roomType4">#roomType4</option>
+                        </select>
+                      </div>
                     </li>
                   </ul>
                 </div>
                 <p>Do Not Complete This Step Until You Have Finished Your Install</p>
                 <div>
                   <ul class="list-unstyled">
-                    <li><span class="listlabel">Capture Codec Configuration</span>
-                      <button class="ux" id="capture">Capture</button>
+                    <li class="col2"><span class="listlabel">Capture Codec Configuration</span>
+                      <div>
+                        <button class="ux" id="capture">Capture</button>
+                      </div>
                     </li>
-                    <li><span class="listlabel">Register Feedbacks</span>
-                      <button class="ux" id="register">Register</button>
-                      <button class="ux" id="deregister">DeRegister</button>
+                    <li class="col3"><span class="listlabel">Register Feedbacks</span>
+                      <div>
+                        <button class="ux" id="register">Register</button>
+                      </div>
+                      <div>
+                        <button class="ux" id="deregister">DeRegister</button>
+                      </div>
                     </li>
                   </ul>
                 </div>
