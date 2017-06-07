@@ -1,0 +1,146 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'Setup - Spark Services';
+  -var section    = 'setup';
+  -var subsection = 'Spark Services';
+
+block secondaryMenu
+  +setupMenu( subsection )
+
+block content
+  div.content-block
+    h5 Spark Integration Settings
+    p Do not change these settings without RR Support Notification
+    div
+      ul.list-unstyled
+        li.col3
+          span.listlabel Spark Access Token:
+          div
+            input#AccessToken.Spark(type="text"  placeholder="#Access Token" value="{{ Spark.AccessToken }}")
+          div
+            button Show Rooms
+        li.col2
+          div
+          div
+            h6 Available Rooms
+            button Add Room 1
+            button Add Room 2
+        li.col2
+          span.listlabel Spark Room ID:
+          div
+            input#RoomID.Spark(type="text"  placeholder="#Access Token" value="{{ Spark.RoomID }}")
+        li.col2
+          span.listlabel Spark Enable Surveys:
+          div
+            label
+              input#SurveysEnabled.Spark(type="checkbox" value="")
+              span.listlabel Enable Survey
+        li.col2
+          span.listlabel Spark Enable Diagnostics:
+          div
+            label
+              input#ReportIssues.Spark(type="checkbox" value="")
+              span.listlabel Enable Diagnostics
+        li.col2even
+          div
+            button Send Test Message
+          div 
+            button Save
+  div.content-block
+    h5 Room Services Configuration
+    div
+      h6 Conference Room Bot
+      ul.list-unstyled
+        li.col2
+          span.listlabel Email:
+          div
+            input#Email.ConferenceRoomBot(type="text" placeholder="#Email" value="{{ ConferenceRoomBot.Email }}")
+        li.col2
+          span.listlabel Token ID:
+          div
+            input#Token.ConferenceRoomBot(type="text"  placeholder="#Token" value="{{ ConferenceRoomBot.Token }}")
+        li.col2
+          div
+          div
+            button#showAvailableRooms.ConferenceRoomBot Show Available Rooms
+        li.col2
+          span.listlabel Room ID:
+          div
+            input#Room.ConferenceRoomBot(type="text"  placeholder="#Room" value="{{ ConferenceRoomBot.Room }}")
+    div
+      h6 Spark Services Bot
+      ul.list-unstyled
+        li.col2
+          span.listlabel Email:
+          div
+            input#Email.SparkServicesBot(type="text" placeholder="#Email" value="{{ SparkServicesBot.Email }}")
+        li.col2
+          span.listlabel Token ID:
+          div
+            input#Token.SparkServicesBot(type="text"  placeholder="#Token" value="{{ SparkServicesBot.Token }}")
+        li.col2
+          div
+          div
+            button#showAvailableRooms.SparkServicesBot Show Available Rooms
+        li.col2
+          span.listlabel Room ID:
+          div
+            input#Room.SparkServicesBot(type="text"  placeholder="#Room" value="{{ SparkServicesBot.Room }}")
+    div
+      h6 Help Desk Bot
+      ul.list-unstyled
+        li.col2
+          span.listlabel Email:
+          div
+            input#Email.HelpDeskBot(type="text" value="{{ HelpDeskBot.Email }}")
+        li.col2
+          span.listlabel Token ID:
+          div
+            input#Token.HelpDeskBot(type="text"  placeholder="Ipv4 Address" value="{{ HelpDeskBot.Token }}")
+        li.col2
+          div
+          div
+            button#showAvailableRooms.HelpDeskBot Show Available Rooms
+        li.col2
+          span.listlabel Room ID:
+          div
+            input#Room.HelpDeskBot(type="text"  placeholder="Subnet Mask" value="{{ HelpDeskBot.Room }}")
+    div
+      h6 Concierge Bot
+      ul.list-unstyled
+        li.col2
+          span.listlabel Email:
+          div
+            input#Email.ConciergeBot(type="text" placeholder="#Email" value="{{ ConciergeBot.Email }}")
+        li.col2
+          span.listlabel Token ID:
+          div
+            input#Token.ConciergeBot(type="text"  placeholder="#Token" value="{{ ConciergeBot.Token }}")
+        li.col2
+          div
+          div
+            button#showAvailableRooms.ConciergeBot Show Available Rooms
+        li.col2
+          span.listlabel Room ID:
+          div
+            input#Room.ConciergeBot(type="text"  placeholder="#Room" value="{{ ConciergeBot.Room }}")
+    div
+      h6 Facilities Bot
+      ul.list-unstyled
+        li.col2
+          span.listlabel Email:
+          div
+            input#Email.FacilitiesBot(type="text" placeholder="#Email" value="{{ FacilitiesBot.Email }}")
+        li.col2
+          span.listlabel Token ID:
+          div
+            input#Token.FacilitiesBot(type="text"  placeholder="#Token" value="{{ FacilitiesBot.Token }}")
+        li.col2
+          div
+          div
+            button#showAvailableRooms.FacilitiesBot Show Available Rooms
+        li.col2
+          span.listlabel Room ID:
+          div
+            input#Room.FacilitiesBot(type="text"  placeholder="#Room" value="{{ FacilitiesBot.Room }}")

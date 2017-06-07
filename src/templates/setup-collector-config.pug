@@ -16,29 +16,29 @@ block content
         li.col2
           span.listlabel Room Name:
           div
-            input#RoomName.SystemInformation(type="text"  placeholder="Room Name" value="{{ .SystemInformation.RoomName }}")
+            input#RoomName.SystemInformation(type="text"  placeholder="Room Name" value="{{ SystemInformation.RoomName }}")
         li.col2
           span.listlabel Room Number:
           div
-            input#RoomNumber.SystemInformation(type="text"  placeholder="Room Number" value="{{ .SystemInformation.RoomNumber }}")
+            input#RoomNumber.SystemInformation(type="text"  placeholder="Room Number" value="{{ SystemInformation.RoomNumber }}")
         li.col2
           span.listlabel Building Name/Number:
           div
-            input#Building.SystemInformation(type="text"  placeholder="Building Name/Number" value="{{ .SystemInformation.Building }}")
+            input#Building.SystemInformation(type="text"  placeholder="Building Name/Number" value="{{ SystemInformation.Building }}")
         li.col2
           span.listlabel Address:
           div
-            input#Address.SystemInformation(type="text"  placeholder="Address" value="{{ .SystemInformation.Address }}")
+            input#Address.SystemInformation(type="text"  placeholder="Address" value="{{ SystemInformation.Address }}")
         li.col2
           span.listlabel City, State, zip:
           div
-            input#City.SystemInformation(type="text"  placeholder="City" value="{{ .SystemInformation.City }}")
+            input#City.SystemInformation(type="text"  placeholder="City" value="{{ SystemInformation.City }}")
         li.col3
           span.listlabel
           div
-            input#State.SystemInformation(type="text"  placeholder="State" value="{{ .SystemInformation.State }}")
+            input#State.SystemInformation(type="text"  placeholder="State" value="{{ SystemInformation.State }}")
           div
-            input#Zip.SystemInformation(type="text"  placeholder="Zipcode" value="{{ .SystemInformation.Zip }}")
+            input#Zip.SystemInformation(type="text"  placeholder="Zipcode" value="{{ SystemInformation.Zip }}")
   div.content-block
     h5 Network Settings
     div
@@ -46,19 +46,19 @@ block content
         li.col2
           span.listlabel DHCP:
           div
-            input#DHCP.NetworkSettings(type="checkbox" value="{{ .NetworkSettings.DHCPstring }}")
+            input#DHCP.NetworkSettings(type="checkbox" value="{{ NetworkSettings.DHCPstring }}")
         li.col2
           span.listlabel Ipv4 Address:
           div
-            input#IPAddress.NetworkSettings(type="text"  placeholder="Ipv4 Address" value="{{ .NetworkSettings.IPAddress }}")
+            input#IPAddress.NetworkSettings(type="text"  placeholder="Ipv4 Address" value="{{ NetworkSettings.IPAddress }}")
         li.col2
           span.listlabel Subnet Mask:
           div
-            input#NetMask.NetworkSettings(type="text"  placeholder="Subnet Mask" value="{{ .NetworkSettings.NetMask }}")
+            input#NetMask.NetworkSettings(type="text"  placeholder="Subnet Mask" value="{{ NetworkSettings.NetMask }}")
         li.col2
           span.listlabel Gateway:
           div
-            input#Gateway.NetworkSettings(type="text"  placeholder="Gateway" value="{{ .NetworkSettings.Gateway }}")
+            input#Gateway.NetworkSettings(type="text"  placeholder="Gateway" value="{{ NetworkSettings.Gateway }}")
         li.col2
           span.listlabel Hostname:
           div
@@ -70,27 +70,27 @@ block content
         li.col2
           span.listlabel Domain Name:
           div
-            input#DomainName.InternetSettings(type="text"  placeholder="Domain Name" value="{{ .InternetSettings.DomainName }}")
+            input#DomainName.InternetSettings(type="text"  placeholder="Domain Name" value="{{ InternetSettings.DomainName }}")
         li.col2
           span.listlabel DNS Server 1:
           div
-            input#DNSServer1.InternetSettings(type="text"  placeholder="DNS Server 1" value="{{ .InternetSettings.DNSServer1 }}")
+            input#DNSServer1.InternetSettings(type="text"  placeholder="DNS Server 1" value="{{ InternetSettings.DNSServer1 }}")
         li.col2
           span.listlabel NS Server 2:
           div
-            input#DNSServer2.InternetSettings(type="text"  placeholder="NS Server 2" value="{{ .InternetSettings.DNSServer2 }}")
+            input#DNSServer2.InternetSettings(type="text"  placeholder="DNS Server 2" value="{{ InternetSettings.DNSServer2 }}")
         li.col2
           span.listlabel Proxy Server:
           div
-            input#ProxyServer.InternetSettings(type="text"  placeholder="Proxy Server" value="{{ .InternetSettings.ProxyServer }}")
+            input#ProxyServer.InternetSettings(type="text"  placeholder="Proxy Server" value="{{ InternetSettings.ProxyServer }}")
         li.col2
           span.listlabel Proxy Username:
           div
-            input#ProxyUsername.InternetSettings(type="text"  placeholder="Proxy Username" value="{{ .InternetSettings.ProxyUserName }}")
+            input#ProxyUsername.InternetSettings(type="text"  placeholder="Proxy Username" value="{{ InternetSettings.ProxyUserName }}")
         li.col2
           span.listlabel Proxy Password:
           div
-            input#ProxyPassword.InternetSettings(type="password"  placeholder="Proxy Password" value="{{ .InternetSettings.ProxyPassword }}")
+            input#ProxyPassword.InternetSettings(type="password"  placeholder="Proxy Password" value="{{ InternetSettings.ProxyPassword }}")
   div.content-block
     h5 Network Services
     div
@@ -98,8 +98,8 @@ block content
         li.col2
           span.listlabel NTP Server 1:
           div
-            input#NTPServer1.NetworkServices(type="text"  placeholder="NTP Server 1" value="{{ .NetworkServices.NTPServer1 }}")
+            input#NTPServer1.NetworkServices(type="text"  placeholder="NTP Server 1" value="{{ NetworkServices.NTPServer1 }}")
         li.col2
           span.listlabel NTP Server 2:
           div
-            input#NTPServer2.NetworkServices(type="text"  placeholder="NTP Server 2" value="{{ .NetworkServices.NTPServer2 }}")
+            input#NTPServer2.NetworkServices(type="text"  placeholder="NTP Server 2" value="{{ NetworkServices.NTPServer2 }}")
