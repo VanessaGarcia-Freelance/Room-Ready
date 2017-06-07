@@ -49,7 +49,7 @@ mixin navigation(currentPage)
           li
             a.setup(href='setup-collector-config.html') Setup
           li
-            a.security(href='#security') Security
+            a.security(href='security-certificates.html') Security
           li
             a.maintenance(href='#maintenance') Maintenance
           li
@@ -71,6 +71,6 @@ mixin setupMenu(active)
   +subnavigation( active , menu )
 
 mixin securityMenu(active)
-  -var menu = { 'Certificates': '#', '802.1x': '#', 'Users': '#' };
+  -var menu = { 'Certificates': 'security-certificates.html', '802.1x': '#', 'Users': '#' };
 
   +subnavigation( active , menu )

@@ -93,11 +93,11 @@ block content
         li.col2
           span.listlabel Email:
           div
-            input#Email.HelpDeskBot(type="text" value="{{ HelpDeskBot.Email }}")
+            input#Email.HelpDeskBot(type="text" placeholder="#Email" value="{{ HelpDeskBot.Email }}")
         li.col2
           span.listlabel Token ID:
           div
-            input#Token.HelpDeskBot(type="text"  placeholder="Ipv4 Address" value="{{ HelpDeskBot.Token }}")
+            input#Token.HelpDeskBot(type="text"  placeholder="#Token" value="{{ HelpDeskBot.Token }}")
         li.col2
           div
           div
@@ -105,7 +105,7 @@ block content
         li.col2
           span.listlabel Room ID:
           div
-            input#Room.HelpDeskBot(type="text"  placeholder="Subnet Mask" value="{{ HelpDeskBot.Room }}")
+            input#Room.HelpDeskBot(type="text"  placeholder="#Room" value="{{ HelpDeskBot.Room }}")
     div
       h6 Concierge Bot
       ul.list-unstyled

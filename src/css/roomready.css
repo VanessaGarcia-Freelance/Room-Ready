@@ -6975,6 +6975,7 @@ ul.list-unstyled .listlabel {
 }
 ul.list-unstyled label .listlabel {
   margin-left: 10px;
+  margin-right: 10px;
 }
 ul.list-unstyled input,
 ul.list-unstyled button {
