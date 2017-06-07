@@ -1,0 +1,78 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'Security - Users';
+  -var section    = 'security';
+  -var subsection = 'Users';
+
+block secondaryMenu
+  +securityMenu( subsection )
+
+block content
+  div.content-block
+    h5 User Setup
+    div
+      ul.list-unstyled
+        li.col2
+          span.listlabel Username:
+          div
+            input#UserName.SecurityUsers(type="text"  placeholder="#UserName" value="{{ SecurityUsers.UserName }}")
+        li.col2
+          span.listlabel Password:
+          div
+            input#Password.SecurityUsers(type="password"  placeholder="#Password" value="{{ SecurityUsers.Password }}")
+        li.col2
+          span.listlabel User Type:
+          div
+            label
+              input#Admin.securityUserType(type="radio" name="securityUserType" value="Admin")
+              span.listlabel Admin
+            label
+              input#View.securityUserType(type="radio" name="securityUserType" value="View")
+              span.listlabel View
+        li.col2
+          div
+          div
+            button#8021xSave Add
+        li.col3
+          div
+          div
+          div
+            button#8021xSave Save
+  div.content-block
+    h5 Current Users
+    div
+      ul.list-unstyled          
+        li.col3
+          span.listlabel User 1
+          div
+            label
+              input#Admin.currentUser(type="radio" name="currentUser1" value="Admin")
+              span.listlabel Admin
+            label
+              input#View.currentUser(type="radio" name="currentUser1" value="View")
+              span.listlabel View
+          div
+            button Delete
+        li.col3
+          span.listlabel User 2
+          div
+            label
+              input#Admin.currentUser(type="radio" name="currentUser2" value="Admin")
+              span.listlabel Admin
+            label
+              input#View.currentUser(type="radio" name="currentUser2" value="View")
+              span.listlabel View
+          div
+            button Delete
+        li.col3
+          span.listlabel User 3
+          div
+            label
+              input#Admin.currentUser(type="radio" name="currentUser3" value="Admin")
+              span.listlabel Admin
+            label
+              input#View.currentUser(type="radio" name="currentUser3" value="View")
+              span.listlabel View
+          div
+            button Delete

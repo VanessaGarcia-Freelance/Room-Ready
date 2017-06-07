@@ -9,9 +9,12 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <!--<link rel="icon" href="../../favicon.ico">-->
-      <title>Setup - External Devices</title>
+      <title>Security - 802.1x</title>
       <!--Bootstrap core CSS-->
-      <link rel="stylesheet" href="css/roomready-clean.css"/>
+      <!-- build:css css/roomready-clean.css-->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/roomready.min.css" rel="stylesheet">
+      <!-- /build-->
     </head>
   </html>
   <body class="page-template">
@@ -38,7 +41,7 @@
           <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
-          <ul class="nav navbar-nav navbar-center" id="setup">
+          <ul class="nav navbar-nav navbar-center" id="security">
             <li><a class="home" href="home.html">Home</a></li>
             <li><a class="setup" href="setup-collector-config.html">Setup</a></li>
             <li><a class="security" href="security-certificates.html">Security</a></li>
@@ -52,7 +55,7 @@
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-left">
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group"><a class="list-group-item" href="setup-collector-config.html" title="Collector Config">Collector Config</a><a class="list-group-item active" href="setup-external-devices.html" title="External Devices">External Devices</a><a class="list-group-item" href="setup-codec-configuration.html" title="Codec Configuration">Codec Configuration</a><a class="list-group-item" href="setup-spark-services.html" title="Spark Services">Spark Services</a>
+          <div class="list-group"><a class="list-group-item" href="security-certificates.html" title="Certificates">Certificates</a><a class="list-group-item active" href="security-8021x.html" title="802.1x">802.1x</a><a class="list-group-item" href="security-users.html" title="Users">Users</a>
           </div>
         </div>
         <div class="col-xs-12 col-sm-9">
@@ -64,86 +67,62 @@
           <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
               <div class="content-block">
-                <h5>Monitors</h5>
-                <p>Make sure your Monitors are off</p>
+                <h5>Certificate Setup</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li class="col2"><span class="listlabel">Scan for Monitors:</span>
+                    <li class="col2"><span class="listlabel">Mode:</span>
                       <div>
-                        <button class="scan" id="scan">SCAN</button>
+                        <label>
+                          <input class="s8021x" id="enabled" type="radio" name="8021x" value="enabled"><span class="listlabel">On</span>
+                        </label>
+                        <label>
+                          <input class="s8021x" id="disabled" type="radio" name="8021x" value="disabled"><span class="listlabel">Off</span>
+                        </label>
                       </div>
                     </li>
-                    <li class="col2"><span class="listlabel">Scan Results:</span><span id="monitorCount">0</span></li>
-                    <li class="col2even">
+                    <li class="col2"><span class="listlabel">Anonymous Identity:</span>
                       <div>
-                        <button class="monitorControl" id="on">Turn Monitors On</button>
+                        <input class="s8021x" id="AnonymousIdentity" type="text" placeholder="#AnonymousIdentity" value="{{ s8021x.AnonymousIdentity }}">
                       </div>
+                    </li>
+                    <li class="col2"><span class="listlabel">Identity:</span>
                       <div>
-                        <button class="monitorControl" id="off">Turn Monitors Off</button>
+                        <input class="s8021x" id="Identity" type="text" placeholder="#Identity" value="{{ s8021x.Identity }}">
+                      </div>
+                    </li>
+                    <li class="col2"><span class="listlabel">Password:</span>
+                      <div>
+                        <input class="s8021x" id="Password" type="password" placeholder="#Password" value="{{ s8021x.Password }}">
+                      </div>
+                    </li>
+                    <li class="col2"><span class="listlabel">TLS Verify:</span>
+                      <div>
+                        <label>
+                          <input class="s8021xTLSVerify" id="true" type="radio" name="s8021xTLSVerify" value="true"><span class="listlabel">On</span>
+                        </label>
+                        <label>
+                          <input class="s8021xTLSVerify" id="false" type="radio" name="s8021xTLSVerify" value="false"><span class="listlabel">Off</span>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="col2"><span class="listlabel">Use Client Certificate:</span>
+                      <div>
+                        <label>
+                          <input class="s8021xUseClientCertificate" id="true" type="radio" name="s8021xUseClientCertificate" value="true"><span class="listlabel">On</span>
+                        </label>
+                        <label>
+                          <input class="s8021xUseClientCertificate" id="false" type="radio" name="s8021xUseClientCertificate" value="false"><span class="listlabel">Off</span>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="col3">
+                      <div></div>
+                      <div></div>
+                      <div>
+                        <button id="8021xSave">Save</button>
                       </div>
                     </li>
                   </ul>
-                </div>
-              </div>
-              <div class="content-block">
-                <h5>Light Configuration</h5>
-                <div>
-                  <ul class="list-unstyled">
-                    <li class="col2"><span class="listlabel">Enable:</span>
-                      <div>
-                        <input class="Enable" id="Enabled" type="checkbox" value="">
-                      </div>
-                    </li>
-                    <li class="col2"><span class="listlabel">OCC Sensor Timeout:</span>
-                      <div>
-                        <input type="text" placeholder="Sensor Timeout" value="">
-                      </div>
-                    </li>
-                    <li class="col2"><span class="listlabel">Enter Your Devices Here:</span>
-                      <div>
-                        <input class="NetworkSettings" id="NetMask" type="text" placeholder="Devices" value="">
-                      </div>
-                    </li>
-                    <li class="col2">
-                      <div></div>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Is a Switch</span>
-                      </label>
-                    </li>
-                    <li class="col2">
-                      <div></div>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Is Interior</span>
-                      </label>
-                    </li>
-                    <li class="col2">
-                      <div></div>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Use Color Temp</span>
-                      </label>
-                    </li>
-                    <li class="col2">
-                      <div></div>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Use PIR</span>
-                      </label>
-                    </li>
-                    <li class="col2">
-                      <div></div>
-                      <label>
-                        <input type="checkbox" value=""><span class="listlabel">Is Indicator</span>
-                      </label>
-                    </li>
-                    <lili class="col2">
-                      <div></div>
-                      <button>Add</button>
-                    </lili>
-                  </ul>
-                </div>
-                <div>
-                  <table>
-                    <h5>Device List</h5>
-                  </table>
                 </div>
               </div>
             </div>

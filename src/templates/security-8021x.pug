@@ -1,0 +1,59 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'Security - 802.1x';
+  -var section    = 'security';
+  -var subsection = '802.1x';
+
+block secondaryMenu
+  +securityMenu( subsection )
+
+block content
+  div.content-block
+    h5 Certificate Setup
+    div
+      ul.list-unstyled
+        li.col2
+          span.listlabel Mode:
+          div
+            label
+              input#enabled.s8021x(type="radio" name="8021x" value="enabled")
+              span.listlabel On
+            label
+              input#disabled.s8021x(type="radio" name="8021x" value="disabled")
+              span.listlabel Off
+        li.col2
+          span.listlabel Anonymous Identity:
+          div
+            input#AnonymousIdentity.s8021x(type="text"  placeholder="#AnonymousIdentity" value="{{ s8021x.AnonymousIdentity }}")
+        li.col2
+          span.listlabel Identity:
+          div
+            input#Identity.s8021x(type="text"  placeholder="#Identity" value="{{ s8021x.Identity }}")
+        li.col2
+          span.listlabel Password:
+          div
+            input#Password.s8021x(type="password"  placeholder="#Password" value="{{ s8021x.Password }}")
+        li.col2
+          span.listlabel TLS Verify:
+          div
+            label
+              input#true.s8021xTLSVerify(type="radio" name="s8021xTLSVerify" value="true")
+              span.listlabel On
+            label
+              input#false.s8021xTLSVerify(type="radio" name="s8021xTLSVerify" value="false")
+              span.listlabel Off
+        li.col2
+          span.listlabel Use Client Certificate:
+          div
+            label
+              input#true.s8021xUseClientCertificate(type="radio" name="s8021xUseClientCertificate" value="true")
+              span.listlabel On
+            label
+              input#false.s8021xUseClientCertificate(type="radio" name="s8021xUseClientCertificate" value="false")
+              span.listlabel Off
+        li.col3
+          div
+          div
+          div
+            button#8021xSave Save

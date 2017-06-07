@@ -9,7 +9,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <!--<link rel="icon" href="../../favicon.ico">-->
-      <title>Security - Certificates</title>
+      <title>Security - Users</title>
       <!--Bootstrap core CSS-->
       <!-- build:css css/roomready-clean.css-->
       <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-left">
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group"><a class="list-group-item active" href="security-certificates.html" title="Certificates">Certificates</a><a class="list-group-item" href="security-8021x.html" title="802.1x">802.1x</a><a class="list-group-item" href="security-users.html" title="Users">Users</a>
+          <div class="list-group"><a class="list-group-item" href="security-certificates.html" title="Certificates">Certificates</a><a class="list-group-item" href="security-8021x.html" title="802.1x">802.1x</a><a class="list-group-item active" href="security-users.html" title="Users">Users</a>
           </div>
         </div>
         <div class="col-xs-12 col-sm-9">
@@ -67,47 +67,86 @@
           <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
               <div class="content-block">
-                <h5>Certificate Setup</h5>
+                <h5>User Setup</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li class="col2"><span class="listlabel">Certificate:</span>
+                    <li class="col2"><span class="listlabel">Username:</span>
                       <div>
-                        <button>Upload</button>
+                        <input class="SecurityUsers" id="UserName" type="text" placeholder="#UserName" value="{{ SecurityUsers.UserName }}">
                       </div>
                     </li>
-                    <li class="col2"><span class="listlabel">Private Key (Optional):</span>
+                    <li class="col2"><span class="listlabel">Password:</span>
                       <div>
-                        <button>Upload</button>
+                        <input class="SecurityUsers" id="Password" type="password" placeholder="#Password" value="{{ SecurityUsers.Password }}">
                       </div>
                     </li>
-                    <li class="col2"><span class="listlabel">Passphrase (Optional):</span>
-                      <div>
-                        <input class="SecurityCertificates" id="PassPhrase" type="password" placeholder="#PassPhrase" value="{{ SecurityCertificates.PassPhrase }}">
-                      </div>
-                    </li>
-                    <li class="col2"><span class="listlabel">Communications Type:</span>
+                    <li class="col2"><span class="listlabel">User Type:</span>
                       <div>
                         <label>
-                          <input class="communicationsType" id="HTTP" type="checkbox" value="HTTP"><span class="listlabel">HTTP</span>
+                          <input class="securityUserType" id="Admin" type="radio" name="securityUserType" value="Admin"><span class="listlabel">Admin</span>
                         </label>
                         <label>
-                          <input class="communicationsType" id="HTTPS" type="checkbox" value="HTTPS"><span class="listlabel">HTTPS</span>
-                        </label>
-                        <label>
-                          <input class="communicationsType" id="Both" type="checkbox" value="Both"><span class="listlabel">Both</span>
+                          <input class="securityUserType" id="View" type="radio" name="securityUserType" value="View"><span class="listlabel">View</span>
                         </label>
                       </div>
                     </li>
-                    <li class="col2"><span class="listlabel">Certificate Authority:</span>
+                    <li class="col2">
+                      <div></div>
                       <div>
-                        <button>Upload</button>
+                        <button id="8021xSave">Add</button>
                       </div>
                     </li>
                     <li class="col3">
                       <div></div>
                       <div></div>
                       <div>
-                        <button>Save</button>
+                        <button id="8021xSave">Save</button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="content-block">
+                <h5>Current Users</h5>
+                <div>
+                  <ul class="list-unstyled">         
+                    <li class="col3"><span class="listlabel">User 1</span>
+                      <div>
+                        <label>
+                          <input class="currentUser" id="Admin" type="radio" name="currentUser1" value="Admin"><span class="listlabel">Admin</span>
+                        </label>
+                        <label>
+                          <input class="currentUser" id="View" type="radio" name="currentUser1" value="View"><span class="listlabel">View</span>
+                        </label>
+                      </div>
+                      <div>
+                        <button>Delete</button>
+                      </div>
+                    </li>
+                    <li class="col3"><span class="listlabel">User 2</span>
+                      <div>
+                        <label>
+                          <input class="currentUser" id="Admin" type="radio" name="currentUser2" value="Admin"><span class="listlabel">Admin</span>
+                        </label>
+                        <label>
+                          <input class="currentUser" id="View" type="radio" name="currentUser2" value="View"><span class="listlabel">View</span>
+                        </label>
+                      </div>
+                      <div>
+                        <button>Delete</button>
+                      </div>
+                    </li>
+                    <li class="col3"><span class="listlabel">User 3</span>
+                      <div>
+                        <label>
+                          <input class="currentUser" id="Admin" type="radio" name="currentUser3" value="Admin"><span class="listlabel">Admin</span>
+                        </label>
+                        <label>
+                          <input class="currentUser" id="View" type="radio" name="currentUser3" value="View"><span class="listlabel">View</span>
+                        </label>
+                      </div>
+                      <div>
+                        <button>Delete</button>
                       </div>
                     </li>
                   </ul>
