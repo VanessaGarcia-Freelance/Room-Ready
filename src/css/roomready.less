@@ -14,7 +14,10 @@
 @systemGreen  : #7cb44f;
 
 
-
+.container {
+  overflow: hidden;
+  border-radius: 0;
+}
 body.listpage {
   .content-block {
     background-color: white;
@@ -53,6 +56,17 @@ a:hover {
 button {
   .btn-default;
 }
+
+//#sidebar {
+  .list-group-item{
+    &.active, &.active:hover {
+      z-index: 2;
+      color: black;
+      background-color: @bgGrey;
+      border-color: @borderGrey;
+    }
+  }
+//}
 
 
 /*

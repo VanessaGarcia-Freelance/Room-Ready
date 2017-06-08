@@ -6733,6 +6733,10 @@ ul.list-unstyled li.col3:after {
 /*
  * Globals
  */
+.container {
+  overflow: hidden;
+  border-radius: 0;
+}
 body.listpage {
   background-color: #a4d77c;
 }
@@ -6821,6 +6825,13 @@ fieldset[disabled] button.focus {
 button .badge {
   color: #fff;
   background-color: #333;
+}
+.list-group-item.active,
+.list-group-item.active:hover {
+  z-index: 2;
+  color: black;
+  background-color: #bfbfbf;
+  border-color: #333;
 }
 /*
  * Base structure

@@ -28,7 +28,8 @@ module.exports = function(grunt) {
       build: {
         files: {
           'dist/js/roomready.min.js': 'src/js/roomready.js',
-          'dist/js/bootstrap.min.js': 'src/js/bootstrap.js'
+          'dist/js/bootstrap.min.js': 'src/js/bootstrap.js',
+          'dist/js/jquery.min.js': 'src/js/jquery.js'
           // how to minify muliple
           //'dist/js/magic.min.js': ['src/js/magic.js', 'src/js/magic2.js']
         }
