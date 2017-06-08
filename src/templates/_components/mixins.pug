@@ -34,28 +34,25 @@ mixin pageheader
               h5.SystemType System Type
 
 mixin navigation(currentPage)
+  -var menu = { 'Home': 'home.html', 'Setup': 'setup-collector-config.html', 'Security': 'security-certificates.html', 'Maintenance': 'maintenance.html', 'RR-Admin': 'rradmin-licenses.html', 'Help': 'help.html'};
+  
   nav.main-nav.navbar.navbar-top.navbar-inverse
     div.container
       div.navbar-header
         button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
-          span.sr-only Toggle navigation
+          span.sr-only Main Menu
           span.icon-bar
           span.icon-bar
           span.icon-bar
       div#navbar.collapse.navbar-collapse
         ul.nav.navbar-nav.navbar-center(id=currentPage)
-          li
-            a.home(href='home.html') Home
-          li
-            a.setup(href='setup-collector-config.html') Setup
-          li
-            a.security(href='security-certificates.html') Security
-          li
-            a.maintenance(href='maintenance.html') Maintenance
-          li
-            a.rradmin(href='rradmin-licenses.html') RR-Admin
-          li
-            a.help(href='help.html') Help
+          each val, key in menu
+            if key === currentPage
+              li
+                a.active(href=val, title=key)= key
+            else
+              li
+                a(href=val, title=key)= key
 
 mixin subnavigation(active, menu)
   div.list-group

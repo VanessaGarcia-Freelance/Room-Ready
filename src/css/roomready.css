@@ -6826,11 +6826,16 @@ button .badge {
   color: #fff;
   background-color: #333;
 }
-.list-group-item.active,
-.list-group-item.active:hover {
+a.list-group-item {
   z-index: 2;
   color: black;
   background-color: #bfbfbf;
+  border-color: #333;
+}
+a.list-group-item.active,
+a.list-group-item.active:hover {
+  background-color: white;
+  color: black;
   border-color: #333;
 }
 /*
@@ -7086,27 +7091,7 @@ select.dropdown {
 .main-nav.navbar-inverse .navbar-toggle {
   background-color: #333;
 }
-.main-nav.navbar-inverse ul#home a.home {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#setup a.setup {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#security a.security {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#maintenance a.maintenance {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#rradmin a.rradmin {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#help a.help {
+.main-nav.navbar-inverse ul li a.active {
   background-color: white;
   border-radius: 5px;
 }
@@ -7308,6 +7293,10 @@ select.dropdown {
     color: black;
     padding: 10px 30px;
     background-color: #bfbfbf;
+  }
+  .main-nav #navbar ul li a.active {
+    background-color: white;
+    border-radius: 5px;
   }
   .main-nav #navbar ul li:first-child a {
     border-top-left-radius: 5px;
