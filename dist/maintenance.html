@@ -9,9 +9,12 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <!--<link rel="icon" href="../../favicon.ico">-->
-      <title>Security - Users</title>
+      <title>Maintenance</title>
       <!--Bootstrap core CSS-->
-      <link rel="stylesheet" href="css/roomready-clean.css"/>
+      <!-- build:css css/roomready-clean.css-->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/roomready.min.css" rel="stylesheet">
+      <!-- /build-->
     </head>
   </html>
   <body class="page-template">
@@ -38,7 +41,7 @@
           <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
-          <ul class="nav navbar-nav navbar-center" id="security">
+          <ul class="nav navbar-nav navbar-center" id="maintenance">
             <li><a class="home" href="home.html">Home</a></li>
             <li><a class="setup" href="setup-collector-config.html">Setup</a></li>
             <li><a class="security" href="security-certificates.html">Security</a></li>
@@ -52,7 +55,7 @@
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-left">
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group"><a class="list-group-item" href="security-certificates.html" title="Certificates">Certificates</a><a class="list-group-item" href="security-8021x.html" title="802.1x">802.1x</a><a class="list-group-item active" href="security-users.html" title="Users">Users</a>
+          <div class="list-group"><a class="list-group-item active" href="maintenance.html" title="Maintenance">Maintenance</a>
           </div>
         </div>
         <div class="col-xs-12 col-sm-9">
@@ -64,33 +67,32 @@
           <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
               <div class="content-block">
-                <h5>User Setup</h5>
+                <h5>Software &amp; Control</h5>
                 <div>
                   <ul class="list-unstyled">
-                    <li class="col2"><span class="listlabel">Username:</span>
+                    <li class="col2"><span class="listlabel">Upload New Firmware:</span>
                       <div>
-                        <input class="SecurityUsers" id="UserName" type="text" placeholder="#UserName" value="{{ SecurityUsers.UserName }}">
+                        <input class="button-default inputfile" type="file" name="file" id="file">
                       </div>
                     </li>
-                    <li class="col2"><span class="listlabel">Password:</span>
+                    <li class="col2"><span class="listlabel">Download Current Config:</span>
                       <div>
-                        <input class="SecurityUsers" id="Password" type="password" placeholder="#Password" value="{{ SecurityUsers.Password }}">
+                        <button class="maintenance" id="downloadButton">Download</button>
                       </div>
                     </li>
-                    <li class="col2"><span class="listlabel">User Type:</span>
+                    <li class="col2"><span class="listlabel">Restore Configuration:</span>
                       <div>
-                        <label>
-                          <input class="securityUserType" id="Admin" type="radio" name="securityUserType" value="Admin"><span class="listlabel">Admin</span>
-                        </label>
-                        <label>
-                          <input class="securityUserType" id="View" type="radio" name="securityUserType" value="View"><span class="listlabel">View</span>
-                        </label>
+                        <input class="button-default inputfile" type="file" name="file2" id="file2">
                       </div>
                     </li>
-                    <li class="col2">
-                      <div></div>
+                    <li class="col2"><span class="listlabel">Reboot Unit:</span>
                       <div>
-                        <button id="8021xSave">Add</button>
+                        <button id="reboot">Reboot</button>
+                      </div>
+                    </li>
+                    <li class="col2"><span class="listlabel">Factory Default</span>
+                      <div>
+                        <button id="factoryReset">Default</button>
                       </div>
                     </li>
                     <li class="col3">
@@ -104,46 +106,17 @@
                 </div>
               </div>
               <div class="content-block">
-                <h5>Current Users</h5>
+                <h5>Remote Room Updates</h5>
                 <div>
-                  <ul class="list-unstyled">         
-                    <li class="col3"><span class="listlabel">User 1</span>
+                  <ul class="list-unstyled">
+                    <li class="col2"><span class="listlabel">Upload New Firmware:</span>
                       <div>
-                        <label>
-                          <input class="currentUser" id="Admin" type="radio" name="currentUser1" value="Admin"><span class="listlabel">Admin</span>
-                        </label>
-                        <label>
-                          <input class="currentUser" id="View" type="radio" name="currentUser1" value="View"><span class="listlabel">View</span>
-                        </label>
-                      </div>
-                      <div>
-                        <button>Delete</button>
+                        <input class="button-default inputfile" type="file" name="file3" id="file3">
                       </div>
                     </li>
-                    <li class="col3"><span class="listlabel">User 2</span>
+                    <li class="col2"><span class="listlabel">Current Version Stored:</span>
                       <div>
-                        <label>
-                          <input class="currentUser" id="Admin" type="radio" name="currentUser2" value="Admin"><span class="listlabel">Admin</span>
-                        </label>
-                        <label>
-                          <input class="currentUser" id="View" type="radio" name="currentUser2" value="View"><span class="listlabel">View</span>
-                        </label>
-                      </div>
-                      <div>
-                        <button>Delete</button>
-                      </div>
-                    </li>
-                    <li class="col3"><span class="listlabel">User 3</span>
-                      <div>
-                        <label>
-                          <input class="currentUser" id="Admin" type="radio" name="currentUser3" value="Admin"><span class="listlabel">Admin</span>
-                        </label>
-                        <label>
-                          <input class="currentUser" id="View" type="radio" name="currentUser3" value="View"><span class="listlabel">View</span>
-                        </label>
-                      </div>
-                      <div>
-                        <button>Delete</button>
+                        <button>Display File Name</button>
                       </div>
                     </li>
                   </ul>

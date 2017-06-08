@@ -1,0 +1,89 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'RR Admin - Licenses';
+  -var section    = 'rradmin';
+  -var subsection = 'Licenses';
+
+block secondaryMenu
+  +rradminMenu( subsection )
+
+block content
+  div.content-block
+    h5 Licenses
+    div
+      ul.list-unstyled
+        li.col2
+          span.listlabel Collector Type:
+          div
+            label
+              input#Micro.AdminLicense(type="checkbox" value="Micro")
+              span.listlabel Micro
+            label
+              input#Com.AdminLicense(type="checkbox" value="Com")
+              span.listlabel Com  
+            label
+              input#Ent.AdminLicense(type="checkbox" value="Ent")
+              span.listlabel Ent
+        li.col2
+          span.listlabel Number of Rooms:
+          div
+            input#Com.AdminLicense(type="number")
+        li.col2
+          span.listlabel Room Ready Portal:
+          div
+            label
+              input#portalEnable.AdminLicense(type="radio" name="AdminLicensePortal" value="portalEnable")
+              span.listlabel Enable
+            label
+              input#portalDisable.AdminLicense(type="radio" name="AdminLicensePortal" value="portalDisable")
+              span.listlabel Disable
+        li.col2
+          span.listlabel Spark Enabled Monitoring:
+          div
+            label
+              input#sparkMonitoringEnable.AdminLicense(type="radio" name="AdminLicenseMonitoring" value="sparkMonitoringEnable")
+              span.listlabel Enable
+            label
+              input#sparkMonitoringDisable.AdminLicense(type="radio" name="AdminLicenseMonitoring" value="sparkMonitoringDisable")
+              span.listlabel Disable
+        li.col2
+          span.listlabel Spark Enabled Services:
+          div
+            label
+              input#sparkServicesEnable.AdminLicense(type="radio" name="AdminLicenseServices" value="sparkServicesEnable")
+              span.listlabel Enable
+            label
+              input#sparkServicesDisable.AdminLicense(type="radio" name="AdminLicenseServices" value="sparkServicesDisable")
+              span.listlabel Disable
+        li.col2
+          span.listlabel Lighting Integration:
+          div
+            label
+              input#lightingIntegrationEnable.AdminLicense(type="radio" name="AdminLicenseLighting" value="lightingIntegrationEnable")
+              span.listlabel Enable
+            label
+              input#lightingIntegrationDisable.AdminLicense(type="radio" name="AdminLicenseLighting" value="lightingIntegrationDisable")
+              span.listlabel Disable
+        li.col2
+          span.listlabel Other Integration:
+          div
+            label
+              input#otherEnable.AdminLicense(type="radio" name="AdminLicenseOther" value="otherEnable")
+              span.listlabel Enable
+            label
+              input#otherDisable.AdminLicense(type="radio" name="AdminLicenseOther" value="otherDisable")
+              span.listlabel Disable
+        li.col2
+          span.listlabel Trial Timer:
+          div
+            label
+              input#otherEnable.AdminLicense(type="radio" name="AdminLicenseTimer" value="otherEnable")
+              span.listlabel Enable
+            label
+              input#otherDisable.AdminLicense(type="radio" name="AdminLicenseTimer" value="otherDisable")
+              span.listlabel Disable
+            select.dropdown
+              option(value="30") 30 Days
+              option(value="60") 60 Days
+              option(value="90") 90 Days

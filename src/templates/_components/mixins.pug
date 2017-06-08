@@ -51,9 +51,9 @@ mixin navigation(currentPage)
           li
             a.security(href='security-certificates.html') Security
           li
-            a.maintenance(href='#maintenance') Maintenance
+            a.maintenance(href='maintenance.html') Maintenance
           li
-            a.rr-admin(href='#rradmin') RR-Admin
+            a.rradmin(href='rradmin-licenses.html') RR-Admin
           li
             a.help(href='#help') Help
 
@@ -65,12 +65,22 @@ mixin subnavigation(active, menu)
       else
         a.list-group-item(href=val, title=key)= key
 
+//- Setup Menu Items
 mixin setupMenu(active)
   -var menu = { 'Collector Config': 'setup-collector-config.html', 'External Devices': 'setup-external-devices.html', 'Codec Configuration': 'setup-codec-configuration.html', 'Spark Services': 'setup-spark-services.html' };
-
   +subnavigation( active , menu )
 
+//- Security Menu Items
 mixin securityMenu(active)
   -var menu = { 'Certificates': 'security-certificates.html', '802.1x': 'security-8021x.html', 'Users': 'security-users.html' };
+  +subnavigation( active , menu )
 
+//- Maintenance Menu Items
+mixin maintenanceMenu(active)
+  -var menu = { 'Maintenance': 'maintenance.html' };
+  +subnavigation( active , menu )
+
+//- RR-Admin Menu Items
+mixin rradminMenu(active)
+  -var menu = { 'Licenses': 'rradmin-licenses.html', 'Remote Rooms': 'rradmin-remote-rooms.html', 'Other Integrations': 'rradmin-other-integrations.html' };
   +subnavigation( active , menu )

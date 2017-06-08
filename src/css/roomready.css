@@ -6985,6 +6985,9 @@ ul.list-unstyled input[type=checkbox],
 ul.list-unstyled input[type=radio] {
   width: auto;
 }
+ul.list-unstyled .inputfile {
+  margin: 10px 0;
+}
 ul.list-unstyled button {
   color: #333;
   background-color: #fff;
@@ -7088,7 +7091,7 @@ select.dropdown {
   background-color: white;
   border-radius: 5px;
 }
-.main-nav.navbar-inverse ul#rr-admin a.rr-admin {
+.main-nav.navbar-inverse ul#rradmin a.rradmin {
   background-color: white;
   border-radius: 5px;
 }

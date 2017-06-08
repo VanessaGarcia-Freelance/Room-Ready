@@ -1,0 +1,54 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'Maintenance';
+  -var section    = 'maintenance';
+  -var subsection = 'Maintenance';
+
+block secondaryMenu
+  +maintenanceMenu( subsection )
+
+block content
+  div.content-block
+    h5 Software &amp; Control
+    div
+      ul.list-unstyled
+        li.col2
+          span.listlabel Upload New Firmware:
+          div
+            input.button-default(type="file" name="file" id="file" class="inputfile")
+            //- label.button-default.btn.labelbtn(for="file") Upload
+        li.col2
+          span.listlabel Download Current Config:
+          div
+            button#downloadButton.maintenance Download
+        li.col2
+          span.listlabel Restore Configuration:
+          div
+            input.button-default(type="file" name="file2" id="file2" class="inputfile")
+            //- label.button-default.btn.labelbtn(for="file2") Upload
+        li.col2
+          span.listlabel Reboot Unit:
+          div
+            button#reboot Reboot
+        li.col2
+          span.listlabel Factory Default
+          div
+            button#factoryReset Default
+        li.col3
+          div
+          div
+          div
+            button#8021xSave Save
+  div.content-block
+    h5 Remote Room Updates
+    div
+      ul.list-unstyled
+        li.col2
+          span.listlabel Upload New Firmware:
+          div
+            input.button-default(type="file" name="file3" id="file3" class="inputfile")
+        li.col2
+          span.listlabel Current Version Stored:
+          div
+            button Display File Name
