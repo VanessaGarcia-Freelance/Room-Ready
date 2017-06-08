@@ -1,0 +1,32 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'RR Admin - Other Integrations';
+  -var section    = 'rradmin';
+  -var subsection = 'Other Integrations';
+
+block secondaryMenu
+  +rradminMenu( subsection )
+
+block content
+  div.content-block
+    h5 RRC Drones **
+    div
+      ul.list-unstyled
+        li.col2
+          span.listlabel Room/Location Name:
+          div
+            input(type="text"  placeholder="#Name" value="{{ adminLicenseRemoteDevice.ipAddress }}")
+        li.col2
+          span.listlabel IP Address:
+          div
+            input(type="text"  placeholder="#ipAddress" value="{{ adminLicenseRemoteDevice.ipAddress }}")
+        li.col2
+          span.listlabel Retrieve Config:
+          div
+            button#retrieve.adminLicenseRemoteDevice Retrieve
+        li.col3
+          div
+          div
+          div
+            button#add.adminLicenseRemoteDevice Add

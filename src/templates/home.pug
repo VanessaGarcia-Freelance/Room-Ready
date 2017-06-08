@@ -76,41 +76,7 @@ html(lang='en')
                     div#Monitors.SystemStatus.col-xs-12.col-sm-4
                       h6 Monitors
                       div.circle
-          div.row.remoteDevice
-            div.col-xs-12.col-md-12
-              div.content-block
-                h5 Remote Device Status
-                div.table-responsive
-                  table#RemoteDevice.table
-                    tr
-                      th Room Name
-                      th IP Address
-                      th Status
-                      th Options
-                    tr
-                      td.roomName Redbird Room
-                      td.ipAddress 192.168.101.40
-                      td.status.issues Issues
-                      td.options 
-                        button Update
-                        button Configure
-                        button Capture
-                    tr
-                      td.roomName Engineering Room
-                      td.ipAddress 192.168.101.40
-                      td.status.online Online
-                      td.options 
-                        button Update
-                        button Configure
-                        button Capture
-                    tr
-                      td.roomName Redbird Room
-                      td.ipAddress 192.168.101.40
-                      td.status.offline Offline
-                      td.options 
-                        button Update
-                        button Configure
-                        button Capture
+          +remoteDeviceStatus()
 
 
 

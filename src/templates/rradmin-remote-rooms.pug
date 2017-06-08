@@ -1,0 +1,32 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'RR Admin - Remote Rooms';
+  -var section    = 'rradmin';
+  -var subsection = 'Remote Rooms';
+
+block secondaryMenu
+  +rradminMenu( subsection )
+
+block content
+  div.content-block
+    h5 Remote Device Input
+    div
+      ul.list-unstyled
+        li.col2
+          span.listlabel Device IP Address:
+          div
+            input#ipAddress.adminLicenseRemoteDevice(type="text"  placeholder="#ipAddress" value="{{ adminLicenseRemoteDevice.ipAddress }}")
+        li.col2
+          span.listlabel Retrieve Config:
+          div
+            button#retrieve.adminLicenseRemoteDevice Retrieve
+        li.col3
+          div
+          div
+          div
+            button#add.adminLicenseRemoteDevice Add
+
+block fullWidthContent
+  div.col-xs-12.col-md-10.col-md-offset-1
+      +remoteDeviceStatus()

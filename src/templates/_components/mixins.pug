@@ -55,7 +55,7 @@ mixin navigation(currentPage)
           li
             a.rradmin(href='rradmin-licenses.html') RR-Admin
           li
-            a.help(href='#help') Help
+            a.help(href='help.html') Help
 
 mixin subnavigation(active, menu)
   div.list-group
@@ -84,3 +84,45 @@ mixin maintenanceMenu(active)
 mixin rradminMenu(active)
   -var menu = { 'Licenses': 'rradmin-licenses.html', 'Remote Rooms': 'rradmin-remote-rooms.html', 'Other Integrations': 'rradmin-other-integrations.html' };
   +subnavigation( active , menu )
+
+//- Help Menu Items
+mixin helpMenu(active)
+  -var menu = { 'Help': 'help.html', 'Downloads': 'help-downloads.html' };
+  +subnavigation( active , menu )
+
+mixin remoteDeviceStatus
+  div.row.remoteDevice
+    div.col-xs-12.col-md-12
+      div.content-block
+        h5 Remote Device Status
+        div.table-responsive
+          table#RemoteDevice.table
+            tr
+              th Room Name
+              th IP Address
+              th Status
+              th Options
+            tr
+              td.roomName Redbird Room
+              td.ipAddress 192.168.101.40
+              td.status.issues Issues
+              td.options 
+                button Update
+                button Configure
+                button Capture
+            tr
+              td.roomName Engineering Room
+              td.ipAddress 192.168.101.40
+              td.status.online Online
+              td.options 
+                button Update
+                button Configure
+                button Capture
+            tr
+              td.roomName Redbird Room
+              td.ipAddress 192.168.101.40
+              td.status.offline Offline
+              td.options 
+                button Update
+                button Configure
+                button Capture

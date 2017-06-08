@@ -1,0 +1,15 @@
+extends Template-2col.pug
+
+block variables
+  -var pagename   = 'Help';
+  -var section    = 'help';
+  -var subsection = 'Downloads';
+
+block secondaryMenu
+  +helpMenu( subsection )
+
+block content
+  div.content-block
+    h5 Downloads
+    div
+      p **Downloads**
