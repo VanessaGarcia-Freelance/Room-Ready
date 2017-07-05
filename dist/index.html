@@ -1,68 +1,61 @@
-<!DOCTYPE html>
-<html lang="en"><!DOCTYPE html><!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!--The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!--<link rel="icon" href="../../favicon.ico">-->
-      <title>PAGE LIST</title>
-      <!--Bootstrap core CSS-->
-      <!-- build:css css/roomready-clean.css-->
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-      <link href="css/roomready.min.css" rel="stylesheet">
-      <!-- /build-->
-    </head>
-  </html>
-  <body class="listpage">
-    <div class="container">
-      <div class="col-xs-12 col-md-10 col-md-offset-1">
-        <div class="row">
-          <div class="col-xs-12 col-md-6">
-            <h2>Room Ready Front End Build</h2>
-            <div>
-              <h4>Login</h4>
-              <ul>
-                <li><a href="login.html">Login Page</a></li>
-              </ul>
-              <h4>Home</h4>
-              <ul>
-                <li><a href="home.html">Home Page</a></li>
-              </ul>
-              <h4>Setup</h4>
-              <ul>
-                <li><a href="setup-collector-config.html">Collector Config</a></li>
-                <li><a href="setup-external-devices.html">External Devices</a></li>
-                <li><a href="setup-codec-configuration.html">Codec Configuration</a></li>
-              </ul>
-              <h4>Security</h4>
-              <ul>
-                <li><a href="security-certificates.html">Certificates</a></li>
-                <li><a href="security-8021x.html">802.1x</a></li>
-                <li><a href="security-users.html">Users</a></li>
-              </ul>
-              <h4>Maintenance</h4>
-              <ul>
-                <li><a href="maintenance.html">Maintenance</a></li>
-              </ul>
-              <h4>RR Admin</h4>
-              <ul>
-                <li><a href="rradmin-licenses.html">Licenses</a></li>
-                <li><a href="rradmin-remote-rooms.html">Remote Rooms</a></li>
-                <li><a href="rradmin-other-integrations.html">Other Integrations</a></li>
-              </ul>
-              <h4>Help</h4>
-              <ul>
-                <li><a href="help.html">Help</a></li>
-                <li><a href="help-downloads.html">Downloads</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!--The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <!--<link rel="icon" href="../../favicon.ico">-->
+  <title>NetConfig</title>
+  <!--Bootstrap core CSS-->
+  <!-- build:css css/roomready-clean.css-->
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/roomready.min.css" rel="stylesheet"/>
+  <!-- /build-->
+</head>
+<body><a href="home">Home </a><a href="cfg">Setup </a><a href="security">Security </a><a href="maintenance">Maintenance </a><a href="admin">RR-Admin </a><a href="help">Help </a><br/><a href="SystemInformation">System Information</a><a href="NetworkSettings">Network Settings </a><a href="InternetSettings">Internet Settings </a><a href="NetworkServices">Network Services </a><br/>
+  <h3>Main Page</h3><br/>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+  $('.netCfg').click(function() { // handle checkbox clicks
+  switch (this.id){
+  case "DHCP":
+  // don't do anything, let the script continue
+  break;
+  default:
+  return; // if not an approved id the function will die
+  break;
+  }
+  var jStr = '{"Type":"bool", "Class":"netCfg", "Id":"' + this.id +
+  '","Data":"' + this.checked + '"}';
+  $.ajax({
+  type: 'POST',
+  url: 'update',
+  //data: JSON.stringify(jStr),
+  data: jStr,
+  success: function(data) { alert('data: ' + data); },
+  contentType: "application/json; charset=utf-8",
+  dataType: 'json'
+  });
+  });
+  $(".netCfg").keyup(function(){ // handle string changes
+  var jStr = '{"Type":"string", "Class":"netCfg", "Id":"' + this.id +
+  '","Data":"' + this.value + '"}   ';
+  $.ajax({
+  type: 'POST',
+  url: 'update',
+  //data: JSON.stringify(jStr),
+  data: jStr,
+  success: function(data) { alert('data: ' + data); },
+  contentType: "application/json; charset=utf-8",
+  dataType: 'json'
+  });
+  });
+  });
+  function result(status, data){
+  alert("something\\n" + status + "\n" + data + "\n");
+  }
+</script>

@@ -1,61 +1,104 @@
-include _components/mixins.pug
+include _mixins/mixins.pug
 
-doctype html
-html(lang='en')
-  doctype html
-  //- include head tag
-  +head('PAGE LIST')
+//- include head tag
++head('NetConfig')
 
 
-  body.listpage
-    div.container
-      div.col-xs-12.col-md-10.col-md-offset-1
-          div.row
-            div.col-xs-12.col-md-6
-              h2 Room Ready Front End Build
-              div
-                h4 Login
-                ul
-                  li
-                    a(href="login.html") Login Page
-                h4 Home
-                ul
-                  li
-                    a(href="home.html") Home Page
-                h4 Setup
-                ul
-                  li
-                    a(href="setup-collector-config.html") Collector Config
-                  li
-                    a(href="setup-external-devices.html") External Devices
-                  li
-                    a(href="setup-codec-configuration.html") Codec Configuration
-                h4 Security
-                ul
-                  li
-                    a(href="security-certificates.html") Certificates
-                  li
-                    a(href="security-8021x.html") 802.1x
-                  li
-                    a(href="security-users.html") Users
-                h4 Maintenance
-                ul
-                  li
-                    a(href="maintenance.html") Maintenance
-                h4 RR Admin
-                ul
-                  li
-                    a(href="rradmin-licenses.html") Licenses
-                  li
-                    a(href="rradmin-remote-rooms.html") Remote Rooms
-                  li
-                    a(href="rradmin-other-integrations.html") Other Integrations
-                h4 Help
-                ul
-                  li
-                    a(href="help.html") Help
-                  li
-                    a(href="help-downloads.html") Downloads
+body
+  a(href="home") Home 
+  a(href="cfg") Setup 
+  a(href="security") Security 
+  a(href="maintenance") Maintenance 
+  a(href="admin") RR-Admin 
+  a(href="help") Help 
+  br
+  a(href="SystemInformation") System Information
+  a(href="NetworkSettings") Network Settings 
+  a(href="InternetSettings") Internet Settings 
+  a(href="NetworkServices") Network Services 
+  br
+  h3 Main Page
+  br 
+  //- input#MACAddress.netCfg(type='text', placeholder='aa:bb:cc:dd:ee:ff', value='11:22:33:44:55')
+  //- br
+  //- input#RoomName.netCfg(type='text', placeholder='RoomName', value='{{ .RoomName }}')
+  //- br
+  //- input#RoomNumber.netCfg(type='text', placeholder='RoomNumber', value='{{ .RoomNumber }}')
+  //- br
+  //- input#Building.netCfg(type='text', placeholder='Building', value='{{ .Building }}')
+  //- br
+  //- input#Address.netCfg(type='text', placeholder='Address', value='{{ .Address }}')
+  //- br
+  //- input#City.netCfg(type='text', placeholder='City', value='{{ .City }}')
+  //- br
+  //- input#State.netCfg(type='text', placeholder='State', value='{{ .State }}')
+  //- br
+  //- input#Zip.netCfg(type='text', placeholder='Zip', value='{{ .Zip }}')
+  //- br
+  //- input#DHCP.netCfg(type='checkbox', placeholder='DHCP', {{='', .dhcpstring='', }}='')
+  //- br
+  //- input#IPAddress.netCfg(type='text', placeholder='IPAddress', value='{{ .IPAddress }}')
+  //- br
+  //- input#Gateway.netCfg(type='text', placeholder='Gateway', value='{{ .Gateway }}')
+  //- br
+  //- input#NetMask.netCfg(type='text', placeholder='NetMask', value='{{ .NetMask }}')
+  //- br
+  //- input#HostName.netCfg(type='text', placeholder='HostName', value='{{ .HostName }}')
+  //- br
+  //- input#DomainName.netCfg(type='text', placeholder='DomainName', value='{{ .DomainName }}')
+  //- br
+  //- input#DNSServer1.netCfg(type='text', placeholder='DNSServer1', value='{{ .DNSServer1 }}')
+  //- br
+  //- input#DNSServer2.netCfg(type='text', placeholder='DNSServer2', value='{{ .DNSServer2 }}')
+  //- br
+  //- input#ProxyServer.netCfg(type='text', placeholder='ProxyServer', value='{{ .ProxyServer }}')
+  //- br
+  //- input#ProxyUserName.netCfg(type='text', placeholder='ProxyUserName', value='{{ .ProxyUserName }}')
+  //- br
+  //- input#ProxyPassword.netCfg(type='password', placeholder='ProxyPassword', value='{{ .ProxyPassword }}')
+  //- br
+  //- input#NTPServer1.netCfg(type='text', placeholder='NTPServer1', value='{{ .NTPServer1 }}')
+  //- br
+  //- input#NTPServer2.netCfg(type='text', placeholder='NTPServer2', value='{{ .NTPServer2 }}')
 
-
-
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+script.
+  $(document).ready(function () {
+  $('.netCfg').click(function() { // handle checkbox clicks
+  switch (this.id){
+  case "DHCP":
+  // don't do anything, let the script continue
+  break;
+  default:
+  return; // if not an approved id the function will die
+  break;
+  }
+  var jStr = '{"Type":"bool", "Class":"netCfg", "Id":"' + this.id +
+  '","Data":"' + this.checked + '"}';
+  $.ajax({
+  type: 'POST',
+  url: 'update',
+  //data: JSON.stringify(jStr),
+  data: jStr,
+  success: function(data) { alert('data: ' + data); },
+  contentType: "application/json; charset=utf-8",
+  dataType: 'json'
+  });
+  });
+  $(".netCfg").keyup(function(){ // handle string changes
+  var jStr = '{"Type":"string", "Class":"netCfg", "Id":"' + this.id +
+  '","Data":"' + this.value + '"}   ';
+  $.ajax({
+  type: 'POST',
+  url: 'update',
+  //data: JSON.stringify(jStr),
+  data: jStr,
+  success: function(data) { alert('data: ' + data); },
+  contentType: "application/json; charset=utf-8",
+  dataType: 'json'
+  });
+  });
+  });
+  function result(status, data){
+  alert("something\\n" + status + "\n" + data + "\n");
+  }

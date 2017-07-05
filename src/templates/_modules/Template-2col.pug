@@ -1,0 +1,36 @@
+include ../_mixins/mixins.pug
+
+block variables
+  -var pagename   = 'Page';
+  -var section    = 'Home';
+  -var subsection = 'Collector Config';
+
+//- include head tag
+doctype html
+html(lang='en')
+  +head( pagename )
+
+  body.page-template(section=section, page=subsection)
+    #pageheader
+    #mainnav(class=section)
+
+    .container
+      .row.row-offcanvas.row-offcanvas-left
+
+        #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas.no-pad
+          block secondaryMenu
+            p example menu
+            //+setupMenu( subsection )
+
+        .col-xs-12.col-sm-9.no-pad-right
+          .row
+            p.pull-left.visible-xs
+              button.btn.btn-default(type="button" data-toggle="offcanvas") #{section} Menu
+          .row
+            //- div.col-xs-12.col-md-10.col-md-offset-1
+            .col-xs-12.col-sm-12
+              block content
+                p example content
+      block fullWidthContent
+
++scripts()

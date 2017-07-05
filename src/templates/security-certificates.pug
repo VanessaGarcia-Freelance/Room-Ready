@@ -1,12 +1,11 @@
-extends Template-2col.pug
+extends _modules/Template-2col.pug
 
 block variables
   -var pagename   = 'Security - Certificates';
-  -var section    = 'security';
+  -var section    = 'Security';
   -var subsection = 'Certificates';
 
 block secondaryMenu
-  +securityMenu( subsection )
 
 block content
   div.content-block

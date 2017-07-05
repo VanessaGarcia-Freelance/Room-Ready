@@ -1,4 +1,4 @@
-include _components/mixins.pug
+include _mixins/mixins.pug
 
 doctype html
 html(lang='en')
@@ -11,15 +11,15 @@ html(lang='en')
 
         div.cover-container
           div.inner.cover
-            form.form-signin
+            form.form-signin(method="post" action="/Login")
               h2.form-signin-heading Sign In
               div.form-fields
                 div
                   label(for='Username') Username
-                  input#Username.Login.form-control(type='text' required autofocus)
+                  input#Username.Login.form-control(type='text' name='login' required autofocus)
                 div
                   label(for='Password') Password
-                  input#Password.Login.form-control(type='password' required)
+                  input#Password.Login.form-control(type='password' name='password' required)
                 div.clearfix
-                //<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                button.btn.btn-lg.btn-primary.btn-block(type="submit") Sign in
 

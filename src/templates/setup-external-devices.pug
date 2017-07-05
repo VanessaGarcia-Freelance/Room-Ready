@@ -1,12 +1,11 @@
-extends Template-2col.pug
+extends _modules/Template-2col.pug
 
 block variables
   -var pagename   = 'Setup - External Devices';
-  -var section    = 'setup';
+  -var section    = 'Setup';
   -var subsection = 'External Devices';
 
 block secondaryMenu
-  +setupMenu( subsection )
 
 block content
   div.content-block

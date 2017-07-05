@@ -1,13 +1,12 @@
-extends Template-2col.pug
+extends _modules/Template-2col.pug
 
 block variables
   -var pagename   = 'RR Admin - Licenses';
-  -var section    = 'rradmin';
+  -var section    = 'RR-Admin';
   -var subsection = 'Licenses';
 
 block secondaryMenu
-  +rradminMenu( subsection )
-
+  
 block content
   div.content-block
     h5 Licenses

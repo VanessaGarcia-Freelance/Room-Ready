@@ -1,0 +1,104 @@
+
+mixin head(page_title)
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    //The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    meta(name='description' content='')
+    meta(name='author' content='')
+    //<link rel="icon" href="../../favicon.ico">
+
+    title= page_title
+
+    //Bootstrap core CSS
+    // build:css css/roomready-clean.css
+    link(href='css/bootstrap.min.css' rel='stylesheet')
+    link(href='css/roomready.min.css' rel='stylesheet')
+    // /build
+        
+mixin pageheader
+  header.main-header.navbar.navbar-default.navbar-static-top.navbar-inverse
+    div.header-container.container
+      div.row
+        div.navbar-header
+          a.navbar-brand(href='#')
+            img(alt='Room Ready' src='img/room-ready-logo.png')
+        div
+          ul.nav.navbar-right
+            li 
+              h5.SystemHostname System Hostname
+            li 
+              h5.SystemType System Type
+
+mixin navigation(currentPage)
+  -var menu = { 'Home': 'home.html', 'Setup': 'setup-collector-config.html', 'Security': 'security-certificates.html', 'Maintenance': 'maintenance.html', 'RR-Admin': 'rradmin-licenses.html', 'Help': 'help.html'};
+  
+  nav.main-nav.navbar.navbar-top.navbar-inverse
+    div.container
+      div.navbar-header
+        button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
+          span.sr-only Main Menu
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      div#navbar.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-center(id=currentPage)
+          each val, key in menu
+            if key === currentPage
+              li
+                a.active(href=val, title=key)= key
+            else
+              li
+                a(href=val, title=key)= key
+
+mixin subnav(menu)
+  div.list-group
+    each val, key in menu
+      a.list-group-item(href=val, title=key)= key
+
+mixin remoteDeviceStatus
+  div.row.remoteDevice
+    div.col-xs-12.col-md-12
+      div.content-block
+        h5 Remote Device Status
+        div.table-responsive
+          table#RemoteDevice.table
+            tr
+              th Room Name
+              th IP Address
+              th Status
+              th Options
+            tr
+              td.roomName Redbird Room
+              td.ipAddress 192.168.101.40
+              td.status.issues Issues
+              td.options 
+                button Update
+                button Configure
+                button Capture
+            tr
+              td.roomName Engineering Room
+              td.ipAddress 192.168.101.40
+              td.status.online Online
+              td.options 
+                button Update
+                button Configure
+                button Capture
+            tr
+              td.roomName Redbird Room
+              td.ipAddress 192.168.101.40
+              td.status.offline Offline
+              td.options 
+                button Update
+                button Configure
+                button Capture
+
+mixin scripts
+  //- <!-- Bootstrap core JavaScript
+  //- ==================================================
+  //- <!-- Placed at the end of the document so the pages load faster -->
+  script(src='js/jquery.min.js')
+  script(src='js/bootstrap.min.js')
+  script(src='js/roomready.min.js')  
+  //- script(src='offcanvas.js')

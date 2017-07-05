@@ -1,12 +1,11 @@
-extends Template-2col.pug
+extends _modules/Template-2col.pug
 
 block variables
   -var pagename   = 'Maintenance';
-  -var section    = 'maintenance';
+  -var section    = 'Maintenance';
   -var subsection = 'Maintenance';
 
 block secondaryMenu
-  +maintenanceMenu( subsection )
 
 block content
   div.content-block

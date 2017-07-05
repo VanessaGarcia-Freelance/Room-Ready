@@ -1,19 +1,21 @@
-include _components/mixins.pug
+include _mixins/mixins.pug
+-var section  = 'Home';
 
 doctype html
 html(lang='en')
   //- include head tag
   +head('Room Ready - Home')
 
-  body.page-template
-    +pageheader()
-    +navigation('home')
+  body.page-template.home(section=section)
+    #pageheader
+    #mainnav(class=section)
     
-    div.container
-      div.col-xs-12.col-md-10.col-md-offset-1
-          div.row
-            div.col-xs-12.col-md-6
-              div.content-block
+    .container
+      .row
+        .col-xs-12.col-md-12.no-pad
+          .row
+            .col-xs-12.col-md-6
+              .content-block
                 h5 System Info
                 div
                   ul.list-unstyled
@@ -34,12 +36,12 @@ html(lang='en')
                     li.col2
                       span.listlabel Serial Number:
                       span#SerialNumber.SystemInfo Example Serial
-              div.content-block
+              .content-block
                 h5.listlabel System License
                 div.SystemLicenses
                   p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-            div.col-xs-12.col-md-6
-              div.content-block
+            .col-xs-12.col-md-6
+              .content-block
                 h5 Connected Devices
                 div
                   ul.list-unstyled
@@ -63,34 +65,19 @@ html(lang='en')
                       span.listlabel Number of Drones:
                       span#NumberOfDrones.ConnectedDevices #
 
-              div.content-block
+              .content-block
                 h5 System Status
                 div
-                  div.row
-                    div#Portal.SystemStatus.col-xs-12.col-sm-4
+                  .row
+                    #Portal.SystemStatus.col-xs-12.col-sm-4
                       h6 Portal Online
-                      div.circle
-                    div#Codec.SystemStatus.col-xs-12.col-sm-4
+                      .circle
+                    #Codec.SystemStatus.col-xs-12.col-sm-4
                       h6 Codec Online
-                      div.circle
-                    div#Monitors.SystemStatus.col-xs-12.col-sm-4
+                      .circle
+                    #Monitors.SystemStatus.col-xs-12.col-sm-4
                       h6 Monitors
-                      div.circle
+                      .circle
           +remoteDeviceStatus()
 
-
-
-      //- hr
-
-      //- footer
-      //-   p &copy; 2016 Company, Inc.
-
-
-
-    //- <!-- Bootstrap core JavaScript
-    //- ==================================================
-    //- <!-- Placed at the end of the document so the pages load faster -->
-    script(src='js/jquery.min.js')
-    script(src='js/bootstrap.min.js')
-    script(src='js/roomready.min.js')  
-    //- script(src='offcanvas.js')
++scripts()

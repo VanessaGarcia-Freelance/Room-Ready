@@ -1,12 +1,11 @@
-extends Template-2col.pug
+extends _modules/Template-2col.pug
 
 block variables
   -var pagename   = 'Setup - Codec Configuration';
-  -var section    = 'setup';
+  -var section    = 'Setup';
   -var subsection = 'Codec Configuration';
 
 block secondaryMenu
-  +setupMenu( subsection )
 
 block content
   div.content-block

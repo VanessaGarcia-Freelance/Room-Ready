@@ -91,7 +91,7 @@ module.exports = function(grunt) {
         },
         files: [ {
           cwd: "src/templates/",
-          src: "*.pug",
+          src: ["**/*.pug", "!_mixins/*.pug"],
           dest: "dist/",
           expand: true,
           ext: ".html"
