@@ -6826,11 +6826,16 @@ button .badge {
   color: #fff;
   background-color: #333;
 }
-.list-group-item.active,
-.list-group-item.active:hover {
+a.list-group-item {
   z-index: 2;
   color: black;
   background-color: #bfbfbf;
+  border-color: #333;
+}
+a.list-group-item.active,
+a.list-group-item.active:hover {
+  background-color: white;
+  color: black;
   border-color: #333;
 }
 /*
@@ -7086,27 +7091,7 @@ select.dropdown {
 .main-nav.navbar-inverse .navbar-toggle {
   background-color: #333;
 }
-.main-nav.navbar-inverse ul#home a.home {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#setup a.setup {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#security a.security {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#maintenance a.maintenance {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#rradmin a.rradmin {
-  background-color: white;
-  border-radius: 5px;
-}
-.main-nav.navbar-inverse ul#help a.help {
+.main-nav.navbar-inverse ul li a.active {
   background-color: white;
   border-radius: 5px;
 }
@@ -7286,28 +7271,34 @@ select.dropdown {
     background-color: transparent;
     border-color: transparent;
   }
+  .main-nav > .container {
+    padding: 0!important;
+    overflow: visible;
+  }
   .main-nav #navbar {
     overflow: hidden;
+    padding: 0;
   }
   .main-nav #navbar ul {
     border-radius: 5px;
-    position: relative;
-    float: left;
-    left: 50%;
+    width: 100%;
     padding: 0;
     list-style: none;
   }
   .main-nav #navbar ul li {
-    position: relative;
-    float: left;
-    right: 50%;
+    width: 16.66%;
   }
   .main-nav #navbar ul li a {
     border: 1px solid black;
     margin-left: -1px;
     color: black;
-    padding: 10px 30px;
+    padding: 10px 0;
     background-color: #bfbfbf;
+    text-align: center;
+  }
+  .main-nav #navbar ul li a.active {
+    background-color: white;
+    border-radius: 5px;
   }
   .main-nav #navbar ul li:first-child a {
     border-top-left-radius: 5px;
@@ -7443,6 +7434,6 @@ body.login_page {
     width: 600px;
   }
   .main-nav #navbar ul li a {
-    padding: 10px 50px;
+    padding: 10px 0;
   }
 }

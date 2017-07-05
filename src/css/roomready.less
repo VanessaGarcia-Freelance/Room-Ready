@@ -58,11 +58,14 @@ button {
 }
 
 //#sidebar {
-  .list-group-item{
-    &.active, &.active:hover {
+  a.list-group-item{
       z-index: 2;
       color: black;
       background-color: @bgGrey;
+      border-color: @borderGrey;
+    &.active, &.active:hover {
+      background-color: white;
+      color: black;
       border-color: @borderGrey;
     }
   }
@@ -171,29 +174,7 @@ ul{
     }
     .inputfile{
       margin: 10px 0;
-    //   width: 0.1px;
-    //   height: 0.1px;
-    //   opacity: 0;
-    //   overflow: hidden;
-    //   position: absolute;
-    //   z-index: -1;
     }
-    // .labelbtn {
-    //   margin-bottom: 5px;
-    //   padding: 5px;
-    //   background-color: #f5f5f5;
-    //   width: 100%;
-    //   border-top: 2px solid #CCCCCC;
-    //   border-right: 2px solid #787878;
-    //   border-bottom: 2px solid #787878;
-    //   border-left: 2px solid #CCCCCC;
-    //   border-radius: 4px;
-    //   &.btn:hover {
-    //     color: #333;
-    //     background-color: #e6e6e6;
-    //     border-color: #adadad;
-    //   }
-    // }
     button {
       .btn-default;
     }
@@ -226,6 +207,10 @@ select.dropdown {
 /*
  * Main Navigation
  */
+
+// .main-nav #navbar ul li a {
+//   background-color: red;
+// }
 .main-nav {
   background-color: @bgGrey;
   // border-color: transparent;
@@ -235,40 +220,10 @@ select.dropdown {
     }
 
     ul {
-      &#home {
-        a.home {
-          background-color: white;
-          border-radius: 5px;
-        }
-      }
-      &#setup {
-        a.setup {
-          background-color: white;
-          border-radius: 5px;
-        }
-      }
-      &#security {
-        a.security {
-          background-color: white;
-          border-radius: 5px;
-        }
-      }
-      &#maintenance {
-        a.maintenance {
-          background-color: white;
-          border-radius: 5px;
-        }
-      }
-      &#rradmin {
-        a.rradmin {
-          background-color: white;
-          border-radius: 5px;
-        }
-      }
-      &#help {
-        a.help {
-          background-color: white;
-          border-radius: 5px;
+      li {
+        a.active {
+            background-color: white;
+            border-radius: 5px;
         }
       }
     }
@@ -493,29 +448,34 @@ select.dropdown {
   .masthead-nav {
     float: right;
   }
-
   .main-nav {
     background-color: transparent;
     border-color: transparent;
+    > .container {
+      padding: 0!important;
+      overflow: visible;
+    }
     #navbar  {
       overflow: hidden;
+      padding: 0;
       ul {
         border-radius: 5px;
-        position: relative;
-        float: left;
-        left: 50%;
+        width: 100%;
         padding: 0;
         list-style: none;
         li {
-          position: relative;
-          float: left;
-          right: 50%;
+          width: 16.66%;
           a {
             border: 1px solid black;
             margin-left: -1px;
             color: black;
-            padding: 10px 30px;
+            padding: 10px 0;
             background-color: @bgGrey;
+            text-align: center;
+            &.active {
+              background-color: white;
+              border-radius: 5px;
+            }
           }
           
           &:first-child {
@@ -670,7 +630,7 @@ body.login_page {
   }
   .main-nav #navbar ul li {
     a {
-      padding: 10px 50px;
+      padding: 10px 0;
     }
   }
 }
