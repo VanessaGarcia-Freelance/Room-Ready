@@ -167,3 +167,91 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/roomready.min.js"> </script>
+<script>
+  $(document).ready(function () {
+    $('.SystemInformation').click(function () { // handle checkbox clicks
+        switch (this.id) {
+            case "DHCP":
+                // don't do anything, let the script continue
+                break;
+            default:
+                return; // if not an approved id the function will die
+                break;
+        }
+        var jStr = '{"Type":"bool", "Class":"systemCfg", "Id":"' + this.id +
+            '","Data":"' + this.checked + '"}';
+        postUpdate(jStr)
+    });
+  
+    $(".SystemInformation").keyup(function () { // handle string changes
+        $("#statusText").stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"SystemInformation", "Id":"' + this.id +
+            '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.class + "\\" + this.id + " to " + this.value + "...")
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });
+    $('.NetworkSettings').click(function() { // handle checkbox clicks
+        switch (this.id){
+            case "DHCP":
+                // don't do anything, let the script continue
+                break;
+            default:
+                return; // if not an approved id the function will die
+                break;
+        }
+        var jStr = '{"Type":"bool", "Class":"NetworkSettings", "Id":"' + this.id +
+                    '","Data":"' + this.checked + '"}';
+        postUpdate(jStr)
+    });                
+    $(".NetworkSettings").keyup(function(){ // handle string changes
+        $( "#statusText" ).stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"NetworkSettings", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });            
+    $(".InternetSettings").keyup(function(){ // handle string changes
+        $( "#statusText" ).stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"InternetSettings", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });            
+    $(".NetworkServices").keyup(function(){ // handle string changes
+        $( "#statusText" ).stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"NetworkServices", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });   
+  
+    $("#nav").load("/static/nav.html"); 
+    $("#subNav").load("/static/setupNav.html");  
+            
+  });
+  function postUpdate(jStr){
+      $.ajax({
+          type: 'POST',
+          url: 'update',
+          //data: JSON.stringify(jStr),
+          data: jStr,
+          success: function (data) { alert('data: ' + data); },
+          contentType: "application/json; charset=utf-8",
+          dataType: 'json'
+      });
+  }
+  function clearStatus() {
+      //$('#statusText').text() = ""
+  } 
+  function result(status, data) {
+      alert("something\n" + status + "\n" + data + "\n");
+  }
+</script>

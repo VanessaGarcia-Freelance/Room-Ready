@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RRC</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://raw.github.com/enyo/dropzone/master/dist/dropzone.js"></script>-->
+    <script>
+        $(document).ready(function () {
+
+            $("#nav").load("/static/nav.html");
+            $("#subNav").load("/static/securityNav.html");
+
+        });
+        function postUpdate(jStr) {
+            $.ajax({
+                type: 'POST',
+                url: 'update',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                success: function (data) { alert('data: ' + data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json'
+            });
+        }
+        function result(status, data) {
+            alert("something\n" + status + "\n" + data + "\n");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="subNav"></div> 
+    <div align="center">
+        <h4>Security\802.1x</h4>
+        <form enctype="multipart/form-data" action="/uploadCertKey" method="post">
+            <span style="width:120px;display:inline-block;" align="left">key.pem</span><input type="file" accept=".pem" name="uploadfile" style="width:230px;" />
+            <input type="hidden" name="token" value="12345"/>
+            <input type="submit" value="upload" />
+        </form>
+        <form enctype="multipart/form-data" action="/uploadCertCertificate" method="post">
+            <span style="width:120px;display:inline-block;" align="left">cert.pem</span><input type="file" accept=".pem" name="uploadfile" style="width:230px;" />
+            <input type="hidden" name="token" value="12345"/>
+            <input type="submit" value="upload" />
+        </form>
+    </div>
+    <br>
+    <table>
+        <caption><strong>IEEE 802.1x Configuration<strong></caption>
+        <tr><td>
+            Mode
+        </td><td align="center">
+            <input type="radio" value="1" class="8021x" id="enabled">On
+            <input type="radio" value="0" class="8021x" id="disabled">Off
+        </td></tr>
+        
+        <tr><td>
+            Anonymous Identity
+        </td><td align="center">
+            <input type="text" class="8021x" id="AnonymousIdentity" placeholder="Anonymous Identity" value="{{ .Security8021x.AnonymousIdentity }}"></input>
+        </td></tr>
+        
+        <tr><td>
+            Identity
+        </td><td align="center">
+            <input type="text" class="8021x" id="Identity" placeholder="Identity" value="{{ .Security8021x.Identity }}"></input>
+        </td></tr>
+        
+        <tr><td>
+            Password
+        </td><td align="center">
+            <input type="text" class="8021x" id="Password" placeholder="Password" value="{{ .Security8021x.Password }}"></input>
+        </td></tr>
+        
+        <tr><td>
+            TLS Verify
+        </td><td align="center">
+            <input name="tlsVerify" type="radio" value="1" class="8021xTLSVerify" id="true">On&nbsp;
+            <input name="tlsVerify" type="radio" value="0" class="8021xTLSVerify" id="false">Off
+        </td></tr>
+        
+        <tr><td>
+            Use Client Certificate
+        </td><td align="center">
+            <input name="useClientCertificate" type="radio" value="1" class="8021xUseClientCertificate" id="true">On&nbsp;
+            <input name="useClientCertificate" type="radio" value="0" class="8021xUseClientCertificate" id="false">Off
+        </td></tr>
+    </table>
+    <br>
+</body>
+
+</html>

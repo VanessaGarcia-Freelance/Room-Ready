@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RRC</title>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#status").fadeOut(500, clearStatus);
+                $('.NetworkSettings').click(function() { // handle checkbox clicks
+                    switch (this.id){
+                        case "DHCP":
+                            // don't do anything, let the script continue
+                            break;
+                        default:
+                            return; // if not an approved id the function will die
+                            break;
+                    }
+                    var jStr = '{"Type":"bool", "Class":"NetworkSettings", "Id":"' + this.id +
+                                '","Data":"' + this.checked + '"}';
+                    $.ajax({
+                        type: 'POST',
+                        url: 'update',
+                        //data: JSON.stringify(jStr),
+                        data: jStr,
+                        success: function(data) { alert('data: ' + data); },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json'
+                    });
+                });                
+
+                $(".NetworkSettings").keyup(function(){ // handle string changes
+                    $( "#statusText" ).stop(true, true).fadeOut();
+                    var jStr = '{"Type":"string", "Class":"NetworkSettings", "Id":"' + this.id +
+                                '","Data":"' + this.value + '"}   ';
+                    $("#statusText").fadeIn(1);
+                    $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+                    $("#statusText").fadeOut(3000, clearStatus);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'update',
+                        //data: JSON.stringify(jStr),
+                        data: jStr,
+                        success: function(data) { alert('data: ' + data); },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json'
+                    });
+                });            
+            });
+            function clearStatus(){
+                //$('#statusText').text() = ""
+            }
+            function result(status, data){
+                alert("something\n" + status + "\n" + data + "\n");
+            }
+        </script>
+    </head>
+
+    <body>
+        <a href="Home">Home</a>&nbsp;<a href="Setup">Setup</a>&nbsp;<a href="Security">Security</a>&nbsp;<a href="Maintenance">Maintenance</a>&nbsp;<a href="Admin">RR-Admin</a>&nbsp;<a href="Help">Help</a>
+        <br>
+        <a href="SystemInformation">System Information</a>&nbsp;<a href="NetworkSettings">Network Settings</a>&nbsp;<a href="InternetSettings">Internet Settings</a>&nbsp;<a href="NetworkServices">Network Services</a>
+        <br>
+        <h3>Network Settings</h3><br> 
+        <input type="checkbox" class="NetworkSettings" id="DHCP" placeholder="DHCP" {{ .NetworkSettings.DHCPstring }}>&nbspDHCP<br>
+        <input type="text" class="NetworkSettings" id="IPAddress" placeholder="IPAddress" value="{{ .NetworkSettings.IPAddress }}">&nbspIPAddress<br>
+        <input type="text" class="NetworkSettings" id="Gateway" placeholder="Gateway" value="{{ .NetworkSettings.Gateway }}">&nbspGateway<br>
+        <input type="text" class="NetworkSettings" id="NetMask" placeholder="NetMask" value="{{ .NetworkSettings.NetMask }}">&nbspNetMask<br>
+        <input type="text" class="NetworkSettings" id="HostName" placeholder="HostName" value="{{ .NetworkSettings.HostName }}">&nbspHostName<br>
+        <br>
+        <div id="statusText" color="red"><input style="text-decoration:none;color:red;border:0px;" type="text" value="" readonly></input></div>
+    </body>
+</html>

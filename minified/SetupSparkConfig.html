@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RRC</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.botTokenSelect').prop("disabled", true);
+           
+            $('.admin').keyup(function () { // Value in 'Adiministrator Token' has changed
+                if ($('.admin').val() == ""){
+                    $('.botTokenSelect').prop("disabled", true);
+                }else{
+                    $('.botTokenSelect').prop("disabled", false);
+                }
+            });
+            $('.getRoomIDs').click(function () { // retrieve and display potential room IDs
+                if ($('#' + this.id + '.botID').val() == ""){
+                    alert("Cannot get Rooms with empty Bot Token.");
+                    return;
+                }
+                var jStr = '{"Type":"command", "Class":"getRoomIDs", "Id":"' + this.id +
+                    '","Data":"' + $('#' + this.id + '.botID').val() + '"}';
+                var selector = '#' + this.id + '.roomIdSelect';
+                //alert(selector);
+                $.ajax({
+                    type: 'POST',
+                    url: 'updateCodecConfig',
+                    //data: JSON.stringify(jStr),
+                    data: jStr,
+                    success: function (data) { $(selector).html(data); },
+                    //success: function (data) { alert(data); },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'text'
+                });
+            });
+            $('div').on("click", ".setRoomIDs", function(){ // late binding
+                statusStop('#helpDesk.indicator');
+                var jStr = '{"Type":"string", "Class":"bots", "Id":"' + this.id + "RoomID" + 
+                    '","Data":"' + this.value + '"}   ';
+                //alert(jStr); 
+                $('#' + this.id + '.roomIdSelect').html(""); // get rid of the buttons
+                $('#' + this.id + '.roomID').val(this.value)
+                statusStart('#helpDesk.indicator', 'Saving...');
+                postUpdate(jStr);
+            });
+
+            $(".botID").keyup(function () { // handle bot id string changes
+                statusStop('#helpDesk.indicator');
+                var jStr = '{"Type":"string", "Class":"bots", "Id":"' + this.id + "BotToken" + 
+                    '","Data":"' + this.value + '"}   ';
+                statusStart('#helpDesk.indicator', 'Saving...');
+                postUpdate(jStr);
+            });
+
+            $("#nav").load("/static/nav.html"); 
+            $("#subNav").load("/static/setupNav.html");  
+                     
+        });
+        function postUpdate(jStr){
+            $.ajax({
+                type: 'POST',
+                url: 'updateCodecConfig',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                success: function (data) { alert('data: ' + data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json'
+            });
+        }
+        function statusStart(selector, msg){
+            $(selector).fadeIn(1);
+            $(selector).text(msg);
+            $(selector).fadeOut(3000, clearStatus);
+        }
+        function statusStop(selector){
+            $(selector).stop(true, true).fadeOut();
+        }
+        function clearStatus() {
+            //$('#statusText').text() = ""
+        } 
+        function result(status, data) {
+            alert("something\n" + status + "\n" + data + "\n");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="subNav"></div>
+    <h3>Setup\SparkConfig</h3>
+
+    <table style="width:80%;">
+        <caption><strong>Administrator Token</strong></caption>
+        <tr style="width:100%;">
+            <td style="width:100%;">
+                <input type="text" style="width:100%;" class="admin" id="token" placeholder="Administrator Token (This value IS NOT STORED)" >
+            </td>
+        </tr>
+    </table>
+    <br>
+
+    <div class="botTokenSelect" id="helpDesk"></div>
+    <table style="width:80%;">
+        <caption><strong>Help Desk</strong></caption>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                <span align="left" style="width:100%;">Bot Token</span>
+            </td><td style="width:12%;">
+                <button align="right" style="width:100%;" class="botTokenSelect" id="helpDesk">Select</button>
+            </td>
+            <td align="left" style="width:75%;">
+                <input type="text" style="width:100%;" class="botID" id="helpDesk" placeholder="Bot Token" value="{{ .Bots.HelpDeskBotToken }}">
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                <span align="left" style="width:100%;">Room ID</span>
+            </td><td style="width:12%;">
+                <button align="right" style="width:100%" class="getRoomIDs" id="helpDesk">Select</button>
+            </td>
+            <td align="left" style="width:75%;">
+                <input type="text" style="width:100%;" class="roomID" id="helpDesk" placeholder="Room ID" value="{{ .Bots.HelpDeskRoomID }}" readonly>
+            </td>
+        </tr>
+    </table>
+    <div class="roomIdSelect" id="helpDesk"></div>
+    <br>
+
+    <div class="botTokenSelect" id="room"></div>
+    <table style="width:80%;">
+        <caption><strong>Room</strong></caption>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                <span align="left" style="width:100%;">Bot Token</span>
+            </td><td style="width:12%;">
+                <button align="right" style="width:100%;" class="botTokenSelect" id="room">Select</button>
+            <td align="left" style="width:75%;">
+                <input type="text" style="width:100%;" class="botID" id="room" placeholder="Bot Token" value="{{ .Bots.RoomBotToken }}">
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                <span align="left" style="width:100%;">Room ID</span>
+            </td><td style="width:12%;">
+                <button style="width:100%;" class="getRoomIDs" id="room">Select</button>
+            </td>
+            <td align="left" style="width:75%;">
+                <input type="text" style="width:100%;" class="roomID" id="room" placeholder="Room ID" value="{{ .Bots.RoomRoomID }}" readonly>
+            </td>
+        </tr>
+    </table>
+    <div class="roomIdSelect" id="room"></div>
+    <br>
+
+    <div class="botTokenSelect" id="concierge"></div>
+    <table style="width:80%;">
+        <caption><strong>Concierge</strong></caption>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                Bot Token
+            </td><td style="width:12%;">
+                <button align="right" style="width:100%;" class="botTokenSelect" id="concierge">Select</button>
+            </td>
+            <td align="left" style="width:75%;">
+                <input type="text" style="width:100%;" class="botID" id="concierge" placeholder="Bot Token" value="{{ .Bots.ConciergeBotToken }}">
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                <span align="left" style="width:58%;">Room ID</span>
+            </td><td style="width:12%;">
+                <button style="width:100%;" class="getRoomIDs" id="concierge">Select</button>
+            </td>
+            <td align="left" style="width:75%;">
+                <input type="text" style="width:100%;" class="roomID" id="concierge" placeholder="Room ID" value="{{ .Bots.ConciergeRoomID }}" readonly>
+            </td>
+        </tr>
+    </table>
+    <div class="roomIdSelect" id="concierge"></div>
+    <br>
+
+    <div class="botTokenSelect" id="facilities"></div>
+    <table style="width:80%;">
+        <caption><strong>Facilities</strong></caption>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                Bot Token
+            </td><td style="width:12%;">
+                <button align="right" style="width:100%;" class="botTokenSelect" id="facilities">Select</button>
+            </td>
+            <td align="left" style="width:75%;">
+                <input type="text" style="width:100%" class="botID" id="facilities" placeholder="Bot Token" value="{{ .Bots.FacilitiesBotToken }}">
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td style="width:12%;">
+                <span align="left" style="width:58%;">Room ID</span>
+            </td><td style="width:12%;">
+                <button style="width:100%;" class="getRoomIDs" id="facilities">Select</button>
+            </td>
+            <td align="left" style="width:80%;">
+                <input type="text" style="width:100%;" class="roomID" id="facilities" placeholder="Room ID" value="{{ .Bots.FacilitiesRoomID }}" readonly>
+            </td>
+        </tr>
+    </table>
+    <div class="roomIdSelect" id="facilities"></div>
+    <br>
+    <div id="statusText" color="red"><input style="text-decoration:none;color:red;border:0px;" type="text" value="" readonly></input>
+    </div>
+</body>
+
+</html>

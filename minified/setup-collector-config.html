@@ -34,35 +34,35 @@
                   <ul class="list-unstyled">
                     <li class="col2"><span class="listlabel">Room Name:</span>
                       <div>
-                        <input class="SystemInformation" id="RoomName" type="text" placeholder="Room Name" value="{{ SystemInformation.RoomName }}">
+                        <input class="SystemInformation" id="RoomName" type="text" placeholder="Room Name" value="{{ .SystemInformation.RoomName }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Room Number:</span>
                       <div>
-                        <input class="SystemInformation" id="RoomNumber" type="text" placeholder="Room Number" value="{{ SystemInformation.RoomNumber }}">
+                        <input class="SystemInformation" id="RoomNumber" type="text" placeholder="Room Number" value="{{ .SystemInformation.RoomNumber }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Building Name/Number:</span>
                       <div>
-                        <input class="SystemInformation" id="Building" type="text" placeholder="Building Name/Number" value="{{ SystemInformation.Building }}">
+                        <input class="SystemInformation" id="Building" type="text" placeholder="Building Name/Number" value="{{ .SystemInformation.Building }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Address:</span>
                       <div>
-                        <input class="SystemInformation" id="Address" type="text" placeholder="Address" value="{{ SystemInformation.Address }}">
+                        <input class="SystemInformation" id="Address" type="text" placeholder="Address" value="{{ .SystemInformation.Address }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">City, State, zip:</span>
                       <div>
-                        <input class="SystemInformation" id="City" type="text" placeholder="City" value="{{ SystemInformation.City }}">
+                        <input class="SystemInformation" id="City" type="text" placeholder="City" value="{{ .SystemInformation.City }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col3"><span class="listlabel"></span>
                       <div>
-                        <input class="SystemInformation" id="State" type="text" placeholder="State" value="{{ SystemInformation.State }}">
+                        <input class="SystemInformation" id="State" type="text" placeholder="State" value="{{ .SystemInformation.State }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                       <div>
-                        <input class="SystemInformation" id="Zip" type="text" placeholder="Zipcode" value="{{ SystemInformation.Zip }}">
+                        <input class="SystemInformation" id="Zip" type="text" placeholder="Zipcode" value="{{ .SystemInformation.Zip }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                   </ul>
@@ -74,27 +74,27 @@
                   <ul class="list-unstyled">
                     <li class="col2"><span class="listlabel">DHCP:</span>
                       <div>
-                        <input class="NetworkSettings" id="DHCP" type="checkbox" value="{{ NetworkSettings.DHCPstring }}">
+                        <input class="NetworkSettings" id="DHCP" type="checkbox" {{ .NetworkSettings.DHCPstring }} {{if eq .UserStatus 1}}disabled readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Ipv4 Address:</span>
                       <div>
-                        <input class="NetworkSettings" id="IPAddress" type="text" placeholder="Ipv4 Address" value="{{ NetworkSettings.IPAddress }}">
+                        <input class="NetworkSettings" id="IPAddress" type="text" placeholder="Ipv4 Address" value="{{ .NetworkSettings.IPAddress }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Subnet Mask:</span>
                       <div>
-                        <input class="NetworkSettings" id="NetMask" type="text" placeholder="Subnet Mask" value="{{ NetworkSettings.NetMask }}">
+                        <input class="NetworkSettings" id="NetMask" type="text" placeholder="Subnet Mask" value="{{ .NetworkSettings.NetMask }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Gateway:</span>
                       <div>
-                        <input class="NetworkSettings" id="Gateway" type="text" placeholder="Gateway" value="{{ NetworkSettings.Gateway }}">
+                        <input class="NetworkSettings" id="Gateway" type="text" placeholder="Gateway" value="{{ .NetworkSettings.Gateway }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Hostname:</span>
                       <div>
-                        <input class="NetworkSettings" id="HostName" type="text" placeholder="Hostname" value="{{ .NetworkSettings.HostName }}">
+                        <input class="NetworkSettings" id="HostName" type="text" placeholder="Hostname" value="{{ .NetworkSettings.HostName }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                   </ul>
@@ -106,32 +106,32 @@
                   <ul class="list-unstyled">
                     <li class="col2"><span class="listlabel">Domain Name:</span>
                       <div>
-                        <input class="InternetSettings" id="DomainName" type="text" placeholder="Domain Name" value="{{ InternetSettings.DomainName }}">
+                        <input class="InternetSettings" id="DomainName" type="text" placeholder="Domain Name" value="{{ .InternetSettings.DomainName }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">DNS Server 1:</span>
                       <div>
-                        <input class="InternetSettings" id="DNSServer1" type="text" placeholder="DNS Server 1" value="{{ InternetSettings.DNSServer1 }}">
+                        <input class="InternetSettings" id="DNSServer1" type="text" placeholder="DNS Server 1" value="{{ .InternetSettings.DNSServer1 }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">NS Server 2:</span>
                       <div>
-                        <input class="InternetSettings" id="DNSServer2" type="text" placeholder="DNS Server 2" value="{{ InternetSettings.DNSServer2 }}">
+                        <input class="InternetSettings" id="DNSServer2" type="text" placeholder="DNS Server 2" value="{{ .InternetSettings.DNSServer2 }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Proxy Server:</span>
                       <div>
-                        <input class="InternetSettings" id="ProxyServer" type="text" placeholder="Proxy Server" value="{{ InternetSettings.ProxyServer }}">
+                        <input class="InternetSettings" id="ProxyServer" type="text" placeholder="Proxy Server" value="{{ .InternetSettings.ProxyServer }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Proxy Username:</span>
                       <div>
-                        <input class="InternetSettings" id="ProxyUsername" type="text" placeholder="Proxy Username" value="{{ InternetSettings.ProxyUserName }}">
+                        <input class="InternetSettings" id="ProxyUsername" type="text" placeholder="Proxy Username" value="{{ .InternetSettings.ProxyUserName }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Proxy Password:</span>
                       <div>
-                        <input class="InternetSettings" id="ProxyPassword" type="password" placeholder="Proxy Password" value="{{ InternetSettings.ProxyPassword }}">
+                        <input class="InternetSettings" id="ProxyPassword" type="password" placeholder="Proxy Password" value="{{ .InternetSettings.ProxyPassword }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                   </ul>
@@ -143,12 +143,12 @@
                   <ul class="list-unstyled">
                     <li class="col2"><span class="listlabel">NTP Server 1:</span>
                       <div>
-                        <input class="NetworkServices" id="NTPServer1" type="text" placeholder="NTP Server 1" value="{{ NetworkServices.NTPServer1 }}">
+                        <input class="NetworkServices" id="NTPServer1" type="text" placeholder="NTP Server 1" value="{{ .NetworkServices.NTPServer1 }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">NTP Server 2:</span>
                       <div>
-                        <input class="NetworkServices" id="NTPServer2" type="text" placeholder="NTP Server 2" value="{{ NetworkServices.NTPServer2 }}">
+                        <input class="NetworkServices" id="NTPServer2" type="text" placeholder="NTP Server 2" value="{{ .NetworkServices.NTPServer2 }}" {{if eq .UserStatus 1}}readonly{{end}}>
                       </div>
                     </li>
                   </ul>
@@ -164,3 +164,91 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/roomready.min.js"> </script>
+<script>
+  $(document).ready(function () {
+    $('.SystemInformation').click(function () { // handle checkbox clicks
+        switch (this.id) {
+            case "DHCP":
+                // don't do anything, let the script continue
+                break;
+            default:
+                return; // if not an approved id the function will die
+                break;
+        }
+        var jStr = '{"Type":"bool", "Class":"systemCfg", "Id":"' + this.id +
+            '","Data":"' + this.checked + '"}';
+        postUpdate(jStr)
+    });
+  
+    $(".SystemInformation").keyup(function () { // handle string changes
+        $("#statusText").stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"SystemInformation", "Id":"' + this.id +
+            '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.class + "\\" + this.id + " to " + this.value + "...")
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });
+    $('.NetworkSettings').click(function() { // handle checkbox clicks
+        switch (this.id){
+            case "DHCP":
+                // don't do anything, let the script continue
+                break;
+            default:
+                return; // if not an approved id the function will die
+                break;
+        }
+        var jStr = '{"Type":"bool", "Class":"NetworkSettings", "Id":"' + this.id +
+                    '","Data":"' + this.checked + '"}';
+        postUpdate(jStr)
+    });                
+    $(".NetworkSettings").keyup(function(){ // handle string changes
+        $( "#statusText" ).stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"NetworkSettings", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });            
+    $(".InternetSettings").keyup(function(){ // handle string changes
+        $( "#statusText" ).stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"InternetSettings", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });            
+    $(".NetworkServices").keyup(function(){ // handle string changes
+        $( "#statusText" ).stop(true, true).fadeOut();
+        var jStr = '{"Type":"string", "Class":"NetworkServices", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+        $("#statusText").fadeIn(1);
+        $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+        $("#statusText").fadeOut(3000, clearStatus);
+        postUpdate(jStr)
+    });   
+  
+    $("#nav").load("/static/nav.html"); 
+    $("#subNav").load("/static/setupNav.html");  
+            
+  });
+  function postUpdate(jStr){
+      $.ajax({
+          type: 'POST',
+          url: 'update',
+          //data: JSON.stringify(jStr),
+          data: jStr,
+          success: function (data) { alert('data: ' + data); },
+          contentType: "application/json; charset=utf-8",
+          dataType: 'json'
+      });
+  }
+  function clearStatus() {
+      //$('#statusText').text() = ""
+  } 
+  function result(status, data) {
+      alert("something\n" + status + "\n" + data + "\n");
+  }
+</script>

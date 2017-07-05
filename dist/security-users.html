@@ -36,35 +36,35 @@
                   <ul class="list-unstyled">
                     <li class="col2"><span class="listlabel">Username:</span>
                       <div>
-                        <input class="SecurityUsers" id="UserName" type="text" placeholder="#UserName" value="{{ SecurityUsers.UserName }}">
+                        <input class="SecurityUsers" id="username" type="text" placeholder="#UserName" value="{{ SecurityUsers.UserName }}">
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">Password:</span>
                       <div>
-                        <input class="SecurityUsers" id="Password" type="password" placeholder="#Password" value="{{ SecurityUsers.Password }}">
+                        <input class="SecurityUsers" id="password" type="password" placeholder="#Password" value="{{ SecurityUsers.Password }}">
                       </div>
                     </li>
                     <li class="col2"><span class="listlabel">User Type:</span>
                       <div>
                         <label>
-                          <input class="securityUserType" id="Admin" type="radio" name="securityUserType" value="Admin"><span class="listlabel">Admin</span>
+                          <input class="SecurityUsers" id="admin" type="radio" name="securityUserType" value="Admin"><span class="listlabel">Admin</span>
                         </label>
                         <label>
-                          <input class="securityUserType" id="View" type="radio" name="securityUserType" value="View"><span class="listlabel">View</span>
+                          <input class="SecurityUsers" id="view" type="radio" name="securityUserType" value="View"><span class="listlabel">View</span>
                         </label>
                       </div>
                     </li>
                     <li class="col2">
                       <div></div>
                       <div>
-                        <button id="8021xSave">Add</button>
+                        <button class="securityUsers" id="add">Add</button>
                       </div>
                     </li>
                     <li class="col3">
                       <div></div>
                       <div></div>
                       <div>
-                        <button id="8021xSave">Save</button>
+                        <button class="securityUsers" id="save">Save</button>
                       </div>
                     </li>
                   </ul>
@@ -72,8 +72,8 @@
               </div>
               <div class="content-block">
                 <h5>Current Users</h5>
-                <div>
-                  <ul class="list-unstyled">         
+                <div class="currentUsers" id="currentUsers">
+                  <ul class="list-unstyled">  
                     <li class="col3"><span class="listlabel">User 1</span>
                       <div>
                         <label>
@@ -81,32 +81,6 @@
                         </label>
                         <label>
                           <input class="currentUser" id="View" type="radio" name="currentUser1" value="View"><span class="listlabel">View</span>
-                        </label>
-                      </div>
-                      <div>
-                        <button>Delete</button>
-                      </div>
-                    </li>
-                    <li class="col3"><span class="listlabel">User 2</span>
-                      <div>
-                        <label>
-                          <input class="currentUser" id="Admin" type="radio" name="currentUser2" value="Admin"><span class="listlabel">Admin</span>
-                        </label>
-                        <label>
-                          <input class="currentUser" id="View" type="radio" name="currentUser2" value="View"><span class="listlabel">View</span>
-                        </label>
-                      </div>
-                      <div>
-                        <button>Delete</button>
-                      </div>
-                    </li>
-                    <li class="col3"><span class="listlabel">User 3</span>
-                      <div>
-                        <label>
-                          <input class="currentUser" id="Admin" type="radio" name="currentUser3" value="Admin"><span class="listlabel">Admin</span>
-                        </label>
-                        <label>
-                          <input class="currentUser" id="View" type="radio" name="currentUser3" value="View"><span class="listlabel">View</span>
                         </label>
                       </div>
                       <div>
@@ -126,3 +100,143 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/roomready.min.js"> </script>
+<script>
+  $(document).ready(function () {
+    $(document).on('click', '.securityUsers', function(){ 
+      // #UserName is the only element in this class that gets a response
+      var login = $('.SecurityUsers#username').val() + "";
+      var password = $('.SecurityUsers#password').val() + "";
+      if (login.length < 5 || password.length < 5) {
+        alert("Login and Password must have at least five characters each!")
+        return
+      }
+      var admin = $(".SecurityUsers#admin:checked").val() + "";
+      admin = admin.toLowerCase();
+      admin == "admin" ? admin = "admin" : admin = "view";
+      var jStr = `
+      {
+        "email": "`+ "" + `",
+        "login": "`+ $('.SecurityUsers#username').val() + `",
+        "password": "`+ $('.SecurityUsers#password').val() + `",
+        "permissions": "`+ admin + `",
+      }
+      `;
+      newUser(jStr, newUserResponse);
+    });
+  
+    $(document).on('click', '.userDelete', function(){ 
+      // #UserName is the only element in this class that gets a response
+      var login = this.id;
+      var jStr = `
+      {
+        "login": "`+ this.id + `"
+      }
+      `;
+      //alert(jStr)
+      userDelete(jStr, newUserResponse);
+    });
+  
+    $(document).on('click', '.userType', function(){ 
+      // #UserName is the only element in this class that gets a response
+      var login = this.id;
+      
+      //alert(this.id + " - " + $(this).val())
+      var jStr = `
+      {
+        "login": "`+ this.id + `",
+        "permissions": "` + $(this).val().toLowerCase() + `"
+      }
+      `;
+      //alert(jStr)
+      userMod(jStr, dummy);
+    });
+  
+    
+    //$("#main-nav").load("static/main-nav.html"); 
+    // $("#subNav").load("/static/setupNav.html"); 
+    // serialDeviceLastScanTime();
+    // setInterval(serialDeviceLastScanTime, 2000);
+  });
+  function userMod(jStr, func){
+      $.ajax({ 
+          type: 'POST',
+          url: 'userMod',
+          data: jStr,
+          success: function (data)  { 
+              func(data) 
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: 'text'
+      });
+  }
+  function newUser(jStr, func){
+      $.ajax({ 
+          type: 'POST',
+          url: 'newUser',
+          data: jStr,
+          success: function (data)  { 
+              func(data) 
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: 'text'
+      });
+  }
+  function userDelete(jStr, func){
+      $.ajax({ 
+          type: 'POST',
+          url: 'userDelete',
+          data: jStr,
+          success: function (data)  { 
+              func(data) 
+          },
+          contentType: "application/json; charset=utf-8",
+          dataType: 'text'
+      });
+  }
+  function newUserResponse(data){
+    //alert(data)
+    var j = JSON.parse(data);
+    if (j.error != null) {
+      alert(j.error)
+      return
+    }
+    // put all users in the correct (currentUsers) div
+    newDiv = "";
+    var ju = j.users;
+    for (var k in ju){
+      var adminChecked = "";
+      ju[k].permissions == "admin" ? adminChecked = "checked" : adminChecked = ""; 
+      var viewChecked = "";
+      ju[k].permissions == "view" ? viewChecked = "checked" : viewChecked = ""; 
+      //alert("2 " + ju[k].login);
+      var divTemplate = `
+        <li class="col3"><span class="userLogin listlabel">` + ju[k].login + `</span>
+          <div>
+            <label>
+              <input class="userType" id="` + ju[k].login + `" type="radio" name="` + ju[k].login + `" value="Admin" ` + adminChecked + `><span class="listlabel">Admin</span>
+            </label>
+            <label>
+              <input class="userType" id="` + ju[k].login + `" type="radio" name="` + ju[k].login + `" value="View" ` + viewChecked + `><span class="listlabel">View</span>
+            </label>
+          </div>
+          <div>
+            <button class="userDelete listlabel" id="` + ju[k].login + `" >Delete</button>
+          </div>
+        </li>
+      `;
+      //alert(divTemplate);
+      newDiv += divTemplate;  
+        // do what you want with artist
+    }
+    newDiv = `<ul class="list-unstyled">` + newDiv + `</ul>`
+    $("#currentUsers.currentUsers").html(newDiv)
+    //alert("3 " + newDiv)
+  } 
+  
+  function dummy(){
+      return
+  }
+  function result(status, data) {
+      alert("something\n" + status + "\n" + data + "\n");
+  }
+</script>

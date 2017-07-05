@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RRC</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://raw.github.com/enyo/dropzone/master/dist/dropzone.js"></script>-->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/vendor/jquery.ui.widget.js"></script>
+    <script src="js/jquery.iframe-transport.js"></script>
+    <script src="js/jquery.fileupload.js"></script>-->
+    <script>
+        $(document).ready(function () {
+            $("#nav").load("/static/nav.html");
+            $("#subNav").load("/static/securityNav.html");
+
+            $(".SecurityCertificates").keyup(function () { // handle string changes
+                var jStr = '{"Type":"string", "Class":"SecurityCertificates", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+                postUpdate(jStr)
+            });
+            $(".communicationsType").click(function () { // handle string changes
+                var jStr = '{"Type":"string", "Class":"SecurityCertificates", "Id":"CommunicationsTypes","Data":"' + this.id + '"}   ';
+                postUpdate(jStr)
+            });
+        });
+        function postUpdate(jStr){
+            $.ajax({
+                type: 'POST',
+                url: 'update',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                success: function (data) { alert('data: ' + data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json'
+            });
+        }
+        function result(status, data) {
+            alert("something\n" + status + "\n" + data + "\n");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="subNav"></div> 
+    <div align="center">
+        <h4>RRC Security\Certificates</h4>
+        <form enctype="multipart/form-data" action="/uploadCertKeyRRC" method="post">
+            <span style="width:120px;display:inline-block;" align="left">key.pem</span><input type="file" accept=".pem" name="uploadfile" style="width:230px;" />
+            <input type="hidden" name="token" value="12345"/>
+            <input type="submit" value="upload" />
+        </form>
+        <form enctype="multipart/form-data" action="/uploadCertCertificateRRC" method="post">
+            <span style="width:120px;display:inline-block;" align="left">cert.pem</span><input type="file" accept=".pem" name="uploadfile" style="width:230px;" />
+            <input type="hidden" name="token" value="12345"/>
+            <input type="submit" value="upload" />
+        </form>
+    </div>
+  <table>
+        <caption><strong>Certificate Setup</strong></caption>
+        <tr>
+            <td>
+                Passphrase (Optional)
+            </td>
+            <td align="center">
+                <input type="text" class="SecurityCertificates" id="Passphrase" placeholder="passphrase" value="{{ .SecurityCertificates.Passphrase }}"></input>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Communications Type
+            </td>
+            <td align="center">
+                <input name="communicationsType" type="radio" value="1" class="communicationsType" id="HTTP" {{if eq .SecurityCertificates.CommunicationsTypes "HTTP"}}checked{{else}}{{end}}>HTTP&nbsp;
+                <input name="communicationsType" type="radio" value="0" class="communicationsType" id="HTTPS" {{if eq .SecurityCertificates.CommunicationsTypes "HTTPS"}}checked{{else}}{{end}}>HTTPS&nbsp;
+                <input name="communicationsType" type="radio" value="2" class="communicationsType" id="Both" {{if eq .SecurityCertificates.CommunicationsTypes "Both"}}checked{{else}}{{end}}>Both&nbsp;
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Certificate Authority
+            </td>
+            <td align="center">
+                <button>Upload</button>
+            </td>
+        </tr>
+
+        <br>
+    </table>
+    <br> 
+</body>
+
+</html>

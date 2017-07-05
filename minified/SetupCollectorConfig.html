@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RRC</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.SystemInformation').click(function () { // handle checkbox clicks
+                switch (this.id) {
+                    case "DHCP":
+                        // don't do anything, let the script continue
+                        break;
+                    default:
+                        return; // if not an approved id the function will die
+                        break;
+                }
+                var jStr = '{"Type":"bool", "Class":"systemCfg", "Id":"' + this.id +
+                    '","Data":"' + this.checked + '"}';
+                postUpdate(jStr)
+            });
+
+            $(".SystemInformation").keyup(function () { // handle string changes
+                $("#statusText").stop(true, true).fadeOut();
+                var jStr = '{"Type":"string", "Class":"SystemInformation", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+                $("#statusText").fadeIn(1);
+                $('#statusText').text("Setting Configuration\\" + this.class + "\\" + this.id + " to " + this.value + "...")
+                $("#statusText").fadeOut(3000, clearStatus);
+                postUpdate(jStr)
+            });
+            $('.NetworkSettings').click(function() { // handle checkbox clicks
+                switch (this.id){
+                    case "DHCP":
+                        // don't do anything, let the script continue
+                        break;
+                    default:
+                        return; // if not an approved id the function will die
+                        break;
+                }
+                var jStr = '{"Type":"bool", "Class":"NetworkSettings", "Id":"' + this.id +
+                            '","Data":"' + this.checked + '"}';
+                postUpdate(jStr)
+            });                
+            $(".NetworkSettings").keyup(function(){ // handle string changes
+                $( "#statusText" ).stop(true, true).fadeOut();
+                var jStr = '{"Type":"string", "Class":"NetworkSettings", "Id":"' + this.id +
+                            '","Data":"' + this.value + '"}   ';
+                $("#statusText").fadeIn(1);
+                $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+                $("#statusText").fadeOut(3000, clearStatus);
+                postUpdate(jStr)
+            });            
+            $(".InternetSettings").keyup(function(){ // handle string changes
+                $( "#statusText" ).stop(true, true).fadeOut();
+                var jStr = '{"Type":"string", "Class":"InternetSettings", "Id":"' + this.id +
+                            '","Data":"' + this.value + '"}   ';
+                $("#statusText").fadeIn(1);
+                $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+                $("#statusText").fadeOut(3000, clearStatus);
+                postUpdate(jStr)
+            });            
+            $(".NetworkServices").keyup(function(){ // handle string changes
+                $( "#statusText" ).stop(true, true).fadeOut();
+                var jStr = '{"Type":"string", "Class":"NetworkServices", "Id":"' + this.id +
+                            '","Data":"' + this.value + '"}   ';
+                $("#statusText").fadeIn(1);
+                $('#statusText').text("Setting Configuration\\" + this.id + " to " + this.value + "...") 
+                $("#statusText").fadeOut(3000, clearStatus);
+                postUpdate(jStr)
+            });   
+
+            $("#nav").load("/static/nav.html"); 
+            $("#subNav").load("/static/setupNav.html");  
+                     
+        });
+        function postUpdate(jStr){
+            $.ajax({
+                type: 'POST',
+                url: 'update',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                success: function (data) { alert('data: ' + data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json'
+            });
+        }
+        function clearStatus() {
+            //$('#statusText').text() = ""
+        } 
+        function result(status, data) {
+            alert("something\n" + status + "\n" + data + "\n");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="subNav"></div>
+    <h3>Setup\CollectorConfig</h3>
+    <table>
+        <caption><strong>System Information</strong></caption>
+        <tr>
+            <td>
+                Room Name
+            </td>
+            <td align="center">
+                <input type="text" class="SystemInformation" id="RoomName" placeholder="RoomName" value="{{ .SystemInformation.RoomName }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Room Number
+            </td>
+            <td align="center">
+                <input type="text" class="SystemInformation" id="RoomNumber" placeholder="RoomNumber" value="{{ .SystemInformation.RoomNumber }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Building
+            </td>
+            <td align="center">
+                <input type="text" class="SystemInformation" id="Building" placeholder="Building" value="{{ .SystemInformation.Building }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Address
+            </td>
+            <td align="center">
+                <input type="text" class="SystemInformation" id="Address" placeholder="Address" value="{{ .SystemInformation.Address }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                City
+            </td>
+            <td align="center">
+                <input type="text" class="SystemInformation" id="City" placeholder="City" value="{{ .SystemInformation.City }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                State
+            </td>
+            <td align="center">
+                <input type="text" class="SystemInformation" id="State" placeholder="State" value="{{ .SystemInformation.State }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Zip
+            </td>
+            <td align="center">
+                <input type="text" class="SystemInformation" id="Zip" placeholder="Zip" value="{{ .SystemInformation.Zip }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <caption><strong>Network Settings</strong></caption>
+        <tr>
+            <td>
+                DHCP
+            </td>
+            <td align="center">
+                <input type="checkbox" class="NetworkSettings" id="DHCP" placeholder="DHCP" {{ .NetworkSettings.DHCPstring }} {{if eq .UserStatus 1}}disabled readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                IP Address
+            </td>
+            <td align="center">
+                <input type="text" class="NetworkSettings" id="IPAddress" placeholder="IPAddress" value="{{ .NetworkSettings.IPAddress }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Gateway
+            </td>
+            <td align="center">
+                <input type="text" class="NetworkSettings" id="Gateway" placeholder="Gateway" value="{{ .NetworkSettings.Gateway }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Netmask
+            </td>
+            <td align="center">
+                <input type="text" class="NetworkSettings" id="NetMask" placeholder="NetMask" value="{{ .NetworkSettings.NetMask }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Hostname
+            </td>
+            <td align="center">
+                <input type="text" class="NetworkSettings" id="HostName" placeholder="HostName" value="{{ .NetworkSettings.HostName }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <caption><strong>Internet Settings</strong></caption>
+        <tr>
+            <td>
+                Domain Name
+            </td>
+            <td align="center">
+                <input type="text" class="InternetSettings" id="DomainName" placeholder="DomainName" value="{{ .InternetSettings.DomainName }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                DNS Server 1
+            </td>
+            <td align="center">
+                <input type="text" class="InternetSettings" id="DNSServer1" placeholder="DNSServer1" value="{{ .InternetSettings.DNSServer1 }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                DNS Server 2
+            </td>
+            <td align="center">
+                <input type="text" class="InternetSettings" id="DNSServer2" placeholder="DNSServer2" value="{{ .InternetSettings.DNSServer2 }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Proxy Server
+            </td>
+            <td align="center">
+                <input type="text" class="InternetSettings" id="ProxyServer" placeholder="ProxyServer" value="{{ .InternetSettings.ProxyServer }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Proxy Username
+            </td>
+            <td align="center">
+                <input type="text" class="InternetSettings" id="ProxyUserName" placeholder="ProxyUserName" value="{{ .InternetSettings.ProxyUserName }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Proxy Password
+            </td>
+            <td align="center">
+                <input type="password" class="InternetSettings" id="ProxyPassword" placeholder="ProxyPassword" value="{{ .InternetSettings.ProxyPassword }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+    </table>
+    <br>
+    <table>
+        <caption><strong>Network Services</strong></caption>
+        <tr>
+            <td>
+                NTPServer1
+            </td>
+            <td align="center">
+                <input type="text" class="NetworkServices" id="NTPServer1" placeholder="NTPServer1" value="{{ .NetworkServices.NTPServer1 }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                NTPServer2
+            </td>
+            <td align="center">
+                <input type="text" class="NetworkServices" id="NTPServer2" placeholder="NTPServer2" value="{{ .NetworkServices.NTPServer2 }}" {{if eq .UserStatus 1}}readonly{{end}}>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div id="statusText" color="red"><input style="text-decoration:none;color:red;border:0px;" type="text" value="" readonly></input>
+    </div>
+</body>
+
+</html>

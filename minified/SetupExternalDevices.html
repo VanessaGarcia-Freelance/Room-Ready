@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RRC</title>
+    <meta charset="utf-8">
+    <style>
+        table.lights {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th.lights {
+            color: white;
+            background-color: black;
+        }
+        table.lights, th.lights, td.lights {
+            border: 1px solid black;
+        }
+        th.lights, td.lights {
+            padding: 15px;
+            text-align: left;
+        }
+        tr.lights:hover {background-color: #f5f5f5}
+        tr.lights:nth-child(even) {background-color: #f2f2f2}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.lights').click(function () { // handle checkbox clicks
+                //alert(this.id + "\n" + this.checked)
+                switch (this.id) {
+                    case "add": // 'add' button clicked
+                        var urlVal = $(".lights#URL").val();
+                        if ( urlVal != "" ){
+                            var jStr = '{"Type":"bool", "Class":"lighting", "Id":"newDevice","Data":"' + 
+                                urlVal + 
+                                '|' + $(".lights#typeNew").find(":selected").text() +
+                                '|' + $(".lights#isSwitchNew").is(':checked') +
+                                '|' + $(".lights#isInteriorNew").is(':checked') +
+                                '|' + $(".lights#useColorTempNew").is(':checked') +
+                                '|' + $(".lights#usePIRNew").is(':checked') +
+                                '|' + $(".lights#useIndicatorNew").is(':checked') + 
+                            '"}';
+                            postUpdateLightingConfig(jStr, updateLightDevices);
+                        }
+                        break;
+                    case "Enabled":
+                        var jStr = '{"Type":"bool", "Class":"lighting", "Id":"' + this.id +
+                            '","Data":"' + this.checked + '"}';
+                        postUpdateLightingConfig(jStr, dummy)
+                        break;
+                    case "occSensorTimeoutNew":
+                        var jStr = '{"Type":"bool", "Class":"lighting", "Id":"' + this.id +
+                            '","Data":"' + this.value + '"}';
+                        postUpdateLightingConfig(jStr, dummy)
+                        break;
+                    default:
+                        break;
+                }
+            });
+            //$('#lightscontrol').on('click', ':button', function() {
+            $(document).on('click', '.lightscontrol', function(){ 
+            //$('.lightscontrol').click(function () { // handle checkbox clicks
+                //alert(this.id + "\n" + this.checked)
+                switch (this.id) {
+                    case "delete": // 'add' button clicked
+                        var jStr = '{"Type":"bool", "Class":"lightscontrol", "Id":"' + this.id + '","Data":"' + $( this ).data("ip") + '"}';
+                        lightingControl(jStr, updateLightDevices);
+                        break;
+                    default:
+                        var jStr = '{"Type":"bool", "Class":"lightscontrol", "Id":"' + this.id + '","Data":"' + $( this ).data("ip") + '"}';
+                        lightingControl(jStr, dummy)
+                        break;
+                }
+            });
+
+            $(document).on('click', '.serialControl', function(){ // monitor #scan and #scanResults 
+            //$('.lightscontrol').click(function () { // handle checkbox clicks
+                //alert(this.id + "\n" + this.checked)
+                switch (this.id) {
+                    case "scanResults": // 'Scan Results' button clicked
+                        var jStr = '{"Type":"bool", "Class":"serialControl", "Id":"' + this.id + '"}';
+                        serialControl(jStr, showSerialScanResults);
+                        break;
+                    case "scan":
+                        $('.serialControl#scan').prop("disabled",true);
+                        var jStr = '{"Type":"bool", "Class":"serialControl", "Id":"' + this.id + '"}';
+                        serialControl(jStr, dummy);
+                        break
+                    default:
+                        var jStr = '{"Type":"bool", "Class":"serialControl", "Id":"' + this.id + '"}';
+                        serialControl(jStr, dummy);
+                        break;
+                }
+            });
+
+            $(".lights").keyup(function () { // handle string changes
+                if (this.id != "URL"){
+                    var jStr = '{"Type":"bool", "Class":"lighting", "Id":"' + this.id +
+                        '","Data":"' + this.value + '"}';
+                    postUpdateLightingConfig(jStr, dummy)
+                }
+            });
+
+            $(document).on('change', '.lightsupdate', function(){ 
+            //$('.lightsupdate').change(function() { // handle update clicks
+                switch (this.id) {
+                    case "type":
+                        // https://api.jquery.com/data/
+                        var jStr = '{"Type":"bool", "Class":"lightsupdate", "Id":"' + 
+                        this.id + '","Data":"' + this.value + '", "Ip":"' + $( this ).data("ip") + '"}';
+                        break;
+                    default:
+                        var jStr = '{"Type":"bool", "Class":"lightsupdate", "Id":"' + 
+                        this.id + '","Data":"' + this.checked + '", "Ip":"' + $( this ).data("ip") + '"}';
+                        break;
+                }
+                postUpdateLightingConfig(jStr, dummy)
+            });
+
+            $("#nav").load("/static/nav.html"); 
+            $("#subNav").load("/static/setupNav.html"); 
+            serialDeviceLastScanTime();
+            setInterval(serialDeviceLastScanTime, 2000);
+        });
+        function serialControl(jStr, func){
+            $.ajax({ 
+                type: 'POST',
+                url: 'serialControl',
+                data: jStr,
+                success: function (data)  { 
+                    func(data) 
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'text'
+            });
+        }
+        function showSerialScanResults(data){
+            alert(JSON.stringify(data, null, 2));
+            // $.ajax({ 
+            //     type: 'POST',
+            //     url: 'getLastSerialScanData',
+            //     success: function (data)  { 
+            //         alert(data); 
+            //     },
+            //     contentType: "application/json; charset=utf-8",
+            //     dataType: 'text'
+            // });
+        }
+        function serialDeviceLastScanTime(data){
+            $.ajax({ 
+                type: 'POST',
+                url: 'getLastDeviceScanTime',
+                success: function (data)  { 
+                    if (data != "No Info"){
+                        if ($('.serialControl#fileDate').val(data) != data){
+                            $('.serialControl#fileDate').val(data);
+                            $('.serialControl#scan').prop("disabled",false); 
+                        }
+                    }
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'text'
+            });
+        }
+        function updateLightDevices(data){
+            console.log(JSON.stringify(data));
+            //alert(data)
+            //var j = $.parseJSON(data);
+            //xvar j = jQuery.parseJSON( data );
+            // for(var k in j) {
+            //     console.log(k, result[k]);
+            // }
+            var ret = "";
+            ret += `
+                <table class="lights" style="width:100%;">
+                    <caption style="color:white;background-color:black;"><strong>Available Devices</strong></caption>
+                    <tr class="lights">
+                        <th class="lights" style="width:11%;">Type</th>
+                        <th class="lights" style="width:19%;">URL</th>
+                        <th class="lights" style="width:11%;">Is Switch</th>
+                        <th class="lights" style="width:11%;">Is Interior</th>
+                        <th class="lights" style="width:11%;">Use ColorTemp</th>
+                        <th class="lights" style="width:11%;">Use PIR</th>
+                        <th class="lights" style="width:11%;">Use Indicator</th>
+                        <th class="lights" style="width:11%;">Options</th>
+                    </tr>
+            `;
+            var tdType, tdURL, tdIsSwitch, tdIsInterior, tdUseColorTemp, tdUsePIR, tdUseIndicator, tdControl = "";
+            for (var thisURL in data) {
+                tdURL = '<td>';
+                tdURL += '<input class="lightsupdate" id="url" type="text" placeholder="URL" style="width:100%;" value="' + thisURL + '" readonly>';
+                tdURL += '</td>';
+                for (var thisKey in data[thisURL]){
+                    thisData = data[thisURL][thisKey];
+                    //console.log(thisURL + "-" + thisKey + "-" + thisData);
+                    
+                    switch (thisKey){ // same as element id
+                        case "type":
+                            tdType = '<td>';
+                            tdType += '<select class="lightsupdate" id="type" data-ip="' + thisURL + '" style="width:100%;">';
+                            if (thisData == "EnOcean"){
+                                tdType += '<option value="enocean" selected="">EnOcean</option>';
+                            }else{
+                                tdType += '<option value="enocean">EnOcean</option>';
+                            }
+                            if (thisData == "Molex"){
+                                tdType += '<option value="molex" selected="">Molex</option>';
+                            }else{
+                                tdType += '<option value="molex">Molex</option>';
+                            }
+                            tdType += '</td>';
+                            break;
+                        case "isSwitch":
+                            tdIsSwitch = '<td>';
+                            if (thisData == true){
+                                tdIsSwitch += '<label><input class="lightsupdate" id="isSwitch" data-ip="' + thisURL + '" type="checkbox" checked>Is Switch</label>';
+                            }else{
+                                tdIsSwitch += '<label><input class="lightsupdate" id="isSwitch" data-ip="' + thisURL + '" type="checkbox">Is Switch</label>';
+                            }
+                            tdIsSwitch += '</td>';
+                            break;
+                        case "isInterior":
+                            tdIsInterior = '<td>';
+                            if (thisData == true){
+                                tdIsInterior += '<label><input class="lightsupdate" id="isInterior" data-ip="' + thisURL + '" type="checkbox" checked>Is Interior</label>';
+                            }else{
+                                tdIsInterior += '<label><input class="lightsupdate" id="isInterior" data-ip="' + thisURL + '" type="checkbox">Is Interior</label>';
+                            }
+                            tdIsInterior += '</td>';
+                            break;
+                        case "useColorTemp":
+                            tdUseColorTemp = '<td>';
+                            if (thisData == true){
+                                tdUseColorTemp += '<label><input class="lightsupdate" id="useColorTemp" data-ip="' + thisURL + '" type="checkbox" checked>Use ColorTemp</label>';
+                            }else{
+                                tdUseColorTemp += '<label><input class="lightsupdate" id="useColorTemp" data-ip="' + thisURL + '" type="checkbox">Use ColorTemp</label>';
+                            }
+                            tdUseColorTemp += '</td>';
+                            break;
+                        case "usePIR":
+                            tdUsePIR = '<td>';
+                            if (thisData == true){
+                                tdUsePIR += '<label><input class="lightsupdate" id="usePIR" data-ip="' + thisURL + '" type="checkbox" checked>Use PIR</label>';
+                            }else{
+                                tdUsePIR += '<label><input class="lightsupdate" id="usePIR" data-ip="' + thisURL + '" type="checkbox">Use PIR</label>';
+                            }
+                            tdUsePIR += '</td>';
+                            break;
+                        case "useIndicator":
+                            tdUseIndicator = '<td>';
+                            if (thisData == true){
+                                tdUseIndicator += '<input class="lightsupdate" id="useIndicator" data-ip="' + thisURL + '" type="checkbox" checked>Use Indicator</label>';
+                            }else{
+                                tdUseIndicator += '<input class="lightsupdate" id="useIndicator" data-ip="' + thisURL + '" type="checkbox">Use Indicator</label>';
+                            }
+                            tdUseIndicator += '</td>';
+                            break;
+                        default: 
+                            break;
+                    }
+                }
+                ret += "<tr>";
+                ret += tdType + tdURL + tdIsSwitch + tdIsInterior + tdUseColorTemp + tdUsePIR + tdUseIndicator;
+                ret += '<td style="text-align:center;">';
+                ret += '<button class="lightscontrol" id="on" data-ip="' + thisURL + '" style="width:30%" value="On">On</button>&nbsp;';
+                ret += '<button class="lightscontrol" id="off" data-ip="' + thisURL + '" style="width:30%" value="Off">Off</button>&nbsp;';
+                ret += '<button class="lightscontrol" id="delete" data-ip="' + thisURL + '" style="width:30%" value="Del">Del</button>';
+                ret += "</td>";
+                ret += "</tr>";
+            }
+            ret += '</table>';
+            console.log("\n" + tdURL + "\n")
+            $('#cLights').html(ret);
+            return ret;
+        }
+        function postUpdateLightingConfig(jStr, func){
+            $.ajax({ 
+                type: 'POST',
+                url: 'updateLightingConfig',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                //success: function (data) {(func(data)); },
+                success: function (data)  { (func(data)); },
+                //complete: function (data) {  alert(data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json'
+            });
+        }
+        function serialControl(jStr, func){
+            $.ajax({ 
+                type: 'POST',
+                url: 'serialControl',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                //success: function (data) {(func(data)); },
+                success: function (data)  { (func(data)); },
+                //complete: function (data) {  alert(data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json'
+            });
+        }
+        function lightingControl(jStr, func){
+            $.ajax({ 
+                type: 'POST',
+                url: 'lightingControl',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                //success: function (data) {(func(data)); },
+                success: function (data)  { (updateLightDevices(data)); },
+                //complete: function (data) {  alert(data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json'
+            });
+        }
+        function dummy(){
+            return
+        }
+        function clearStatus() {
+            //$('#statusText').text() = ""
+        }
+        function result(status, data) {
+            alert("something\n" + status + "\n" + data + "\n");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="subNav"></div>
+    <h3>Setup\ExternalDevices</h3> 
+    <table>
+        <caption><strong>Serial Devices</strong></caption>
+        <tr>
+            <td>
+                Device Scan
+            </td>
+            <td align="center">
+                <button class="serialControl" id="scan" style="width:100%;">Start</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Scan Results
+            </td>
+            <td align="center">
+                <button class="serialControl" id="scanResults" value="View Scan Results" style="width:100%;">View Scan Results</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Last Scan Results&nbsp;&nbsp;
+            </td>
+            <td align="center">
+                <input class="serialControl" id="fileDate" value="View" style="width:98%;text-align:center;" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td align="center">
+                &nbsp;
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td align="center">
+                Monitor Control
+            </td>
+            <td align="center">
+                <button class="serialControl" style="width:100%;" id="on">On</button>
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td align="center">
+                &nbsp;
+            </td>
+            <td align="center">
+                <button class="serialControl" style="width:100%;" id="off">Off</button>
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td align="center">
+                Switcher Control
+            </td>
+            <td align="center">
+                <button class="serialControl" style="width:100%;" id="input1">Input 1</button>
+            </td>
+        </tr>
+        <tr style="width:100%;">
+            <td align="center">
+                &nbsp;
+            </td>
+            <td align="center">
+                <button class="serialControl" style="width:100%;" id="input2">Input 2</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <caption><strong>Light Configuration</strong></caption>
+        <tr>
+            <td>
+                Enable
+            </td>
+            <td align="center">
+                <input type="checkbox" class="lights" id="Enabled" value="Enable" {{if eq .enabled true}}checked="checked"{{end}}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Occ Sensor Timeout
+            </td>
+            <td align="center">
+                <input type="text" class="lights" id="occSensorTimeoutNew" value="{{ .occsensortimeout }}"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                New Device&nbsp;<button class="lights" id="add">Add</button>
+            </td>
+            <td align="center">
+                <input type="text" class="lights" id="URL" placeholder="URL">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select class="lights" id="typeNew">
+                    <option value="enocean">EnOcean</option>
+                    <option value="molex">Molex</option>
+                </select>
+            </td>
+            <td>
+                <label><input type="checkbox" class="lights" id="isSwitchNew">Is Switch</input></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label><input type="checkbox" class="lights" id="isInteriorNew">Is Interior</input></label>
+            </td>
+            <td>
+                <label><input type="checkbox" class="lights" id="useColorTempNew">Use ColorTemp</input></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label><input type="checkbox" class="lights" id="usePIRNew">Use PIR</input></label>
+            </td>
+            <td>
+                <label><input type="checkbox" class="lights" id="useIndicatorNew">Use Indicator</input></label>
+            </td>
+        </tr>
+    </table>
+    <div id="cLights">
+        <table class="lights" style="width:100%;">
+            <caption style="color:white;background-color:black;"><strong>Available Devices</strong></caption>
+            <tr class="lights">
+                <th class="lights" style="width:11%;">Type</th>
+                <th class="lights" style="width:19%;">URL</th>
+                <th class="lights" style="width:11%;">Is Switch</th>
+                <th class="lights" style="width:11%;">Is Interior</th>
+                <th class="lights" style="width:11%;">Use ColorTemp</th>
+                <th class="lights" style="width:11%;">Use PIR</th>
+                <th class="lights" style="width:11%;">Use Indicator</th>
+                <th class="lights" style="width:11%;">Options</th>
+            </tr>
+            {{range $index, $element := .devices}} 
+                <tr>
+                    <td>
+                        <select class="lightsupdate" id="type" data-ip="{{ $index }}" style="width:100%;">
+                            <option value="enocean" {{if eq $element.type "EnOcean"}}selected{{end}}>EnOcean</option>
+                            <option value="molex" {{if eq $element.type "Molex"}}selected{{end}}>Molex</option>
+                        </select>
+                    </td>
+                    <td><input class="lightsupdate" id="url" type="text" placeholder="URL" style="width:100%;" value="{{ $index }}"readonly></td>
+                    <td><label><input class="lightsupdate" id="isSwitch" data-ip="{{ $index }}" type="checkbox" {{if eq $element.isSwitch true}}checked="checked"{{end}}>Is Switch</input></label></td>
+                    <td><label><input class="lightsupdate" id="isInterior" data-ip="{{ $index }}" type="checkbox" {{if eq $element.isInterior true}}checked="checked"{{end}}>Is Interior</input></label></td>
+                    <td><label><input class="lightsupdate" id="useColorTemp" data-ip="{{ $index }}" type="checkbox" {{if eq $element.useColorTemp true}}checked="checked"{{end}}>Use ColorTemp</input></label></td>
+                    <td><label><input class="lightsupdate" id="usePIR" data-ip="{{ $index }}" type="checkbox" {{if eq $element.usePIR true}}checked="checked"{{end}}>Use PIR</input></label></td>
+                    <td><label><input class="lightsupdate" id="useIndicator" data-ip="{{ $index }}" type="checkbox" {{if eq $element.useIndicator true}}checked="checked"{{end}}>Use Indicator</input></label></td>
+                    <td style="text-align:center;">
+                        <button class="lightscontrol" id="on" data-ip="{{ $index }}" style="width:30%" value="On">On</button>
+                        <button class="lightscontrol" id="off" data-ip="{{ $index }}" style="width:30%" value="Off">Off</button>
+                        <button class="lightscontrol" id="delete" data-ip="{{ $index }}" style="width:30%" value="Del">Del</button>
+                    </td>
+                </tr>
+            {{end}}
+        </table>
+    </div>
+    
+    <!--GREAT EXAMPLE of ranging over data in the page!-->
+    <!--{{range $index, $element := .devices}} 
+        {{range $k, $v := $element}}
+            {{$index}} &nbsp; {{$k}} &nbsp; {{$v}}<br>
+        {{end}}
+    {{end}}-->
+    <br>
+    <br>
+    <div id="statusText" color="red"><input style="text-decoration:none;color:red;border:0px;" type="text" value="" readonly></input>
+    </div>
+</body>
+
+</html>

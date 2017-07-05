@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RRC</title>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--<script src="https://raw.github.com/enyo/dropzone/master/dist/dropzone.js"></script>-->
+        <script>
+            $(document).ready(function () {
+
+                $("#nav").load("/static/nav.html");
+                $("#subNav").load("/static/securityNav.html");
+
+            });
+            function postUpdate(jStr){
+                $.ajax({
+                    type: 'POST',
+                    url: 'update',
+                    //data: JSON.stringify(jStr),
+                    data: jStr,
+                    success: function (data) { alert('data: ' + data); },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json'
+                });
+            }
+            function result(status, data) {
+                alert("something\n" + status + "\n" + data + "\n");
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="nav"></div>
+        <div id="subNav"></div> 
+        <h4>Security\User</h4>
+        <table>
+            <caption><strong>User Setup</strong></caption>
+            <tr><td>
+                Username
+            </td><td align="center">
+                <input type="text" class="securityUsers" id="UserName" placeholder="UserName">
+            </td></tr>
+            
+            <tr><td>
+                Password
+            </td><td align="center">
+                <input type="password" class="securityUsers" id="Password" placeholder="Password">
+            </td></tr>
+            
+            <tr><td>
+                User Type
+            </td><td align="center">
+                <input name="securityUserType" type="radio" value="1" class="securityUsers" id="userType">Admin&nbsp;
+                <input name="securityUserType" type="radio" value="0" class="securityUsers" id="userType">View Only&nbsp;
+            </td></tr>
+            
+            <tr><td>
+                Add
+            </td><td align="center">
+                <button class="securityUsers" id="add">Add</button>
+            </td></tr>
+        </table>
+    </body>
+</html>

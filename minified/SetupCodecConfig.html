@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RRC</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".CodecConnection").keyup(function () { // handle string changes for Codec IP, Codec Username, Codec Password
+                var jStr = '{"Type":"string", "Class":"CodecConnection", "Id":"' + this.id +
+                    '","Data":"' + this.value + '"}   ';
+                postUpdate(jStr)
+            });
+
+            $("#capture.ux").click(function () { // handle string changes for Codec IP, Codec Username, Codec Password
+                var jStr = '{"Type":"string", "Class":"CodecConnection", "Id":"' + this.id +
+                    '","Data":""}   ';
+                $.ajax({
+                    type: 'POST',
+                    url: 'updateCodecConfig',
+                    //data: JSON.stringify(jStr),
+                    data: jStr,
+                    success: function (data) { alert('data: ' + data); },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'text'
+                });
+            });
+            $(".CodecAction").click(function () { // handle string changes for Codec IP, Codec Username, Codec Password
+                var jStr = '{"Type":"string", "Class":"CodecConnection", "Id":"' + this.id +
+                    '","Data":""}   ';
+                $.ajax({
+                    type: 'POST',
+                    url: 'updateCodecConfig',
+                    //data: JSON.stringify(jStr),
+                    data: jStr,
+                    success: function (data) { alert('data: ' + data); },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'text'
+                });
+            });
+
+            $('.UserExperienceReset').click(function () { // handle string changes for Codec IP, Codec Username, Codec Password
+                //alert("UX");
+                var jStr = '{"Type":"string", "Class":"userExperienceReset", "Id":"' + this.value +
+                    '","Data":""}   ';
+                postUpdate(jStr)
+            });
+
+            $(".DoNotDisturb").click(function () { // handle string changes
+                var jStr = '{"Type":"string", "Class":"userExperienceDND", "Id":"' + this.value +
+                    '","Data":""}   ';
+                postUpdate(jStr)
+            });
+
+            $("#nav").load("/static/nav.html");
+            $("#subNav").load("/static/setupNav.html");
+
+        });
+        function postUpdate(jStr){
+            $.ajax({
+                type: 'POST',
+                url: 'updateCodecConfig',
+                //data: JSON.stringify(jStr),
+                data: jStr,
+                //success: function (data) { alert('data: ' + data); },
+                contentType: "application/json; charset=utf-8",
+                dataType: 'text'
+            });
+        }
+        
+        function clearStatus() {
+            //$('#statusText').text() = ""
+        }
+        function result(status, data) {
+            //alert("something\n" + status + "\n" + data + "\n");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="nav"></div>
+    <div id="subNav"></div>
+    <h3>Setup\CodecConfig</h3>
+    <table style="width:45%;">
+        <caption><strong>Connection</strong></caption>
+        <tr>
+            <td>
+                IP Address
+            </td>
+            <td align="center">
+                <input type="text" class="CodecConnection" id="IPAddress" placeholder="IP Address" value="{{ .IPAddress }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Username
+            </td>
+            <td align="center">
+                <input type="text" class="CodecConnection" id="UserName" placeholder="Username" value="{{ .Username }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password
+            </td>
+            <td align="center">
+                <input type="password" class="CodecConnection" id="Password" placeholder="Password" value="{{ .Password }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Codec Connection
+            </td>
+            <td align="center">
+                <button class="CodecAction" id="testConnection" style="width:45%;">Test</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Standby
+            </td>
+            <td align="center">
+                <button class="CodecAction" id="standbyActivate" style="width:45%;">Activate</button>&nbsp;<button class="CodecAction" id="standbyDeactivate" style="width:45%;">DeActivate</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table style="width:45%;">
+        <caption><strong>User Experience Settings</strong></caption>
+        <tr>
+            <td>
+                User Experience Reset
+            </td>
+            <td align="center">
+                <input type="radio" name="userExperienceReset" class="UserExperienceReset" id="enabled" value="enabled" {{if eq .UxReset true}}checked="checked"{{else}}{{end}}>Activate</input><input type="radio" name="userExperienceReset" class="UserExperienceReset"
+                    id="disabled" value="disabled" {{if eq .UxReset false}}checked="checked"{{else}}{{end}}>Deactivate</input>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Do Not Disturb During Call
+            </td>
+            <td align="center">
+                <input type="radio" name="userExperienceDND" class="DoNotDisturb" id="enabled" value="enabled" {{if eq .DoNotDisturb true}}checked="checked"{{else}}{{end}}>Activate</input><input type="radio" name="userExperienceDND" class="DoNotDisturb"
+                    id="disabled" value="disabled" {{if eq .DoNotDisturb false}}checked="checked"{{else}}{{end}}>Deactivate</input>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Send Configuration
+            </td>
+            <td align="center">
+                <select id="storedConfigs">
+                    <option value="some config">Some Config</option>
+                    <option value="another config">Another Config</option>
+                </select>
+                <button class="UserExperience" id="uploadConfig">Upload</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table style="width:45%;">
+        <caption>Do Not Complete this step until you have finished your install</caption>
+        <tr>
+            <td>
+                Capture Codec Configuration
+            </td>
+            <td align="center">
+                <button class="ux" id="capture" style="width:48%;">Capture</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Register Feedbacks
+            </td>
+            <td align="center">
+                <button class="ux" id="register" style="width:48%;">Register</button>&nbsp;<button class="ux" id="deregister" style="width:48%;">De Register</button>
+            </td>
+        </tr>
+
+    </table>
+    <br>
+    <div id="statusText" color="red"><input style="text-decoration:none;color:red;border:0px;" type="text" value="" readonly></input>
+    </div>&nbsp;&nbsp;&nbsp;
+</body>
+
+</html>
